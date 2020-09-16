@@ -18,8 +18,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(cors());
 
-const uri =
-  "mongodb+srv://jeroentjuuhh:Hoipop123@heeren-a-cluster.rncuy.gcp.mongodb.net/test?retryWrites=true&w=majority"
+const uri = ''// SERVER URL MONGODB
 
 async function run() {
   try {
