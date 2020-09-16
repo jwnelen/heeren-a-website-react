@@ -1,0 +1,16 @@
+.player img {
+	width: auto;
+  height: auto;
+	max-height: 12rem;
+}
+
+.spec-container {
+	position: relative;
+	text-align: center;
+	color: white;
+}
+
+.bottom-right {
+	background-color: rgba(0, 0, 0, 1);
+}
+
