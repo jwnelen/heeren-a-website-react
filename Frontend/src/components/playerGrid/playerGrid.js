@@ -5,9 +5,7 @@ import './playerGrid.css'
 
 //import playerData from '../../data/data.json'
 
-const apiUrl = 'http://127.0.0.1:8080/api/players/';
-
-
+const apiUrl = 'http://127.0.0.1:8000/users';
 															
 function PlayerList(data) {
 //	console.log('playerlist');

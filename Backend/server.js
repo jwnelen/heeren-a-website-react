@@ -1,57 +1,30 @@
-// Import express
-let express = require('express');
-// Import Body parser
-let bodyParser = require('body-parser');
-// Import Mongoose
-let mongoose = require('mongoose');
-let cors = require('cors');
-// Initialize the app
-let app = express();
+// https://medium.com/@aem_iro/deploying-a-node-js-postgressql-app-to-heroku-hosting-platform-cc611287ae76
+// https://itnext.io/building-restful-api-with-node-js-express-js-and-postgresql-the-right-way-b2e718ad1c66
+// https://www.red-gate.com/simple-talk/blogs/setting-up-a-simple-rest-interface-with-sql-server/
 
+const express = require('express')
+const bodyParser = require('body-parser')
+const app = express()
+const db = require('./src/queries')
 
-// Import routes
-let apiRoutes = require("./api-routes");
+const cors = require('cors')
+app.use(cors())
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
-app.use(cors());
+const port = 8000
 
-const uri = ''// SERVER URL MONGODB
+app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+)
 
-async function run() {
-  try {
-    await mongoose.connect(uri, {useNewUrlParser: true})
-		var db = mongoose.connection;
-	
-		if(!db)
-				console.log("Error connecting db")
-		else
-				console.log("Db connected successfully")
-		
-    const collection = db.collection('players');
-		
-		
-		
-  } finally {
-    // Ensures that the client will close when you finish/error
-//    await db.close();
-  }
-}
+app.get('/', (request, response) => {
+  response.json({ info: 'Node.js, Express, and Postgres API' })
+})
 
-// Setup server port
-var port = process.env.PORT || 8080;
+app.get('/users', db.getUsers)
 
-// Send message for default URL
-app.get('/', (req, res) => res.send('Hello World with Express'));
-
-// Use Api routes in the App
-app.use('/api', apiRoutes);
-
-// Launch app to listen to specified port
-app.listen(port, function () {
-    console.log("Running RestHub on port " + port);
-});
-
-run().catch(console.dir);
+app.listen(port, () => {
+  console.log(`App running on port ${port}.`)
+})
