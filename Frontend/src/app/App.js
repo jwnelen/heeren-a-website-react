@@ -9,6 +9,7 @@ import Home from '../contents/home.js'
 import Contact from '../contents/contact.js'
 import NavBar from '../components/NavigationBar/navbar'
 import PlayerGrid from '../components/playerGrid/playerGrid'
+import PlayerProfile from '../components/playerProfile/playerProfile'
 
 function App() {
 	
@@ -24,6 +25,9 @@ function App() {
     		</Route>
 				<Route path="/team">
 					<PlayerGrid></PlayerGrid>
+    		</Route>
+				<Route path="/players/:id">
+					<PlayerProfile></PlayerProfile>
     		</Route>
     	</div>
     </Router>

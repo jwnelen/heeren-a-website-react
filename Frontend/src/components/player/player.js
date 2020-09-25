@@ -7,16 +7,17 @@ class Player extends Component {
     render(props) {			
         return(
            <div className="card player">
-							<img className="card-img-top" src={link_fed} alt="player"></img>
+							<a href={ "/players/" + this.props.id}><img className="card-img-top" src={link_fed} alt="player"></img></a>
 							
 						<div className="card-body">
-									<h3 className="card-title">{this.props.nickname || "Nickname"}</h3>
+									<a href={ "/players/" + this.props.id}><h3 className="card-title">{this.props.nickname || "Nickname"}</h3> </a>
 									<p className="card-text text-secondary mb-1 font-italic font-light" >{this.props.name || "Name"}</p>
 						</div>
 						<ul className="list-group list-group-flush">
 							<li className="list-group-item">{this.props.ratingSingles || 0.0000} | {this.props.ratingDoubles || 0.0000 } </li>
 							<li className="list-group-item">Daltons genomen: {this.props.amountDaltonsReceived || 0}</li>
 							<li className="list-group-item">Daltons uitgedeeld: {this.props.amountDaltonsEarned || 0} </li>
+							<li className="list-group-item">id: {this.props.id} </li>
 						</ul>
 					</div> 
         );

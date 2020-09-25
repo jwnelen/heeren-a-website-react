@@ -1,25 +1,19 @@
 import React, {Component} from 'react';
-//import axios from 'axios'
 import Player from '../player/player'
 import './playerGrid.css'
-
-//import playerData from '../../data/data.json'
-
-const apiUrl = 'http://127.0.0.1:8000/users';
+import getPlayers from '../../data/api.js'
 															
 function PlayerList(data) {
-//	console.log('playerlist');
-	
 	const players = data.data.playerData;
-//	return (<p>{JSON.stringify(players)}</p>);
 		const items = players.map( (player, index) => 
 					<Player className="col-6" 
 						name={player.name} 
-						nickname={player.nickname} 
+						nickname={player.nickname}
+						id={player.id}
 						amountDaltonsEarned={player.amountDaltonsEarned}
 						amountDaltonsReceived={player.amountDaltonsReceived}
-						ratingSingles={player.ratingSingles}
-						ratingDoubles={player.ratingDoubles}
+						ratingSingles={player.single_rating}
+						ratingDoubles={player.doubles_rating}
 						key={index}/>
 													);
 					return items
@@ -42,16 +36,14 @@ class PlayerGrid extends Component {
 	
 	componentDidMount() {
 		console.log('mounted; isLoading: ' + this.state.isLoading);
-		fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-				console.log('data: ' + JSON.stringify(data))
-					this.setState({ 
-							playerData: data, 
-							isLoading: false 
-				});
-			});
-															
+		
+		getPlayers().then(data => {
+			console.log('got data; ' + data)
+			this.setState({ 
+								playerData: data, 
+								isLoading: false 
+					});
+		})		
 	}
 	
     //special react function to render content on the screen
