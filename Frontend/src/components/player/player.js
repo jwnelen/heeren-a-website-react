@@ -14,7 +14,16 @@ class Player extends Component {
 									<p className="card-text text-secondary mb-1 font-italic font-light" >{this.props.name || "Name"}</p>
 						</div>
 						<ul className="list-group list-group-flush">
-							<li className="list-group-item">{this.props.ratingSingles || 0.0000} | {this.props.ratingDoubles || 0.0000 } </li>
+							<li className="list-group-item align-center"> 
+									<div className="rating border"> 5
+										<span className="current-rating">
+											{this.props.ratingSingles || 0.0000} </span>
+								</div>
+								<div className="rating border"> 5
+										<span className="current-rating justify-content-center">
+											{this.props.ratingSingles || 0.0000} </span>
+								</div>
+							</li> 
 							<li className="list-group-item">Daltons genomen: {this.props.amountDaltonsReceived || 0}</li>
 							<li className="list-group-item">Daltons uitgedeeld: {this.props.amountDaltonsEarned || 0} </li>
 							<li className="list-group-item">id: {this.props.id} </li>
