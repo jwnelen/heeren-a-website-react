@@ -14,7 +14,7 @@ class Player extends Component {
 									<p className="card-text text-secondary mb-1 font-italic font-light" >{this.props.name || "Name"}</p>
 						</div>
 						<ul className="list-group list-group-flush">
-							<li className="list-group-item align-center"> 
+							<li className="list-group-item"> 
 									<div className="rating border"> 5
 										<span className="current-rating">
 											{this.props.ratingSingles || 0.0000} </span>
