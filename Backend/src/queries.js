@@ -10,7 +10,7 @@ const pool = new Pool({
 });
 
 const getPlayer = (request, response) => {
-  pool.query('SELECT * FROM players', (error, results) => {
+  pool.query('SELECT * FROM players ORDER BY single_rating ASC', (error, results) => {
     if (error) {
 			
       throw error
