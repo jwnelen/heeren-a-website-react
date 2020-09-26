@@ -26,9 +26,9 @@ function App() {
 				<Route path="/team">
 					<PlayerGrid></PlayerGrid>
     		</Route>
-				<Route path="/players/:id">
-					<PlayerProfile></PlayerProfile>
-    		</Route>
+				<Route 
+					path="/players/:id"
+					component={PlayerProfile}/>
     	</div>
     </Router>
     );

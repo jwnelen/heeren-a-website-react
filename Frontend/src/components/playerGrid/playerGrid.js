@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Player from '../player/player'
 import './playerGrid.css'
-import getPlayers from '../../data/api.js'
+import api from '../../data/api.js'
 															
 function PlayerList(data) {
 	const players = data.data.playerData;
@@ -36,7 +36,9 @@ class PlayerGrid extends Component {
 	componentDidMount() {
 		console.log('mounted; isLoading: ' + this.state.isLoading);
 		
-		getPlayers().then(data => {
+		console.log(api);
+		
+		api.getPlayers().then(data => {
 			console.log('got data; ' + data)
 			this.setState({ 
 								playerData: data, 
@@ -49,7 +51,7 @@ class PlayerGrid extends Component {
     render(props) {
         return(
 					<div>
-						<h1>The dream team</h1>
+						<h1>Het Heeren-A team</h1>
 						
 						<div className="container">
 							<div className="row justify-content-center">
@@ -57,7 +59,7 @@ class PlayerGrid extends Component {
 									<p>no data to display </p> :
 										<PlayerList data={this.state}></PlayerList>
 								}
-							</div> 
+							</div>
 						</div>
 					</div>
         );
