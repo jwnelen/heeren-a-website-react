@@ -18,18 +18,13 @@ class PlayerProfile extends Component {
   }					
 	
 	componentDidMount() {
-		console.log('mounted; isLoading: ' + this.state.isLoading);
-
 		const { id } = this.props.match.params
-		console.log('id: ' + id);
 		
 		api.getPlayerById(id).then(data => {
-			console.log('got data; ' + JSON.stringify(data))
 			this.setState({ 
 								playerData: data[0], 
 								isLoading: false 
 					});
-			console.log(this.state);
 		})		
 	}
 	
@@ -44,11 +39,13 @@ class PlayerProfile extends Component {
 						<li className="list-group-item">
 							<RatingDisplay
 								ratingSingles={this.state.playerData.single_rating}
-								ratingDoubles={this.state.playerData.doubles_rating} />
+								ratingDoubles={this.state.playerData.doubles_rating}
+								ratingSinglesEndingYear={this.state.playerData.single_rating_ending_year}
+								ratingDoublesEndingYear={this.state.playerData.doubles_rating_ending_year}/>
 						</li>
 						<li className="list-group-item">Daltons genomen: {this.state.playerData.amountDaltonsReceived || 0}</li>
 						<li className="list-group-item">Daltons uitgedeeld: {this.state.playerData.amountDaltonsEarned || 0} </li>
-						<li className="list-group-item">id: {this.props.id} </li>
+						<li className="list-group-item">id: {this.state.playerData.id} </li>
 				</ul>
 				</div>
 			);

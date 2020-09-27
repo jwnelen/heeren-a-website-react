@@ -34,13 +34,13 @@ const createPlayer = (req, res) => {
 	const {name, email} = req.body;
 	
 	
-	pool.query('INSERT INTO players (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
-    if (error) {
-      throw error
-    }
-		console.log(JSON.stringify(results));
-    res.status(201).send(`Added ${results.rowCount} row`)
-  })
+//	pool.query('INSERT INTO players (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+//    if (error) {
+//      throw error
+//    }
+//		console.log(JSON.stringify(results));
+//    res.status(201).send(`Added ${results.rowCount} row`)
+//  })
 }
 
 module.exports = {

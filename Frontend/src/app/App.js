@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 
 import Home from '../contents/home.js'
-import Contact from '../contents/contact.js'
 import NavBar from '../components/NavigationBar/navbar'
 import PlayerGrid from '../components/playerGrid/playerGrid'
 import PlayerProfile from '../components/playerProfile/playerProfile'
@@ -17,14 +16,11 @@ function App() {
     <Router>
     	<div className="App">
 				<NavBar></NavBar>
-				<Route exact path="/">
-					<PlayerGrid></PlayerGrid>
+				<Route exact path="/"
+					component={Home}>
 				</Route>
-    		<Route path="/contact">
-    			<Contact />
-    		</Route>
-				<Route path="/team">
-					<PlayerGrid></PlayerGrid>
+				<Route path="/team"
+					component={PlayerGrid}>
     		</Route>
 				<Route 
 					path="/players/:id"

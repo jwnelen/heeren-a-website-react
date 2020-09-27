@@ -8,7 +8,6 @@ async function getPlayers() {
 };
 
 async function getPlayerById(id) {	
-	console.log('getPlayers')
 	let response = await fetch(apiUrl + '/' + id);
 	let data = await response.json();
 	return data;
