@@ -43,8 +43,21 @@ const createPlayer = (req, res) => {
 //  })
 }
 
+const getDaltons = (req, res) => {
+	console.log('getting daltons');
+	
+	pool.query('SELECT * FROM daltons', (error, results) => {
+    if (error) {
+			
+      throw error
+    }
+    res.status(200).json(results.rows)
+  })
+}
+
 module.exports = {
 	getPlayer,
 	getPlayerById,
+	getDaltons,
 	createPlayer
 };

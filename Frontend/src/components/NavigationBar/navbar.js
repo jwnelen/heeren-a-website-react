@@ -11,6 +11,9 @@ class NavBar extends Component {
 							<li className="nav-item">
 								<a className="nav-link" href="/team">Team</a>
 							</li>
+						<li className="nav-item">
+								<a className="nav-link" href="/daltons">Daltons</a>
+							</li>
 						</ul>
         );
     }

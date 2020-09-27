@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import Home from '../contents/home.js'
+import Daltons from '../contents/daltons.js'
 import NavBar from '../components/NavigationBar/navbar'
 import PlayerGrid from '../components/playerGrid/playerGrid'
 import PlayerProfile from '../components/playerProfile/playerProfile'
@@ -22,6 +23,9 @@ function App() {
 				<Route path="/team"
 					component={PlayerGrid}>
     		</Route>
+				<Route exact path="/daltons"
+					component={Daltons}>
+				</Route>
 				<Route 
 					path="/players/:id"
 					component={PlayerProfile}/>
