@@ -12,6 +12,7 @@ class PlayerProfile extends Component {
  
     this.state = {
       playerData: [],
+			amountDaltonsEarned: 0,
       isLoading: true,
       error: null,
     };
@@ -22,10 +23,19 @@ class PlayerProfile extends Component {
 		
 		api.getPlayerById(id).then(data => {
 			this.setState({ 
-								playerData: data[0], 
-								isLoading: false 
+								playerData: data[0]
 					});
-		})		
+		})
+		
+		api.getAmountDaltonsPlayer(id).then(data => {
+			console.log(data);
+			let l = data[0] ? data[0].daltons_earned : 0
+			this.setState({ 
+				amountDaltonsEarned: l,
+				isLoading: false 
+
+			})
+		})
 	}
 	
 	render(props) {			
@@ -43,7 +53,7 @@ class PlayerProfile extends Component {
 								ratingSinglesEndingYear={this.state.playerData.single_rating_ending_year}
 								ratingDoublesEndingYear={this.state.playerData.doubles_rating_ending_year}/>
 						</li>
-						<li className="list-group-item">Daltons genomen: {this.state.playerData.amountDaltonsReceived || 0}</li>
+						<li className="list-group-item">Daltons verdient: {this.state.amountDaltonsEarned || 0}</li>
 						<li className="list-group-item">Daltons uitgedeeld: {this.state.playerData.amountDaltonsEarned || 0} </li>
 						<li className="list-group-item">id: {this.state.playerData.id} </li>
 				</ul>

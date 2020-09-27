@@ -31,8 +31,13 @@ async function getDaltons() {
 	return data;
 };
 
+async function getAmountDaltonsPlayer(id) {	
+	let response = await fetch(apiUrl + '/daltons/amountDaltonsEarned/' + id);
+	let data = await response.json();
+	return data;
+};
 
 
-export default {getPlayers, getPlayerById, getDaltons, getPlayersIdAndName};
+export default {getPlayers, getPlayerById, getDaltons, getPlayersIdAndName, getAmountDaltonsPlayer};
 
 
