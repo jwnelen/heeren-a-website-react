@@ -44,14 +44,25 @@ const createPlayer = (req, res) => {
 }
 
 const getDaltons = (req, res) => {
-	console.log('getting daltons');
-	
 	pool.query('SELECT * FROM daltons', (error, results) => {
     if (error) {
-			
       throw error
     }
     res.status(200).json(results.rows)
+  })
+}
+
+const countDaltonsEarned = (req, res) => {
+	const id = parseInt(req.params.id)
+
+	pool.query(
+		'SELECT * from players as pl LEFT JOIN ( SELECT person_earned_id, count(*) as "DaltonsEarned" from daltons group by person_earned_id )  as dal ON pl.id = dal.person_earned_id WHERE pl.id = $1;', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+		
+			console.log(results);
+    	res.status(200).json(results.rows)
   })
 }
 
@@ -59,5 +70,6 @@ module.exports = {
 	getPlayer,
 	getPlayerById,
 	getDaltons,
-	createPlayer
+	createPlayer,
+	countDaltonsEarned
 };

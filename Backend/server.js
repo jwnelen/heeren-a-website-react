@@ -28,6 +28,7 @@ app.get('/players/:id', db.getPlayerById)
 app.post('/players', db.createPlayer)
 
 app.get('/daltons', db.getDaltons)
+app.get('/playerDaltons/:id', db.countDaltonsEarned)
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
