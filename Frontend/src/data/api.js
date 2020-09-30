@@ -31,6 +31,21 @@ async function getDaltons() {
 	return data;
 };
 
+async function addDalton(dalton) {	
+	console.log('dalton in api function: ' + JSON.stringify(dalton));
+	
+	let response = await fetch(apiUrl + '/daltons', {
+		method: 'POST',
+		headers: {
+  	'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+ 		},
+		body: JSON.stringify(dalton)
+	});
+	
+	let data = await response;
+	console.log('data response: ' + data);
+};
+
 async function getAmountDaltonsPlayer(id) {	
 	let response = await fetch(apiUrl + '/daltons/amountDaltonsEarned/' + id);
 	let data = await response.json();
@@ -38,6 +53,13 @@ async function getAmountDaltonsPlayer(id) {
 };
 
 
-export default {getPlayers, getPlayerById, getDaltons, getPlayersIdAndName, getAmountDaltonsPlayer};
+export default {
+	getPlayers, 
+	getPlayerById, 
+	getDaltons, 
+	getPlayersIdAndName, 
+	getAmountDaltonsPlayer,
+	addDalton
+};
 
 

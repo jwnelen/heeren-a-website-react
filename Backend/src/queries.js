@@ -52,6 +52,29 @@ const getDaltons = (req, res) => {
   })
 }
 
+const addDalton = (req, res) => {
+	console.log('got at the add dalton of the queries')
+	const dalton = req.body;
+	const date_earned = dalton.date_earned;
+	const reason = dalton.reason;
+	const person_name = 4;
+	console.log(dalton);
+	
+	if(!dalton || !date_earned || !reason || !person_name) {
+		res.status(500).send('not enough values' + JSON.stringify(dalton));
+	} else { 			//INSERT INTO daltons (date_earned, reason, person_earned_id) VALUES ('2020-09-30', 'team dalton', 5);
+			pool.query("INSERT INTO daltons (date_earned, reason, person_earned_id) VALUES ($1, $2, $3);", [date_earned, reason, person_name], (error, results) => {
+			if (error) {
+				console.log(error);
+				res.status(500).send('error; ' + JSON.stringify(error));
+			} else {
+				console.log('results: ' + JSON.stringify(results));
+				res.status(200).send(`Added ${results.rowCount} row`);
+			}
+  	})
+	}
+}
+
 const countDaltonsEarned = (req, res) => {
 	const id = parseInt(req.params.id)
 
@@ -81,5 +104,6 @@ module.exports = {
 	getPlayerById,
 	getDaltons,
 	createPlayer,
-	countDaltonsEarned
+	countDaltonsEarned,
+	addDalton
 };
