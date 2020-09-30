@@ -57,7 +57,7 @@ const addDalton = (req, res) => {
 	const dalton = req.body;
 	const date_earned = dalton.date_earned;
 	const reason = dalton.reason;
-	const person_name = 4;
+	const person_name = dalton.person_earned_id;
 	console.log(dalton);
 	
 	if(!dalton || !date_earned || !reason || !person_name) {

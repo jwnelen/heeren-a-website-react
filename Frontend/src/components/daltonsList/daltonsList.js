@@ -6,7 +6,6 @@ import moment from 'moment'
 import 'moment/locale/nl'
 							
 function DaltonListFactory(data) {
-	console.log('dalton factory' + JSON.stringify(data))
 	const daltons = data.data.daltons;
 	const players = data.data.players;
 	
@@ -28,7 +27,7 @@ function DaltonListFactory(data) {
 						<th>#</th>
 						<th>Verdiend</th>
 						<th>Reden</th>
-						<th>Gekregen</th>
+						<th>Genomen door</th>
 						<th>Datum verdient</th>
 						<th>Datum genomen</th>
 					</tr>
@@ -54,7 +53,6 @@ class daltonsList extends Component {
 	
 	componentDidMount() {
 		api.getDaltons().then(data => {
-			console.log(JSON.stringify(data))
 			this.setState({ 
 								daltons: data, 
 								isLoading: false 
@@ -62,7 +60,6 @@ class daltonsList extends Component {
 		})
 		
 		api.getPlayersIdAndName().then(data => {
-			console.log(JSON.stringify(data))
 			this.setState({ 
 								players: data, 
 								isLoading: false 
