@@ -15,8 +15,10 @@ function DaltonListFactory(data) {
       <td>{players[dalton.person_earned_id]}</td>
       <td>{dalton.reason}</td>
       <td>{players[dalton.person_took_id]}</td>
-      <td>{moment(dalton.date_earned).locale('nl').format('dddd DD MMMM YYYY')}</td>
-      <td>{moment(dalton.date_taken).locale('nl').format('dddd DD MMMM YYYY')}</td>
+      <td>{
+					dalton.date_earned ? moment(dalton.date_earned).locale('nl').format('dddd DD MMMM YYYY') : ''}</td>
+   <td>{
+					dalton.date_taken ? moment(dalton.date_taken).locale('nl').format('dddd DD MMMM YYYY') : ''}</td>
     </tr>
 														 );
 															
@@ -52,12 +54,12 @@ class daltonsList extends Component {
   }					
 	
 	componentDidMount() {
-		api.getDaltons().then(data => {
-			this.setState({ 
-								daltons: data, 
-								isLoading: false 
-					});
-		})
+//		api.getDaltons().then(data => {
+//			this.setState({ 
+//								daltons: data, 
+//								isLoading: false 
+//					});
+//		})
 		
 		api.getPlayersIdAndName().then(data => {
 			this.setState({ 
