@@ -42,8 +42,18 @@ async function addDalton(dalton) {
 		body: JSON.stringify(dalton)
 	});
 	
-	let data = await response;
-	console.log('data response: ' + data);
+	let result = await response;
+	
+	if(response.ok){
+		return result
+	} else {
+		const error = new Error();
+		error.info = {
+			type: 'Error',
+			message: 'Could not add Dalton: ' + JSON.stringify(dalton)
+		}
+		return (error);
+	}
 };
 
 async function getAmountDaltonsPlayer(id) {	

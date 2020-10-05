@@ -3,6 +3,7 @@ import './daltonsList.css'
 import api from '../../data/api.js'
 import Table from 'react-bootstrap/Table'
 import moment from 'moment'
+import Button from 'react-bootstrap/Button';
 import 'moment/locale/nl'
 							
 function DaltonListFactory(data) {
@@ -12,13 +13,17 @@ function DaltonListFactory(data) {
 	const items = daltons.map( (dalton, index) => 
 		<tr key={index}>
       <td>{index}</td>
-      <td>{players[dalton.person_earned_id]}</td>
+      <td>{players[dalton.person_earned_id] ? players[dalton.person_earned_id] : '-' }</td>
       <td>{dalton.reason}</td>
       <td>{players[dalton.person_took_id]}</td>
       <td>{
 					dalton.date_earned ? moment(dalton.date_earned).locale('nl').format('dddd DD MMMM YYYY') : ''}</td>
    <td>{
 					dalton.date_taken ? moment(dalton.date_taken).locale('nl').format('dddd DD MMMM YYYY') : ''}</td>
+			<td>
+				<Button variant="secondary" onClick={this.handleClick}>Edit
+				</Button>
+			</td>
     </tr>
 														 );
 															
@@ -32,6 +37,7 @@ function DaltonListFactory(data) {
 						<th>Genomen door</th>
 						<th>Datum verdient</th>
 						<th>Datum genomen</th>
+						<th>Edit</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,7 +45,9 @@ function DaltonListFactory(data) {
 				</tbody>
 			</Table>													
 		return table
-}		
+}
+
+
 
 class daltonsList extends Component {
   constructor(props) {
@@ -51,15 +59,19 @@ class daltonsList extends Component {
       isLoading: true,
       error: null,
     };
-  }					
+  }
+	
+	handleClick = () => {
+		console.log('handle click');	
+	}
 	
 	componentDidMount() {
-//		api.getDaltons().then(data => {
-//			this.setState({ 
-//								daltons: data, 
-//								isLoading: false 
-//					});
-//		})
+		api.getDaltons().then(data => {
+			this.setState({ 
+								daltons: data, 
+								isLoading: false 
+					});
+		})
 		
 		api.getPlayersIdAndName().then(data => {
 			this.setState({ 

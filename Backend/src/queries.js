@@ -52,26 +52,48 @@ const getDaltons = (req, res) => {
   })
 }
 
-const addDalton = (req, res) => {
-	console.log('got at the add dalton of the queries')
-	const dalton = req.body;
-	const date_earned = dalton.date_earned;
-	const reason = dalton.reason;
-	const person_name = dalton.person_earned_id;
-	console.log(dalton);
+function queryDaltonGenerator(dalton) {
+	let string_variable_names = '';
+	let string_dollar_signs = '';
+	let counter = 1; // Needs to start at 1
+	let variables = [];
+	for (const el in dalton) {
+		if(dalton[el] !== "" && dalton[el] !== '0') {
+			string_variable_names = string_variable_names.concat(', ' +  el)
+			string_dollar_signs = string_dollar_signs.concat(', $' + counter);
+			variables.push(dalton[el]);
+			counter++;
+		}
+	}
 	
-	if(!dalton || !date_earned || !reason || !person_name) {
+	string_variable_names = string_variable_names.slice(2, string_variable_names.length);
+	string_dollar_signs = string_dollar_signs.slice(2, string_dollar_signs.length);
+	let finalString = '(' + string_variable_names + ') VALUES (' + string_dollar_signs + ');'
+
+	return {finalString, variables}
+}
+
+const addDalton = (req, res) => {
+	const dalton = req.body;
+	console.log(dalton);
+
+	const {finalString, variables} = queryDaltonGenerator(dalton);
+	
+	const valid = (dalton && dalton.person_took_id && dalton.reason);
+	console.log(finalString, variables);
+	
+	if(!valid) {
 		res.status(500).send('not enough values' + JSON.stringify(dalton));
-	} else { 			//INSERT INTO daltons (date_earned, reason, person_earned_id) VALUES ('2020-09-30', 'team dalton', 5);
-			pool.query("INSERT INTO daltons (date_earned, reason, person_earned_id) VALUES ($1, $2, $3);", [date_earned, reason, person_name], (error, results) => {
-			if (error) {
-				console.log(error);
-				res.status(500).send('error; ' + JSON.stringify(error));
-			} else {
-				console.log('results: ' + JSON.stringify(results));
-				res.status(200).send(`Added ${results.rowCount} row`);
-			}
-  	})
+	} else if(valid && !dalton.date_earned) {
+		pool.query
+			("INSERT INTO daltons " + finalString, variables, (error, results) => {
+				if (error) {
+					console.log(error);
+					res.status(500).send('error; ' + JSON.stringify(error));
+				} else {
+					res.status(200).send(`Added ${results.rowCount} row`);
+				}
+		})
 	}
 }
 
