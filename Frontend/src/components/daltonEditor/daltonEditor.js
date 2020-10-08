@@ -7,7 +7,16 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
+const defaultNewDalton = {
+			date_earned: "",
+    	date_taken: "",
+			reason: "",
+    	person_earned_id: "0",
+			person_took_id: "0"
+		}
+
 class daltonEditor extends Component {
+
 	constructor(props) {
 		super(props);
 		
@@ -20,7 +29,7 @@ class daltonEditor extends Component {
 		
 		this.handleInputChange = this.handleInputChange.bind(this);
 	}
-	
+
 	handleInputChange(event) {
 		const target = event.target;
 		
@@ -73,19 +82,35 @@ class daltonEditor extends Component {
 					});
 		})		
 		
-		const defaultNewDalton = {
-			date_earned: "",
-    	date_taken: "",
-			reason: "",
-    	person_earned_id: "0",
-			person_took_id: "0",
-			
-		}
+		console.log('default dalton : ' + JSON.stringify(defaultNewDalton));
 		
 		this.setState({ 
 								daltonData: defaultNewDalton, 
 								isLoading: false 
 					});		
+	}
+
+	componentDidUpdate(prevProps) {
+		console.log('update props: ' + this.props.dalton_id);
+		let dalton_id = this.props.dalton_id
+		
+		if(dalton_id !== 0 && prevProps.dalton_id !== dalton_id) {
+			api.getDaltonById(this.props.dalton_id).then(data => {
+				
+				const newDalton = {}
+				newDalton.date_earned = data[0].date_earned ? data[0].date_earned : ''
+				newDalton.date_taken = data[0].date_taken ? data[0].date_taken : ''
+				newDalton.reason = data[0].reason ? data[0].reason : ''
+				newDalton.person_earned_id = data[0].person_earned_id ? data[0].person_earned_id : '0'
+				newDalton.person_took_id = data[0].person_took_id ? data[0].person_took_id : '0'
+				
+				this.setState({ 
+									daltonData: newDalton, 
+									isLoading: false 
+						});
+			}).catch(err => console.log(err.message));
+		}
+			
 	}
 	
 	render(props) {

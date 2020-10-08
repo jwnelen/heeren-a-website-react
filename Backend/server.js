@@ -28,6 +28,7 @@ app.get('/players/:id', db.getPlayerById)
 app.post('/players', db.createPlayer)
 
 app.get('/daltons', db.getDaltons)
+app.get('/daltons/:id', db.getDaltonById)
 app.post('/daltons', db.addDalton)
 app.get('/daltons/amountDaltonsEarned/:id', db.countDaltonsEarned)
 

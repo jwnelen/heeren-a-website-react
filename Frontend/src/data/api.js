@@ -31,6 +31,22 @@ async function getDaltons() {
 	return data;
 };
 
+async function getDaltonById(id) {
+	if(id) {
+	let response = await fetch(apiUrl + '/daltons/' + id);
+	let data = await response.json();
+	return data;
+	} else {
+		const error = new Error();
+		error.info = {
+			type: 'Error',
+			message: 'Could not edit Dalton: '
+		}
+		return (error);
+	}
+};
+
+
 async function addDalton(dalton) {	
 	console.log('dalton in api function: ' + JSON.stringify(dalton));
 	
@@ -69,7 +85,8 @@ export default {
 	getDaltons, 
 	getPlayersIdAndName, 
 	getAmountDaltonsPlayer,
-	addDalton
+	addDalton,
+	getDaltonById
 };
 
 

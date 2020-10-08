@@ -52,6 +52,18 @@ const getDaltons = (req, res) => {
   })
 }
 
+const getDaltonById = (req, res) => {
+	const id = parseInt(req.params.id)
+	console.log('get dalton by id in queries: ' + id)
+
+	pool.query('SELECT * FROM daltons WHERE dalton_id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    res.status(200).json(results.rows)
+  })
+}
+
 function queryDaltonGenerator(dalton) {
 	let string_variable_names = '';
 	let string_dollar_signs = '';
@@ -127,5 +139,6 @@ module.exports = {
 	getDaltons,
 	createPlayer,
 	countDaltonsEarned,
-	addDalton
+	addDalton,
+	getDaltonById
 };
