@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component } from 'react';
 import './daltonEditor.css'
 import api from '../../data/api.js'
 import Form from 'react-bootstrap/Form';
@@ -6,13 +6,16 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import Collapse from 'react-bootstrap/Collapse';
 
 const defaultNewDalton = {
 			date_earned: "",
     	date_taken: "",
 			reason: "",
     	person_earned_id: "0",
-			person_took_id: "0"
+			person_took_id: "0",
+			dalton_id: null
 		}
 
 class daltonEditor extends Component {
@@ -20,7 +23,9 @@ class daltonEditor extends Component {
 	constructor(props) {
 		super(props);
 		
+		
 		this.state = {
+			open: false,
       daltonData: {},
 			playerData: [],
       isLoading: true,
@@ -28,6 +33,7 @@ class daltonEditor extends Component {
     };
 		
 		this.handleInputChange = this.handleInputChange.bind(this);
+		this.toggleEditor = this.toggleEditor.bind(this);
 	}
 
 	handleInputChange(event) {
@@ -106,11 +112,21 @@ class daltonEditor extends Component {
 				
 				this.setState({ 
 									daltonData: newDalton, 
-									isLoading: false 
+									isLoading: false,
+									open: true
 						});
-			}).catch(err => console.log(err.message));
-		}
-			
+			}).catch(err => {
+				console.log(err.message)
+				this.setState({open: false})
+				}
+			);
+		}		
+	}
+
+	toggleEditor() {
+		this.setState({
+			open: !this.state.open
+		});
 	}
 	
 	render(props) {
@@ -118,7 +134,11 @@ class daltonEditor extends Component {
 			<Container>
 			{ Object.keys(this.state.daltonData).length === 0 ?
 									<p>no data to display </p> :
-				<Form noValidate>
+				<Card >	
+			 		<Card.Header onClick={this.toggleEditor}>Featured</Card.Header>
+			<Collapse in={this.state.open}>
+			 		<Card.Body>		
+			 <Form noValidate>
 					{/* FIRST ROW */}
 					<Row>
 						<Col>
@@ -236,6 +256,9 @@ class daltonEditor extends Component {
 							</Col>
 					</Row>
 				</Form>
+				</Card.Body>
+						</Collapse>
+						</Card>
 				}
 			</Container>
 

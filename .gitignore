@@ -3,8 +3,10 @@
 # dependencies
 Backend/node_modules
 Frontend/node_modles
+**/node_modules
 /.pnp
 .pnp.js
+**/package-lock.json
 
 # testing
 /coverage
@@ -14,6 +16,7 @@ Frontend/node_modles
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local
