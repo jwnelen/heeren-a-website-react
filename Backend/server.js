@@ -10,8 +10,13 @@ const db = require('./src/queries')
 const cors = require('cors')
 app.use(cors())
 
-const port = 8000
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+
+console.log('port;' + process.env.PORT)
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
