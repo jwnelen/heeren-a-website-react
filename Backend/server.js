@@ -1,6 +1,6 @@
 // https://medium.com/@aem_iro/deploying-a-node-js-postgressql-app-to-heroku-hosting-platform-cc611287ae76
 // https://itnext.io/building-restful-api-with-node-js-express-js-and-postgresql-the-right-way-b2e718ad1c66
-// https://www.red-gate.com/simple-talk/blogs/setting-up-a-simple-rest-interface-with-sql-server/
+// https://www.red-gate.com/simple-talk/blogs/setting-up-a-simple-rest-interface-with-sql-serve
 
 const express = require('express')
 const bodyParser = require('body-parser')

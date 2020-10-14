@@ -17,9 +17,9 @@ async function getPlayersIdAndName() {
 	let response = await fetch(apiUrl + '/players/');
 	let data = await response.json();
 	let result = {};
-	
+	console.log('data: ' + JSON.stringify(data));
 	for(let i = 0; i < data.length; i++) {
-		result[data[i].id] = data[i].nickname
+		result[data[i].player_id] = data[i].nickname
 	}
 	console.log(result);
 	return result;
