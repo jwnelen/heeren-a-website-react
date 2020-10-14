@@ -1,20 +1,26 @@
-const Pool = require('pg').Pool
+const {Client} = require('pg')
 require('dotenv').config();
 
-const pool = new Pool({
+const client = new Client({
   user: process.env.USER,
   host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
-  port: process.env.PORT_DB,
-	ssl: {
-    rejectUnauthorized: false
-  }
+  port: process.env.PORT_DB
 });
+
+client.connect(err => {
+  if (err) {
+    console.error('connection error', err.stack)
+  } else {
+    console.log('connected')
+  }
+})
+
 
 const getPlayer = (request, response) => {
 	// ORDER BY singles_rating ASC
-  pool.query('SELECT * FROM players', (error, results) => {
+  client.query('SELECT * FROM players', (error, results) => {
     if (error) {
 			
       throw error
