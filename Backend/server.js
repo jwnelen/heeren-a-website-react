@@ -2,6 +2,8 @@
 // https://itnext.io/building-restful-api-with-node-js-express-js-and-postgresql-the-right-way-b2e718ad1c66
 // https://www.red-gate.com/simple-talk/blogs/setting-up-a-simple-rest-interface-with-sql-serve
 
+// git subtree push heroku --prefix=Backend main
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()

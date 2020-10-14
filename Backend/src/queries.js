@@ -6,7 +6,10 @@ const pool = new Pool({
   host: process.env.HOST,
   database: process.env.DATABASE,
   password: process.env.PASSWORD,
-  port: process.env.PORT_DB
+  port: process.env.PORT_DB,
+	ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const getPlayer = (request, response) => {
