@@ -13,13 +13,14 @@ client.connect(err => {
   if (err) {
     console.error('connection error', err.stack)
   } else {
-    console.log('connected')
+    console.log('connected with env: ' + JSON.stringify(client))
   }
 })
 
 
 const getPlayer = (request, response) => {
 	// ORDER BY singles_rating ASC
+	console.log('getting players');
   client.query('SELECT * FROM players', (error, results) => {
     if (error) {
 			
