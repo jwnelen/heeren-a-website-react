@@ -1,24 +1,29 @@
 const {Client} = require('pg')
 require('dotenv').config();
 
-//  user: process.env.USER,
-//  host: process.env.HOST,
-//  database: process.env.DATABASE_URL,
-//  password: process.env.PASSWORD,
-//  port: process.env.PORT_DB
-
-const client = new Client({
+let client = null;
+if(process.env.NODE_ENV) {
+	client = new Client ({
+		user: process.env.USER,
+		host: process.env.HOST,
+		database: process.env.DATABASE_URL,
+		password: process.env.PASSWORD,
+		port: process.env.PORT_DB
+	})
+} else {
+	client = new Client({
 	connectionString: process.env.DATABASE_URL
-});
+	})
+}
 
 client.connect(err => {
   if (err) {
     console.error('connection error', err.stack)
+		console.log('env: ' + process.env.NODE_ENV)
   } else {
     console.log('connected with env: ' + JSON.stringify(client))
   }
 })
-
 
 const getPlayer = (request, response) => {
 	// ORDER BY singles_rating ASC
