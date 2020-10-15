@@ -10,7 +10,6 @@ const db = require('./src/queries')
 const path = require('path');
 const app = express()
 
-
 const cors = require('cors')
 app.use(cors())
 
