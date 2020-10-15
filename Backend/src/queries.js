@@ -2,7 +2,7 @@ const {Client} = require('pg')
 require('dotenv').config();
 
 let client = null;
-if(process.env.NODE_ENV) {
+if(process.env.NODE_ENV === 'development') {
 	client = new Client ({
 		user: process.env.USER,
 		host: process.env.HOST,
@@ -19,7 +19,6 @@ if(process.env.NODE_ENV) {
 client.connect(err => {
   if (err) {
     console.error('connection error', err.stack)
-		console.log('env: ' + process.env.NODE_ENV)
   } else {
     console.log('connected with env: ' + JSON.stringify(client))
   }
