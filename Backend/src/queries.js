@@ -20,7 +20,7 @@ client.connect(err => {
   if (err) {
     console.error('connection error', err.stack)
   } else {
-    console.log('connected with env: ' + JSON.stringify(client))
+    console.log('connected!')
   }
 })
 

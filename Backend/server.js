@@ -6,8 +6,10 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const app = express()
 const db = require('./src/queries')
+const path = require('path');
+const app = express()
+
 
 const cors = require('cors')
 app.use(cors())
@@ -26,19 +28,22 @@ app.use(
   })
 )
 
-app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' })
+// add middlewares
+app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(express.static("build"));
+
+app.get('/api/players', db.getPlayer)
+app.get('/api/players/:id', db.getPlayerById)
+app.post('/api/players', db.createPlayer)
+
+app.get('/api/daltons', db.getDaltons)
+app.get('/api/daltons/:id', db.getDaltonById)
+app.post('/api/daltons', db.addDalton)
+app.get('/api/daltons/amountDaltonsEarned/:id', db.countDaltonsEarned)
+
+app.get('/*', (request, response) => {
+  response.sendFile(path.join(__dirname, "build", "index.html"));
 })
-
-app.get('/players', db.getPlayer)
-app.get('/players/:id', db.getPlayerById)
-app.post('/players', db.createPlayer)
-
-app.get('/daltons', db.getDaltons)
-app.get('/daltons/:id', db.getDaltonById)
-app.post('/daltons', db.addDalton)
-app.get('/daltons/amountDaltonsEarned/:id', db.countDaltonsEarned)
-
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
