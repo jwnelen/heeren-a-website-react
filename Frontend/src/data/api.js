@@ -14,7 +14,7 @@ async function getPlayerById(id) {
 };
 
 async function getPlayersIdAndName() {	
-	return fetch(apiUrl + '/playersIdandName')
+	return fetch(apiUrl + '/players/compressed')
 		.then(response => response.json())
 		.then(result => {
 			// computing the pairs
