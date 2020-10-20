@@ -33,12 +33,13 @@ app.use(express.static("build"));
 
 app.get('/api/players', db.getPlayer)
 app.get('/api/players/:id', db.getPlayerById)
-app.post('/api/players', db.createPlayer)
+app.get('/api/playersIdandName', db.getPlayersIdandName)
+//app.post('/api/players', db.createPlayer)
 
 app.get('/api/daltons', db.getDaltons)
 app.get('/api/daltons/:id', db.getDaltonById)
 app.post('/api/daltons', db.addDalton)
-app.get('/api/daltons/amountDaltonsEarned/:id', db.countDaltonsEarned)
+//app.get('/api/daltons/amountDaltonsEarned/:id', db.countDaltonsEarned)
 
 app.get('/*', (request, response) => {
   response.sendFile(path.join(__dirname, "build", "index.html"));

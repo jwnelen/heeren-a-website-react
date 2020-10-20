@@ -14,7 +14,7 @@ async function getPlayerById(id) {
 };
 
 async function getPlayersIdAndName() {	
-	return fetch(apiUrl + '/players')
+	return fetch(apiUrl + '/playersIdandName')
 		.then(response => response.json())
 		.then(result => {
 			// computing the pairs
