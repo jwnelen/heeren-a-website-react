@@ -8,7 +8,7 @@ class Player extends Component {
 	render(props) {			
 			return(
 				 <div className="card player">
-						<a href={ "/players/" + this.props.player.id}><img className="card-img-top" src={link_fed} alt="player"></img></a>
+						<a href={ "/players/" + this.props.player.player_id}><img className="card-img-top" src={link_fed} alt="player"></img></a>
 
 					<div className="card-body">
 								<a href={ "/players/" + this.props.player.player_id}><h3 className="card-title">{this.props.player.nickname || "Nickname"}</h3> </a>
@@ -16,9 +16,9 @@ class Player extends Component {
 					<ul className="list-group list-group-flush">
 						<li className="list-group-item"> 
 							<RatingDisplay 
-								ratingSingles={this.props.player.single_rating}
+								ratingSingles={this.props.player.singles_rating}
 								ratingDoubles={this.props.player.doubles_rating}
-								ratingSinglesEndingYear={this.props.player.single_rating_ending_year}
+								ratingSinglesEndingYear={this.props.player.singles_rating_ending_year}
 								ratingDoublesEndingYear={this.props.player.doubles_rating_ending_year}>
 							</RatingDisplay>
 						</li> 

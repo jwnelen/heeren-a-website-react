@@ -16,24 +16,46 @@ if(process.env.NODE_ENV === 'development') {
 	})
 }
 
-client.connect(err => {
-  if (err) {
-    console.error('connection error', err.stack)
-  } else {
-    console.log('connected!')
-  }
-})
+let options = null;
+
+if(process.env.NODE_ENV === 'development') {
+	options = {
+		client: 'pg',
+		connection: {
+			user: process.env.USER,
+			host: process.env.HOST,
+			database: process.env.DATABASE_URL,
+			password: process.env.PASSWORD,
+		}
+	}
+} else {
+	options = {
+		client: 'pg',
+		connection: process.env.DATABASE_URL
+	}
+}
+
+const knex = require('knex')(options);
+
+knex.raw("SELECT VERSION()").then(
+    (version) => console.log('connected with knex')
+		).catch((err) => { console.log( err); throw err })
+
+//client.connect(err => {
+//  if (err) {
+//    console.error('connection error', err.stack)
+//  } else {
+//    console.log('connected!')
+//  }
+//})
 
 const getPlayer = (request, response) => {
 	// ORDER BY singles_rating ASC
 	console.log('getting players');
-  client.query('SELECT * FROM players', (error, results) => {
-    if (error) {
-			
-      throw error
-    }
+  knex.raw('SELECT * FROM players').then(results => {
     response.status(200).json(results.rows)
-  })
+  }).catch(err => {console.log(err); throw err})
+	
 };
 
 const getPlayerById = (req, res) => {
