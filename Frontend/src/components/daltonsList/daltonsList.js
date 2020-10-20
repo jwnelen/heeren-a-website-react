@@ -72,12 +72,12 @@ class daltonsList extends Component {
 	}
 	
 	componentDidMount() {
-		api.getDaltons().then(data => {
-			this.setState({ 
-								daltons: data, 
-								isLoading: false 
-					});
-		})
+//		api.getDaltons().then(data => {
+//			this.setState({ 
+//								daltons: data, 
+//								isLoading: false 
+//					});
+//		})
 		
 		api.getPlayersIdAndName().then(data => {
 			this.setState({ 

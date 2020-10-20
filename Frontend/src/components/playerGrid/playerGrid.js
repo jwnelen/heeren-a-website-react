@@ -25,17 +25,20 @@ class PlayerGrid extends Component {
 	
 	componentDidMount() {
 		api.getPlayers().then(data => {
+			if(data){
 			this.setState({ 
 								playerData: data, 
 								isLoading: false 
 					});
+			} else {
+				console.log('data is undefined')
+			}
 		})		
 	}
 	
     render(props) {
         return(
 					<div>
-						<h1>Het Heeren-A team</h1>
 						<div className="container">
 							<div className="row justify-content-center">
 								{ this.state.isLoading === true ?

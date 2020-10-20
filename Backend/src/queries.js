@@ -39,7 +39,7 @@ const getPlayer = (request, response) => {
 const getPlayerById = (req, res) => {
 	const id = parseInt(req.params.id)
 	
-	pool.query('SELECT * FROM players WHERE id = $1', [id], (error, results) => {
+	client.query('SELECT * FROM players WHERE player_id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -61,7 +61,7 @@ const createPlayer = (req, res) => {
 }
 
 const getDaltons = (req, res) => {
-	pool.query('SELECT * FROM daltons', (error, results) => {
+	client.query('SELECT * FROM daltons', (error, results) => {
     if (error) {
       throw error
     }
@@ -73,7 +73,7 @@ const getDaltonById = (req, res) => {
 	const id = parseInt(req.params.id)
 	console.log('get dalton by id in queries: ' + id)
 
-	pool.query('SELECT * FROM daltons WHERE dalton_id = $1', [id], (error, results) => {
+	client.query('SELECT * FROM daltons WHERE dalton_id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -114,7 +114,7 @@ const addDalton = (req, res) => {
 	if(!valid) {
 		res.status(500).send('not enough values' + JSON.stringify(dalton));
 	} else if(valid && !dalton.date_earned) {
-		pool.query
+		client.query
 			("INSERT INTO daltons " + finalString, variables, (error, results) => {
 				if (error) {
 					console.log(error);
@@ -139,7 +139,7 @@ const countDaltonsEarned = (req, res) => {
 //    	res.status(200).json(results.rows)
 //  })
 	
-		pool.query(
+		client.query(
 		'SELECT person_earned_id, count(*) as "daltons_earned" from daltons WHERE person_earned_id=$1 group by person_earned_id;', [id], (error, results) => {
     if (error) {
       throw error

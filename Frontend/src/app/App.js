@@ -7,8 +7,8 @@ import {
 
 import Home from '../contents/home.js'
 import Daltons from '../contents/daltons.js'
+import Team from '../contents/team.js'
 import NavBar from '../components/NavigationBar/navbar'
-import PlayerGrid from '../components/playerGrid/playerGrid'
 import PlayerProfile from '../components/playerProfile/playerProfile'
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
 					component={Home}>
 				</Route>
 				<Route path="/team"
-					component={PlayerGrid}>
+					component={Team}>
     		</Route>
 				<Route exact path="/daltons"
 					component={Daltons}>

@@ -11,7 +11,7 @@ class Player extends Component {
 						<a href={ "/players/" + this.props.player.id}><img className="card-img-top" src={link_fed} alt="player"></img></a>
 
 					<div className="card-body">
-								<a href={ "/players/" + this.props.player.id}><h3 className="card-title">{this.props.player.nickname || "Nickname"}</h3> </a>
+								<a href={ "/players/" + this.props.player.player_id}><h3 className="card-title">{this.props.player.nickname || "Nickname"}</h3> </a>
 								<p className="card-text text-secondary mb-1 font-italic font-light" >{this.props.player.name || "Name"}</p>
 					<ul className="list-group list-group-flush">
 						<li className="list-group-item"> 

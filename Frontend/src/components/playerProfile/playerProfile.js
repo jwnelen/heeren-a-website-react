@@ -22,20 +22,21 @@ class PlayerProfile extends Component {
 		const { id } = this.props.match.params
 		
 		api.getPlayerById(id).then(data => {
+			console.log('data in component: ' + data);
 			this.setState({ 
 								playerData: data[0]
 					});
 		})
 		
-		api.getAmountDaltonsPlayer(id).then(data => {
-			console.log(data);
-			let l = data[0] ? data[0].daltons_earned : 0
-			this.setState({ 
-				amountDaltonsEarned: l,
-				isLoading: false 
-
-			})
-		})
+//		api.getAmountDaltonsPlayer(id).then(data => {
+//			console.log(data);
+//			let l = data[0] ? data[0].daltons_earned : 0
+//			this.setState({ 
+//				amountDaltonsEarned: l,
+//				isLoading: false 
+//
+//			})
+//		})
 	}
 	
 	render(props) {			
