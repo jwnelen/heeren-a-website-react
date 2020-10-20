@@ -1,20 +1,20 @@
 const {Client} = require('pg')
 require('dotenv').config();
 
-let client = null;
-if(process.env.NODE_ENV === 'development') {
-	client = new Client ({
-		user: process.env.USER,
-		host: process.env.HOST,
-		database: process.env.DATABASE_URL,
-		password: process.env.PASSWORD,
-		port: process.env.PORT_DB
-	})
-} else {
-	client = new Client({
-	connectionString: process.env.DATABASE_URL
-	})
-}
+//let client = null;
+//if(process.env.NODE_ENV === 'development') {
+//	client = new Client ({
+//		user: process.env.USER,
+//		host: process.env.HOST,
+//		database: process.env.DATABASE_URL,
+//		password: process.env.PASSWORD,
+//		port: process.env.PORT_DB
+//	})
+//} else {
+//	client = new Client({
+//	connectionString: process.env.DATABASE_URL
+//	})
+//}
 
 let options = null;
 
@@ -49,24 +49,24 @@ knex.raw("SELECT VERSION()").then(
 //  }
 //})
 
-const getPlayer = (request, response) => {
+const getPlayer = (req, res) => {
 	// ORDER BY singles_rating ASC
 	console.log('getting players');
-  knex.raw('SELECT * FROM players').then(results => {
-    response.status(200).json(results.rows)
+  knex.raw('SELECT * FROM players')
+		.then(results => {
+    res.status(200).json(results.rows)
   }).catch(err => {console.log(err); throw err})
 	
 };
 
 const getPlayerById = (req, res) => {
 	const id = parseInt(req.params.id)
-	
-	client.query('SELECT * FROM players WHERE player_id = $1', [id], (error, results) => {
-    if (error) {
-      throw error
-    }
-    res.status(200).json(results.rows)
-  })
+		console.log('getting players by Id');
+
+	knex.raw('SELECT * FROM players WHERE player_id = ' + id)
+		.then(results => {
+			res.status(200).json(results.rows)
+		}).catch(err => {console.log(err); throw err})
 }
 
 const createPlayer = (req, res) => {
@@ -83,24 +83,22 @@ const createPlayer = (req, res) => {
 }
 
 const getDaltons = (req, res) => {
-	client.query('SELECT * FROM daltons', (error, results) => {
-    if (error) {
-      throw error
-    }
-    res.status(200).json(results.rows)
-  })
+		console.log('getting daltons');
+
+	knex.raw('SELECT * FROM daltons')
+    .then(results => {
+			res.status(200).json(results.rows)
+		}).catch(err => {console.log(err); throw err})
 }
 
 const getDaltonById = (req, res) => {
-	const id = parseInt(req.params.id)
-	console.log('get dalton by id in queries: ' + id)
+		console.log('getting daltons by id');
 
-	client.query('SELECT * FROM daltons WHERE dalton_id = $1', [id], (error, results) => {
-    if (error) {
-      throw error
-    }
-    res.status(200).json(results.rows)
-  })
+	const id = parseInt(req.params.id)
+	knex.raw('SELECT * FROM daltons WHERE dalton_id = ' + id)
+    .then(results => {
+			res.status(200).json(results.rows)
+		}).catch(err => {console.log(err); throw err})
 }
 
 function queryDaltonGenerator(dalton) {
