@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import DaltonsList from '../components/daltonsList/daltonsList'
-import DaltonEditor from '../components/daltonEditor/daltonEditor'
+import {Container} from '../components/daltonEditor/container/container'
+//import DaltonEditor from '../components/daltonEditor/daltonEditor'
+
 import api from '../data/api.js'
 
 class Daltons extends Component {
@@ -31,10 +33,15 @@ class Daltons extends Component {
 				} else {
 					console.log('data is undefined')
 				}
-			})		
-		
-		
+			})
 	}
+	
+	onSubmit = (event) => {
+    event.preventDefault(event);
+    console.log(event.target.name.value);
+    console.log(event.target.email.value);
+    console.log(event.target.playerTook.value);
+  };
 	
 	render() {
 		const {isLoading, daltons, players} = this.state;
@@ -45,7 +52,7 @@ class Daltons extends Component {
 			return (
 					<div>
 						<h1>Daltons</h1>
-						<DaltonsList daltons={daltons} players={players}> </DaltonsList>
+				    <Container players={players} onSubmit={this.onSubmit} />
 					</div>
 				)
 		}
@@ -54,6 +61,7 @@ class Daltons extends Component {
     
 export default Daltons
 
+//						<DaltonsList daltons={daltons} players={players}> </DaltonsList>
 // TO USE LATER
 //	state = {
 //		dalton_id: 0
