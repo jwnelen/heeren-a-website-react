@@ -12,10 +12,6 @@ function PlayerList(players) {
 }		
 
 class PlayerGrid extends Component {
-  constructor(props) {
-    super(props);
-  }					
-	
 	render(props) {
 		const {players} = this.props;
 		
