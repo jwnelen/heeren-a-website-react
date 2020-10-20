@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
-import Collapse from 'react-bootstrap/Collapse';
 
 const defaultNewDalton = {
 			date_earned: "",
@@ -25,7 +24,6 @@ class daltonEditor extends Component {
 		
 		
 		this.state = {
-			open: false,
       daltonData: {},
 			playerData: [],
       isLoading: true,
@@ -33,7 +31,6 @@ class daltonEditor extends Component {
     };
 		
 		this.handleInputChange = this.handleInputChange.bind(this);
-		this.toggleEditor = this.toggleEditor.bind(this);
 	}
 
 	handleInputChange(event) {
@@ -113,20 +110,12 @@ class daltonEditor extends Component {
 				this.setState({ 
 									daltonData: newDalton, 
 									isLoading: false,
-									open: true
 						});
 			}).catch(err => {
 				console.log(err.message)
-				this.setState({open: false})
 				}
 			);
 		}		
-	}
-
-	toggleEditor() {
-		this.setState({
-			open: !this.state.open
-		});
 	}
 	
 	render(props) {
@@ -135,8 +124,7 @@ class daltonEditor extends Component {
 			{ Object.keys(this.state.daltonData).length === 0 ?
 									<p>no data to display </p> :
 				<Card >	
-			 		<Card.Header onClick={this.toggleEditor}>Featured</Card.Header>
-			<Collapse in={this.state.open}>
+			 		<Card.Header>Featured</Card.Header>
 			 		<Card.Body>		
 			 <Form noValidate>
 					{/* FIRST ROW */}
@@ -257,7 +245,6 @@ class daltonEditor extends Component {
 					</Row>
 				</Form>
 				</Card.Body>
-						</Collapse>
 						</Card>
 				}
 			</Container>
