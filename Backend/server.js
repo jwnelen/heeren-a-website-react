@@ -1,17 +1,25 @@
 // https://medium.com/@aem_iro/deploying-a-node-js-postgressql-app-to-heroku-hosting-platform-cc611287ae76
 // https://itnext.io/building-restful-api-with-node-js-express-js-and-postgresql-the-right-way-b2e718ad1c66
-// https://www.red-gate.com/simple-talk/blogs/setting-up-a-simple-rest-interface-with-sql-server/
+// https://www.red-gate.com/simple-talk/blogs/setting-up-a-simple-rest-interface-with-sql-serve
+
+// git subtree push heroku --prefix=Backend main
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const app = express()
 const db = require('./src/queries')
+const path = require('path');
+const app = express()
 
 const cors = require('cors')
 app.use(cors())
 
-const port = 8000
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+
+console.log('port;' + process.env.PORT)
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
@@ -19,19 +27,22 @@ app.use(
   })
 )
 
-app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' })
+// add middlewares
+app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(express.static("build"));
+
+app.get('/api/players', db.getPlayer)
+app.get('/api/players/:id', db.getPlayerById)
+app.post('/api/players', db.createPlayer)
+
+app.get('/api/daltons', db.getDaltons)
+app.get('/api/daltons/:id', db.getDaltonById)
+app.post('/api/daltons', db.addDalton)
+app.get('/api/daltons/amountDaltonsEarned/:id', db.countDaltonsEarned)
+
+app.get('/*', (request, response) => {
+  response.sendFile(path.join(__dirname, "build", "index.html"));
 })
-
-app.get('/players', db.getPlayer)
-app.get('/players/:id', db.getPlayerById)
-app.post('/players', db.createPlayer)
-
-app.get('/daltons', db.getDaltons)
-app.get('/daltons/:id', db.getDaltonById)
-app.post('/daltons', db.addDalton)
-app.get('/daltons/amountDaltonsEarned/:id', db.countDaltonsEarned)
-
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })

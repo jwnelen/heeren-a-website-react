@@ -1,41 +1,44 @@
-const apiUrl = 'http://127.0.0.1:8000';
-
+const apiUrl = 'http://127.0.0.1:8000/api';
+//const apiUrl = '/api';
 
 async function getPlayers() {
-	let response = await fetch(apiUrl + '/players');
-	let data = await response.json();
-	return data;
+	return fetch(apiUrl + '/players')
+		.then(response => response.json())
+		.catch((error) => console.log('error in api', error))		
 };
 
 async function getPlayerById(id) {	
-	let response = await fetch(apiUrl + '/players/' + id);
-	let data = await response.json();
-	return data;
+	return fetch(apiUrl + '/players/' + id)
+		.then(response => response.json())
+		.catch((error) => console.log('error in api', error))		
 };
 
 async function getPlayersIdAndName() {	
-	let response = await fetch(apiUrl + '/players/');
-	let data = await response.json();
-	let result = {};
-	
-	for(let i = 0; i < data.length; i++) {
-		result[data[i].id] = data[i].nickname
-	}
-	console.log(result);
-	return result;
+	return fetch(apiUrl + '/players')
+		.then(response => response.json())
+		.then(result => {
+			// computing the pairs
+			let pairs = {};
+			for(let i = 0; i < result.length; i++) {
+				pairs[result[i].player_id] = result[i].nickname
+			}
+			return pairs;
+		})
+		.catch((error) => console.log('error in api', error))		
+					
 };
 
 async function getDaltons() {	
-	let response = await fetch(apiUrl + '/daltons');
-	let data = await response.json();
-	return data;
+	return fetch(apiUrl + '/daltons')
+		.then(response => response.json())
+		.catch((error) => console.log('error in api', error))		
 };
 
 async function getDaltonById(id) {
 	if(id) {
-	let response = await fetch(apiUrl + '/daltons/' + id);
-	let data = await response.json();
-	return data;
+	return fetch(apiUrl + '/daltons/' + id)
+		.then(response => response.json())
+		.catch((error) => console.log('error in api', error))		
 	} else {
 		const error = new Error();
 		error.info = {
@@ -46,7 +49,7 @@ async function getDaltonById(id) {
 	}
 };
 
-
+// TODO
 async function addDalton(dalton) {	
 	console.log('dalton in api function: ' + JSON.stringify(dalton));
 	
@@ -73,9 +76,9 @@ async function addDalton(dalton) {
 };
 
 async function getAmountDaltonsPlayer(id) {	
-	let response = await fetch(apiUrl + '/daltons/amountDaltonsEarned/' + id);
-	let data = await response.json();
-	return data;
+	return fetch(apiUrl + '/daltons' + '/amountDaltonsEarned/' + id)
+		.then(response => response.json())
+		.catch((error) => console.log('error in api', error))		
 };
 
 
