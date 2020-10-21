@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import DaltonsListRow from '../daltonsListRow/daltonsListRow';
 import './daltonsList.css'
 import Table from 'react-bootstrap/Table'
-
-
-							
+		
 class daltonsList extends Component {
 	renderRows() {
 		const {daltons, players} = this.props;

@@ -9,17 +9,15 @@ const bodyParser = require('body-parser')
 const db = require('./src/queries')
 const path = require('path');
 const app = express()
-
 const cors = require('cors')
-app.use(cors())
 
+app.use(cors())
 
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
 }
 
-console.log('port;' + process.env.PORT)
 app.use(bodyParser.json())
 app.use(
   bodyParser.urlencoded({
@@ -27,18 +25,14 @@ app.use(
   })
 )
 
-// add middlewares
+// add middlewares for production
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("build"));
 
-app.get('/api/players', db.getPlayer)
-app.get('/api/players/:id', db.getPlayerById)
-app.post('/api/players', db.createPlayer)
-
-app.get('/api/daltons', db.getDaltons)
-app.get('/api/daltons/:id', db.getDaltonById)
-app.post('/api/daltons', db.addDalton)
-app.get('/api/daltons/amountDaltonsEarned/:id', db.countDaltonsEarned)
+// adding controllers
+app.use('/api/players', require('./router-controllers/player-controller'))
+app.use('/api/daltons', require('./router-controllers/dalton-controller'))
+app.use('/api/posts', require('./router-controllers/posts-controller'))
 
 app.get('/*', (request, response) => {
   response.sendFile(path.join(__dirname, "build", "index.html"));

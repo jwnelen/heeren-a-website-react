@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DaltonsList from '../components/daltonsList/daltonsList'
-import DaltonEditor from '../components/daltonEditor/daltonEditor'
+import {Container} from '../components/daltonEditor/container/container'
+
 import api from '../data/api.js'
 
 class Daltons extends Component {
@@ -17,24 +18,46 @@ class Daltons extends Component {
 	}
 	
 	componentDidMount() {
+		this.getDaltonsData();
+		this.getPlayersData();
+	}
+	
+	getDaltonsData = () => {
 		api.getDaltons().
 			then(daltonsData => {
-				if(daltonsData) {
-							api.getPlayersIdAndName().then(playersData => {
-								console.log('daltons page mounted with data: ' + JSON.stringify(playersData))
+				this.setState({
+					daltons: daltonsData
+					});
+				}
+			)
+	}
+	
+	getPlayersData = () => {
+		api.getPlayersIdAndName()
+			.then(playersData => {
 								this.setState({ 
 									players: playersData,
-									daltons: daltonsData,
 									isLoading: false 
 							});
-						})
-				} else {
-					console.log('data is undefined')
-				}
-			})		
-		
-		
+		})
 	}
+						
+	
+	onSubmit = (event) => {
+    event.preventDefault(event);
+		const dalton = {
+			person_took_id: event.target.playerTook.value,
+			reason: event.target.reason.value
+		}
+		const self = this;
+		api.addDalton(dalton)
+			.then(res => {
+				if(res.status === 200) console.log('dalton added!')
+				self.child.closeModal()
+				self.getDaltonsData()
+				window.alert("Dalton is added!");
+			});
+  };
 	
 	render() {
 		const {isLoading, daltons, players} = this.state;
@@ -45,7 +68,8 @@ class Daltons extends Component {
 			return (
 					<div>
 						<h1>Daltons</h1>
-						<DaltonsList daltons={daltons} players={players}> </DaltonsList>
+				    <Container players={players} onRefParent={ref => (this.child = ref)} onSubmit={this.onSubmit} />
+						<DaltonsList daltons={daltons} players={players} onSelectDalton={this.handleDaltonChange}></DaltonsList>
 					</div>
 				)
 		}
@@ -53,16 +77,3 @@ class Daltons extends Component {
 }
     
 export default Daltons
-
-// TO USE LATER
-//	state = {
-//		dalton_id: 0
-//	}
-//	
-//	handleDaltonChange = (dal_id) => {
-//		this.setState({dalton_id: dal_id})
-//		console.log('other dalton: ' + dal_id)
-//	}
-    
-//						<DaltonEditor dalton_id={this.state.dalton_id}></DaltonEditor>
-//						<DaltonsList onSelectDalton={this.handleDaltonChange}></DaltonsList>
