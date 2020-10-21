@@ -85,13 +85,22 @@ const addDalton = (req, res) => {
 		.catch(err => {console.log(err); throw err})
 }
 
+const getPosts = (req, res) => {
+	knex.select('*').from('posts')
+		.then((result) => {
+		console.log(result)
+		res.status(200).json(result)
+	}).catch(err => {console.log(err); throw err})
+}
+
 module.exports = {
 	getPlayer,
 	getPlayerById,
 	getPlayersIdandName,
 	getDaltons,
 	addDalton,
-	getDaltonById
+	getDaltonById,
+	getPosts
 };
 
 //const countDaltonsEarned = (req, res) => {

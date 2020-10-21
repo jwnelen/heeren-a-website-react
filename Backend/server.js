@@ -32,6 +32,7 @@ app.use(express.static("build"));
 // adding controllers
 app.use('/api/players', require('./router-controllers/player-controller'))
 app.use('/api/daltons', require('./router-controllers/dalton-controller'))
+app.use('/api/posts', require('./router-controllers/posts-controller'))
 
 app.get('/*', (request, response) => {
   response.sendFile(path.join(__dirname, "build", "index.html"));

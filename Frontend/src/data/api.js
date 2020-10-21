@@ -75,6 +75,12 @@ async function addDalton(dalton) {
 	}
 };
 
+async function getPosts() {
+	return fetch(apiUrl + '/posts')
+		.then(response => response.json())
+		.catch((error) => console.log('error in api', error))		
+};
+
 async function getAmountDaltonsPlayer(id) {	
 	return fetch(apiUrl + '/daltons' + '/amountDaltonsEarned/' + id)
 		.then(response => response.json())
@@ -89,7 +95,8 @@ export default {
 	getPlayersIdAndName, 
 	getAmountDaltonsPlayer,
 	addDalton,
-	getDaltonById
+	getDaltonById,
+	getPosts
 };
 
 

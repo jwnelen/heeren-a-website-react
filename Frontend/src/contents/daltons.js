@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DaltonsList from '../components/daltonsList/daltonsList'
 import {Container} from '../components/daltonEditor/container/container'
-//import DaltonEditor from '../components/daltonEditor/daltonEditor'
 
 import api from '../data/api.js'
 
@@ -55,13 +54,9 @@ class Daltons extends Component {
 			.then(res => {
 				if(res.status === 200) console.log('dalton added!')
 				self.child.closeModal()
-				window.alert("Dalton is added!");
 				self.getDaltonsData()
+				window.alert("Dalton is added!");
 			});
-		
-		// close window
-		// refresh list
-		
   };
 	
 	render() {
@@ -82,17 +77,3 @@ class Daltons extends Component {
 }
     
 export default Daltons
-
-//						<DaltonsList daltons={daltons} players={players}> </DaltonsList>
-// TO USE LATER
-//	state = {
-//		dalton_id: 0
-//	}
-//	
-//	handleDaltonChange = (dal_id) => {
-//		this.setState({dalton_id: dal_id})
-//		console.log('other dalton: ' + dal_id)
-//	}
-    
-//						<DaltonEditor dalton_id={this.state.dalton_id}></DaltonEditor>
-//						

@@ -24,9 +24,9 @@ class DaltonsListRow extends Component {
       <td>{dalton.reason}</td>
       <td>{players[dalton.person_took_id]}</td>
       <td>{
-					dalton.date_earned ? moment(dalton.date_earned).locale('nl').format('dddd DD MMMM YYYY') : ''}</td>
+					dalton.date_earned ? moment(dalton.date_earned).format('dddd DD MMMM YYYY') : ''}</td>
    		<td>{
-					dalton.date_taken ? moment(dalton.date_taken).locale('nl').format('dddd DD MMMM YYYY') : ''}</td>
+					dalton.date_taken ? moment(dalton.date_taken).format('dddd DD MMMM YYYY') : ''}</td>
 			<td>
 				<Button variant="transparent" id={dalton.dalton_id} onClick={this.handleClick}>
 					<svg width="1.5em" height="1.5em" viewBox="0 0 16 16" className="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

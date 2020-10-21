@@ -1,11 +1,13 @@
 import React from 'react';
 
-export const Form = ({ onSubmit, players}) => {	
+export const Form = ({ onSubmit, players, dalton, setFieldValue}) => {	
 	
 	let options = Object.keys(players).map( function(key) {
 		return <option key={key} value={key}>{players[key]}</option>
 	});						
 
+	
+	
 	return(
 	<form onSubmit={onSubmit}>
       <div className="form-group">
@@ -29,15 +31,3 @@ export const Form = ({ onSubmit, players}) => {
 }
 
 export default Form
-
-/*
-{( 
-							players.map((player, index) => {
-								return <option 
-									key={index} 
-									value={player.id}
-									>{player.nickname}
-								</option> })
-											)}
-											
-											*/
