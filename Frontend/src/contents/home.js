@@ -27,7 +27,7 @@ class Home extends Component {
 		
 		const postList = posts.map((post, index) => {
 						return (
-							<div>
+							<div key={index}>
 								<BlogPost post={post} index={index}></BlogPost>
 								<hr></hr>
 							</div>
