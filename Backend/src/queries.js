@@ -85,6 +85,15 @@ const addDalton = (req, res) => {
 		.catch(err => {console.log(err); throw err})
 }
 
+const deleteDalton = (req, res) => {
+	const id = parseInt(req.params.id)
+	
+	knex('daltons').where('dalton_id', id).del()
+		.then(rows => res.status(200).json(rows))
+		.catch(err => {console.log(err); throw err})
+
+}
+
 const getPosts = (req, res) => {
 	knex.select('*').from('posts')
 		.then((result) => {
@@ -100,6 +109,7 @@ module.exports = {
 	getDaltons,
 	addDalton,
 	getDaltonById,
+	deleteDalton,
 	getPosts
 };
 

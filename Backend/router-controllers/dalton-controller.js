@@ -7,6 +7,7 @@ const queries = require('../src/queries')
 daltonRouter
 	.get('/', queries.getDaltons)
 	.post('/', queries.addDalton)
+	.delete('/:id', queries.deleteDalton)
 
 daltonRouter.get('/:id', queries.getDaltonById)
 
