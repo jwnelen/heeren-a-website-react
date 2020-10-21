@@ -29,6 +29,15 @@ export class Container extends Component {
   toggleScrollLock = () => {
     document.querySelector('html').classList.toggle('scroll-lock');
   };
+
+	componentDidMount() {
+    this.props.onRefParent(this)
+  }
+
+	componentWillUnmount() {
+    this.props.onRefParent(undefined)
+  }
+
   render() {
     return (
       <React.Fragment>

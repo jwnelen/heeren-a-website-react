@@ -9,17 +9,8 @@ export const Form = ({ onSubmit, players}) => {
 	return(
 	<form onSubmit={onSubmit}>
       <div className="form-group">
-        <label htmlFor="name">Name</label>
-        <input className="form-control" id="name" />
-      </div>
-      <div className="form-group">
-        <label htmlFor="email">Email address</label>
-        <input
-          type="emai	l"
-          className="form-control"
-          id="email"
-          placeholder="name@example.com"
-        />
+        <label htmlFor="reason">Reden</label>
+        <input className="form-control" id="reason" />
       </div>
 			<div className="form-group">
 				<label htmlFor="playerTook">Genomen door</label>

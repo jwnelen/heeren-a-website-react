@@ -19,28 +19,49 @@ class Daltons extends Component {
 	}
 	
 	componentDidMount() {
+		this.getDaltonsData();
+		this.getPlayersData();
+	}
+	
+	getDaltonsData = () => {
 		api.getDaltons().
 			then(daltonsData => {
-				if(daltonsData) {
-							api.getPlayersIdAndName().then(playersData => {
-								console.log('daltons page mounted with data: ' + JSON.stringify(playersData))
+				this.setState({
+					daltons: daltonsData
+					});
+				}
+			)
+	}
+	
+	getPlayersData = () => {
+		api.getPlayersIdAndName()
+			.then(playersData => {
 								this.setState({ 
 									players: playersData,
-									daltons: daltonsData,
 									isLoading: false 
 							});
-						})
-				} else {
-					console.log('data is undefined')
-				}
-			})
+		})
 	}
+						
 	
 	onSubmit = (event) => {
     event.preventDefault(event);
-    console.log(event.target.name.value);
-    console.log(event.target.email.value);
-    console.log(event.target.playerTook.value);
+		const dalton = {
+			person_took_id: event.target.playerTook.value,
+			reason: event.target.reason.value
+		}
+		const self = this;
+		api.addDalton(dalton)
+			.then(res => {
+				if(res.status === 200) console.log('dalton added!')
+				self.child.closeModal()
+				window.alert("Dalton is added!");
+				self.getDaltonsData()
+			});
+		
+		// close window
+		// refresh list
+		
   };
 	
 	render() {
@@ -52,7 +73,8 @@ class Daltons extends Component {
 			return (
 					<div>
 						<h1>Daltons</h1>
-				    <Container players={players} onSubmit={this.onSubmit} />
+				    <Container players={players} onRefParent={ref => (this.child = ref)} onSubmit={this.onSubmit} />
+						<DaltonsList daltons={daltons} players={players} onSelectDalton={this.handleDaltonChange}></DaltonsList>
 					</div>
 				)
 		}
@@ -73,4 +95,4 @@ export default Daltons
 //	}
     
 //						<DaltonEditor dalton_id={this.state.dalton_id}></DaltonEditor>
-//						<DaltonsList onSelectDalton={this.handleDaltonChange}></DaltonsList>
+//						
