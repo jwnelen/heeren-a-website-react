@@ -16,10 +16,9 @@ class Team extends Component {
 	
 	
 	componentDidMount() {
-		api.getPlayers().
-			then(data => {
+		api.getPlayers()
+			.then(data => {
 				if(data) {
-					console.log('team page mounted with data: ' + JSON.stringify(data))
 					this.setState({ 
 									playerData: data, 
 									isLoading: false 

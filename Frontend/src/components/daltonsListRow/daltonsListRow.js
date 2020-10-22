@@ -11,11 +11,11 @@ class DaltonsListRow extends Component {
 	}
 	
 	handleClick = (e) => {
-		console.log('handle click', e.target.id);
+		this.props.onSelectCurrentDalton(this.props.dalton);
 	}
 	
 	render(props) {
-		const {dalton, index, players} = this.props;
+		const {dalton, index, players, } = this.props;
 		
 		return(
 		<tr>

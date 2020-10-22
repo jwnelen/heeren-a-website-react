@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Form } from '../form/form';
+import Form from '../form/form';
 import FocusTrap from 'focus-trap-react';
 import './modal.css'
 
@@ -12,7 +12,8 @@ export const Modal = ({
   buttonRef,
   closeModal,
   onSubmit,
-	players
+	players,
+	currentDalton
 }) => {
   return ReactDOM.createPortal(
     <FocusTrap>
@@ -41,7 +42,7 @@ export const Modal = ({
             </svg>
           </button>
           <div className="modal-body">
-            <Form players={players} onSubmit={onSubmit} />
+            <Form players={players} onSubmit={onSubmit} currentDalton={currentDalton} />
           </div>
         </div>
       </aside>

@@ -12,6 +12,7 @@ class Daltons extends Component {
 		this.state = {
 			daltons: [],
 			players: [],
+			currentDalton: {},
       isLoading: true,
 			errors: [],
     };
@@ -22,9 +23,14 @@ class Daltons extends Component {
 		this.getPlayersData();
 	}
 	
+	handleDaltonChange = (dalton) => {
+		this.setState({currentDalton: dalton})
+		this.child.showModal();
+	}
+	
 	getDaltonsData = () => {
-		api.getDaltons().
-			then(daltonsData => {
+		api.getDaltons()
+			.then(daltonsData => {
 				this.setState({
 					daltons: daltonsData
 					});
@@ -41,26 +47,62 @@ class Daltons extends Component {
 							});
 		})
 	}
-						
 	
-	onSubmit = (event) => {
+	clearDalton = () => {
+		this.setState({
+			currentDalton: {}
+		})
+	}
+	
+	onSubmit = (event, dalton, deletion = false) => {
     event.preventDefault(event);
-		const dalton = {
-			person_took_id: event.target.playerTook.value,
-			reason: event.target.reason.value
-		}
 		const self = this;
-		api.addDalton(dalton)
+		
+		// Delete Dalton
+		if(deletion) {
+			api.deleteDalton(dalton)
+				.then(res => {
+					if(res.status === 200) {
+						self.child.closeModal()
+						self.getDaltonsData()
+						window.alert("Dalton is deleted!");
+					} else {
+						window.alert("Could not delete dalton");
+					}
+				})
+		} else {
+		
+		// Add Dalton
+		if(dalton.dalton_id === null || dalton.dalton_id === -1) {
+			delete dalton['dalton_id'];
+			
+			api.addDalton(dalton)
 			.then(res => {
-				if(res.status === 200) console.log('dalton added!')
-				self.child.closeModal()
-				self.getDaltonsData()
-				window.alert("Dalton is added!");
+				if(res.status === 200) {
+					self.child.closeModal()
+					self.getDaltonsData()
+					window.alert("Dalton is added!");
+				} else {
+					window.alert("Could not add dalton");
+				}
 			});
+		} else { // Edit Dalton
+			api.updateDalton(dalton)
+				.then(res => {
+					if(res.status === 200) {
+						self.child.closeModal()
+						self.getDaltonsData()
+						window.alert("Dalton is updated!");
+					} else {
+						window.alert("Could not update dalton");
+					}
+				});
+		}
+		}
   };
 	
 	render() {
-		const {isLoading, daltons, players} = this.state;
+		const {isLoading, daltons, players, currentDalton} = this.state;
 		
 		if(isLoading) {
 			return <h3 className='mt-4'>loading...</h3>;
@@ -68,8 +110,13 @@ class Daltons extends Component {
 			return (
 					<div>
 						<h1>Daltons</h1>
-				    <Container players={players} onRefParent={ref => (this.child = ref)} onSubmit={this.onSubmit} />
+				    <Container 
+							players={players} currentDalton={currentDalton}
+							onRefParent={ref => (this.child = ref)} 
+							onSubmit={this.onSubmit}
+							onClearDalton={this.clearDalton}/>
 						<DaltonsList daltons={daltons} players={players} onSelectDalton={this.handleDaltonChange}></DaltonsList>
+						
 					</div>
 				)
 		}

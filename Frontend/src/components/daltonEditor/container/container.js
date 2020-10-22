@@ -15,6 +15,7 @@ export class Container extends Component {
     this.setState({ isShown: false });
     this.TriggerButton.focus();
     this.toggleScrollLock();
+		this.props.onClearDalton();
   };
   onKeyDown = (event) => {
     if (event.keyCode === 27) {
@@ -54,6 +55,7 @@ export class Container extends Component {
             onKeyDown={this.onKeyDown}
             onClickOutside={this.onClickOutside}
 						players={this.props.players}
+						currentDalton={this.props.currentDalton}
           />
         ) : null}
       </React.Fragment>

@@ -7,8 +7,10 @@ const queries = require('../src/queries')
 daltonRouter
 	.get('/', queries.getDaltons)
 	.post('/', queries.addDalton)
-	.delete('/:id', queries.deleteDalton)
 
-daltonRouter.get('/:id', queries.getDaltonById)
+daltonRouter
+	.get('/:id', queries.getDaltonById)
+	.put('/:id', queries.updateDalton)
+	.delete('/:id', queries.deleteDalton)
 
 module.exports = daltonRouter;
