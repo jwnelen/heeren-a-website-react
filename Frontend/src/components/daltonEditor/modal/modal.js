@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Form } from '../form/form';
+import Form from '../form/form';
 import FocusTrap from 'focus-trap-react';
 import './modal.css'
 
@@ -25,7 +25,6 @@ export const Modal = ({
         className="modal-cover"
         onClick={onClickOutside}
         onKeyDown={onKeyDown}
-				currentDalton={currentDalton}
       >
         <div className="modal-area" ref={modalRef}>
           <button
@@ -43,7 +42,7 @@ export const Modal = ({
             </svg>
           </button>
           <div className="modal-body">
-            <Form players={players} onSubmit={onSubmit} />
+            <Form players={players} onSubmit={onSubmit} currentDalton={currentDalton} />
           </div>
         </div>
       </aside>
