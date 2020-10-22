@@ -56,11 +56,26 @@ class Daltons extends Component {
 		})
 	}
 	
-	onSubmit = (event, dalton) => {
+	onSubmit = (event, dalton, deletion = false) => {
     event.preventDefault(event);
 		
 		console.log('dalton: ' + JSON.stringify(dalton));
+		console.log('deletion: ' + deletion);
 		const self = this;
+		
+		// Delete Dalton
+		if(deletion) {
+			api.deleteDalton(dalton)
+				.then(res => {
+					if(res.status === 200) {
+						self.child.closeModal()
+						self.getDaltonsData()
+						window.alert("Dalton is deleted!");
+					} else {
+						window.alert("Could not delete dalton");
+					}
+				})
+		} else {
 		
 		// Add Dalton
 		if(dalton.dalton_id === null || dalton.dalton_id === -1) {
@@ -88,6 +103,7 @@ class Daltons extends Component {
 					}
 				});
 		}
+		}
   };
 	
 	render() {
@@ -99,9 +115,7 @@ class Daltons extends Component {
 			return (
 					<div>
 						<h1>Daltons</h1>
-				    {JSON.stringify(this.state.currentDalton)}
-						<hr/>
-						<Container 
+				    <Container 
 							players={players} currentDalton={currentDalton}
 							onRefParent={ref => (this.child = ref)} 
 							onSubmit={this.onSubmit}

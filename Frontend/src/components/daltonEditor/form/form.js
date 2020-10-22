@@ -18,6 +18,7 @@ class Form extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleDeleteButton = this.handleDeleteButton.bind(this);
 	}
 	
 	handleChange(event) {
@@ -29,6 +30,11 @@ class Form extends Component {
     })
   }
 	
+	handleDeleteButton(event) {
+		event.preventDefault();
+		this.props.onSubmit(event, this.state, true)
+	}
+	
 	render(props) {
 		const {onSubmit, players, dalton, setFieldValue} = this.props;
 		
@@ -36,16 +42,34 @@ class Form extends Component {
 			return <option key={key} value={key}>{players[key]}</option>
 		});	
 		
-		let pageTitle;
+		let confirmButtons;
+		
 		if(this.state.dalton_id === -1) {
-      pageTitle = <h2>Add Dalton</h2>
+			confirmButtons = 
+				<div className="form-group">
+					<button className="form-control btn btn-primary" type="submit">
+						Add Dalton!
+					</button>
+				</div>
     } else {
-      pageTitle = <h2>Edit Dalton</h2>
+			confirmButtons = 
+				<div className="row justify-content-around">
+					<div className='col-6'>
+					<button className="form-control btn btn-primary" type="submit">
+						Confirm
+					</button>
+						</div>
+					<div className='col-6'>
+					<button className="form-control btn btn-danger" type="button" onClick={this.handleDeleteButton}>
+						Delete Dalton
+					</button>
+					</div> 
+				</div>
     }
+		
 		
 		return(
 		<form onSubmit={(e) => onSubmit(e, this.state)}>
-				{pageTitle}
 				<div className="form-group">
 					<label htmlFor="reason">Reden</label>
 					<input 
@@ -66,12 +90,8 @@ class Form extends Component {
 					<option value={0}>Choose...</option>
 					{options}
 					</select>
-				</div>
-				<div className="form-group">
-					<button className="form-control btn btn-primary" type="submit">
-						Submit
-					</button>
-				</div>
+			</div>
+					{confirmButtons}
 			</form>
 		)
 	}

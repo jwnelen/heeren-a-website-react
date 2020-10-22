@@ -75,6 +75,29 @@ async function addDalton(dalton) {
 	}
 };
 
+async function deleteDalton(dalton) {
+	console.log('dalton deletion of ' + JSON.stringify(dalton));
+	
+	let response = await fetch(apiUrl + '/daltons/' + dalton.dalton_id, {
+		method: 'DELETE',
+		headers: {
+  	'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+ 		},
+	});
+	
+	let result = await response;
+	if(response.ok){
+		return result
+	} else {
+		const error = new Error();
+		error.info = {
+			type: 'Error',
+			message: 'Could not delete Dalton: ' + JSON.stringify(dalton)
+		}
+		return (error);
+	}
+}
+
 async function updateDalton(dalton) {
 	console.log('dalton in api function: ' + JSON.stringify(dalton));
 	let id = dalton.dalton_id;
@@ -122,6 +145,7 @@ export default {
 	getPlayersIdAndName, 
 	getAmountDaltonsPlayer,
 	addDalton,
+	deleteDalton,
 	updateDalton,
 	getDaltonById,
 	getPosts

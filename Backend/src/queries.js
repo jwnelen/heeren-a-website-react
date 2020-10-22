@@ -87,7 +87,6 @@ const addDalton = (req, res) => {
 
 const deleteDalton = (req, res) => {
 	const id = parseInt(req.params.id)
-	
 	knex('daltons').where('dalton_id', id).del()
 		.then(rows => res.status(200).json(rows))
 		.catch(err => {console.log(err); throw err})
