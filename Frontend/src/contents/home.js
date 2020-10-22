@@ -42,7 +42,7 @@ class Home extends Component {
 			return (
 				<div>
  					<div className='front-image-container'>
-						<img src={process.env.PUBLIC_URL + '/background.jpg'} className='p-4' alt="Background image"/>
+						<img src={process.env.PUBLIC_URL + '/background.jpg'} className='p-4' alt="background"/>
 						<h1>Heeren A </h1>
 					</div>
 					<div className='container'>

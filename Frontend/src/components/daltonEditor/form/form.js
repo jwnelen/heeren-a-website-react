@@ -36,7 +36,7 @@ class Form extends Component {
 	}
 	
 	render(props) {
-		const {onSubmit, players, dalton, setFieldValue} = this.props;
+		const {onSubmit, players} = this.props;
 		
 		let options = Object.keys(players).map( function(key) {
 			return <option key={key} value={key}>{players[key]}</option>

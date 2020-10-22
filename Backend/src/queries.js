@@ -29,7 +29,6 @@ knex.raw("SELECT VERSION()").then(
 const getPlayer = (req, res) => {
 	knex.select('*').from('players')
 		.then((result) => {
-		console.log(result)
 		res.status(200).json(result)
 	}).catch(err => {console.log(err); throw err})
 	
@@ -40,17 +39,14 @@ const getPlayerById = (req, res) => {
 
 	knex.select('*').from('players').where('player_id', id)
 		.then((result) => {
-		console.log(result)
 		if(result.length === 0) {throw new Error}
 		res.status(200).json(result)
 	}).catch(err => {console.log(err); throw err})
 }
 
 const getPlayersIdandName = (req, res) => {
-	console.log('only getting players name and ID ')
 	knex.select('player_id', 'nickname').from('players')
 		.then((result) => {
-		console.log(result)
 		res.status(200).json(result)
 	}).catch(err => {console.log(err); throw err})
 }
@@ -59,18 +55,15 @@ const getPlayersIdandName = (req, res) => {
 const getDaltons = (req, res) => {
 	knex.select('*').from('daltons')
 		.then((result) => {
-		console.log(result)
 		res.status(200).json(result)
 	}).catch(err => {console.log(err); throw err})
 }
 
 const getDaltonById = (req, res) => {
-	console.log('getting daltons by id');
 	const id = parseInt(req.params.id)
 
 	knex.select('*').from('daltons').where('dalton_id', id)
 		.then((result) => {
-		console.log(result)
 		if(result.length === 0) {throw new Error}
 		res.status(200).json(result)
 	}).catch(err => {console.log(err); throw err})
@@ -93,11 +86,8 @@ const deleteDalton = (req, res) => {
 }
 
 const updateDalton = (req, res) => {
-	console.log('params:  ' + JSON.stringify(req.params));
 	const id = parseInt(req.params.id)
 	const dalton = req.body
-	console.log('dalton updated: ' + JSON.stringify(dalton));
-	console.log('id: ' + id);
 	
 	knex('daltons')
 		.where({dalton_id: id})
@@ -109,7 +99,6 @@ const updateDalton = (req, res) => {
 const getPosts = (req, res) => {
 	knex.select('*').from('posts')
 		.then((result) => {
-		console.log(result)
 		res.status(200).json(result)
 	}).catch(err => {console.log(err); throw err})
 }
@@ -125,17 +114,3 @@ module.exports = {
 	getPosts,
 	updateDalton
 };
-
-//const countDaltonsEarned = (req, res) => {
-//	const id = parseInt(req.params.id)
-//	
-//		client.query(
-//		'SELECT person_earned_id, count(*) as "daltons_earned" from daltons WHERE person_earned_id=$1 group by person_earned_id;', [id], (error, results) => {
-//    if (error) {
-//      throw error
-//    }
-//		
-//			console.log(results);
-//    	res.status(200).json(results.rows)
-//  })
-//}

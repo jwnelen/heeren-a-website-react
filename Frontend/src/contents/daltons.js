@@ -24,14 +24,13 @@ class Daltons extends Component {
 	}
 	
 	handleDaltonChange = (dalton) => {
-		console.log('dalton changed: ' + JSON.stringify(dalton));
 		this.setState({currentDalton: dalton})
 		this.child.showModal();
 	}
 	
 	getDaltonsData = () => {
-		api.getDaltons().
-			then(daltonsData => {
+		api.getDaltons()
+			.then(daltonsData => {
 				this.setState({
 					daltons: daltonsData
 					});
@@ -50,7 +49,6 @@ class Daltons extends Component {
 	}
 	
 	clearDalton = () => {
-		console.log('clear dalton');
 		this.setState({
 			currentDalton: {}
 		})
@@ -58,9 +56,6 @@ class Daltons extends Component {
 	
 	onSubmit = (event, dalton, deletion = false) => {
     event.preventDefault(event);
-		
-		console.log('dalton: ' + JSON.stringify(dalton));
-		console.log('deletion: ' + deletion);
 		const self = this;
 		
 		// Delete Dalton
