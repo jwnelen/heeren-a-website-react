@@ -26,6 +26,7 @@ class Daltons extends Component {
 	handleDaltonChange = (dalton) => {
 		console.log('dalton changed: ' + JSON.stringify(dalton));
 		this.setState({currentDalton: dalton})
+		this.child.showModal();
 	}
 	
 	getDaltonsData = () => {
@@ -47,22 +48,46 @@ class Daltons extends Component {
 							});
 		})
 	}
-						
 	
-	onSubmit = (event) => {
+	clearDalton = () => {
+		console.log('clear dalton');
+		this.setState({
+			currentDalton: {}
+		})
+	}
+	
+	onSubmit = (event, dalton) => {
     event.preventDefault(event);
-		const dalton = {
-			person_took_id: event.target.playerTook.value,
-			reason: event.target.reason.value
-		}
+		
+		console.log('dalton: ' + JSON.stringify(dalton));
 		const self = this;
-		api.addDalton(dalton)
+		
+		// Add Dalton
+		if(dalton.dalton_id === null || dalton.dalton_id === -1) {
+			delete dalton['dalton_id'];
+			
+			api.addDalton(dalton)
 			.then(res => {
-				if(res.status === 200) console.log('dalton added!')
-				self.child.closeModal()
-				self.getDaltonsData()
-				window.alert("Dalton is added!");
+				if(res.status === 200) {
+					self.child.closeModal()
+					self.getDaltonsData()
+					window.alert("Dalton is added!");
+				} else {
+					window.alert("Could not add dalton");
+				}
 			});
+		} else { // Edit Dalton
+			api.updateDalton(dalton)
+				.then(res => {
+					if(res.status === 200) {
+						self.child.closeModal()
+						self.getDaltonsData()
+						window.alert("Dalton is updated!");
+					} else {
+						window.alert("Could not update dalton");
+					}
+				});
+		}
   };
 	
 	render() {
@@ -76,7 +101,11 @@ class Daltons extends Component {
 						<h1>Daltons</h1>
 				    {JSON.stringify(this.state.currentDalton)}
 						<hr/>
-						<Container players={players} onRefParent={ref => (this.child = ref)} onSubmit={this.onSubmit} currentDalton={currentDalton}/>
+						<Container 
+							players={players} currentDalton={currentDalton}
+							onRefParent={ref => (this.child = ref)} 
+							onSubmit={this.onSubmit}
+							onClearDalton={this.clearDalton}/>
 						<DaltonsList daltons={daltons} players={players} onSelectDalton={this.handleDaltonChange}></DaltonsList>
 						
 					</div>

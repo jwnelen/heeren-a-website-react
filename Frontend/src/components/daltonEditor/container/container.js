@@ -15,6 +15,7 @@ export class Container extends Component {
     this.setState({ isShown: false });
     this.TriggerButton.focus();
     this.toggleScrollLock();
+		this.props.onClearDalton();
   };
   onKeyDown = (event) => {
     if (event.keyCode === 27) {

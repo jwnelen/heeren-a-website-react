@@ -75,6 +75,33 @@ async function addDalton(dalton) {
 	}
 };
 
+async function updateDalton(dalton) {
+	console.log('dalton in api function: ' + JSON.stringify(dalton));
+	let id = dalton.dalton_id;
+	delete dalton['dalton_id']
+	console.log('id in api: ' + id);
+	
+	let response = await fetch(apiUrl + '/daltons/' + id, {
+		method: 'PUT',
+		headers: {
+  	'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+ 		},
+		body: JSON.stringify(dalton)
+	});
+	
+	let result = await response;
+	if(response.ok){
+		return result
+	} else {
+		const error = new Error();
+		error.info = {
+			type: 'Error',
+			message: 'Could not update Dalton: ' + JSON.stringify(dalton)
+		}
+		return (error);
+	}
+}
+
 async function getPosts() {
 	return fetch(apiUrl + '/posts')
 		.then(response => response.json())
@@ -95,6 +122,7 @@ export default {
 	getPlayersIdAndName, 
 	getAmountDaltonsPlayer,
 	addDalton,
+	updateDalton,
 	getDaltonById,
 	getPosts
 };

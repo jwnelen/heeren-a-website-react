@@ -94,6 +94,7 @@ const deleteDalton = (req, res) => {
 }
 
 const updateDalton = (req, res) => {
+	console.log('params:  ' + JSON.stringify(req.params));
 	const id = parseInt(req.params.id)
 	const dalton = req.body
 	console.log('dalton updated: ' + JSON.stringify(dalton));

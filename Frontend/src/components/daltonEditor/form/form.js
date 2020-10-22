@@ -8,7 +8,7 @@ class Form extends Component {
 		this.initialState = {
 			dalton_id: -1,
 			reason: '',
-			player_took_id: '0'
+			person_took_id: '0'
 		}
 		
 		if(props.currentDalton.dalton_id){
@@ -44,7 +44,7 @@ class Form extends Component {
     }
 		
 		return(
-		<form onSubmit={onSubmit}>
+		<form onSubmit={(e) => onSubmit(e, this.state)}>
 				{pageTitle}
 				<div className="form-group">
 					<label htmlFor="reason">Reden</label>
