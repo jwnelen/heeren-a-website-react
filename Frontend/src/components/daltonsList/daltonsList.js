@@ -9,7 +9,12 @@ class daltonsList extends Component {
 		
 		let items = [];
 		daltons.forEach( (dalton, index) => {
-			items.push(<DaltonsListRow players={players} key={index} index={index} dalton={dalton}> </DaltonsListRow>)
+			items.push(<DaltonsListRow 
+								 onSelectCurrentDalton={this.props.onSelectDalton} 
+								 players={players} 
+								 key={index} 
+								 index={index} 
+								 dalton={dalton}> </DaltonsListRow>)
 		});
 			
 		return items

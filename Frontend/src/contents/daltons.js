@@ -12,6 +12,7 @@ class Daltons extends Component {
 		this.state = {
 			daltons: [],
 			players: [],
+			currentDalton: {},
       isLoading: true,
 			errors: [],
     };
@@ -20,6 +21,11 @@ class Daltons extends Component {
 	componentDidMount() {
 		this.getDaltonsData();
 		this.getPlayersData();
+	}
+	
+	handleDaltonChange = (dalton) => {
+		console.log('dalton changed: ' + JSON.stringify(dalton));
+		this.setState({currentDalton: dalton})
 	}
 	
 	getDaltonsData = () => {
@@ -60,7 +66,7 @@ class Daltons extends Component {
   };
 	
 	render() {
-		const {isLoading, daltons, players} = this.state;
+		const {isLoading, daltons, players, currentDalton} = this.state;
 		
 		if(isLoading) {
 			return <h3 className='mt-4'>loading...</h3>;
@@ -68,8 +74,11 @@ class Daltons extends Component {
 			return (
 					<div>
 						<h1>Daltons</h1>
-				    <Container players={players} onRefParent={ref => (this.child = ref)} onSubmit={this.onSubmit} />
+				    {JSON.stringify(this.state.currentDalton)}
+						<hr/>
+						<Container players={players} onRefParent={ref => (this.child = ref)} onSubmit={this.onSubmit} currentDalton={currentDalton}/>
 						<DaltonsList daltons={daltons} players={players} onSelectDalton={this.handleDaltonChange}></DaltonsList>
+						
 					</div>
 				)
 		}

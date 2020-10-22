@@ -9,6 +9,8 @@ daltonRouter
 	.post('/', queries.addDalton)
 	.delete('/:id', queries.deleteDalton)
 
-daltonRouter.get('/:id', queries.getDaltonById)
+daltonRouter
+	.get('/:id', queries.getDaltonById)
+	.put('/:id', queries.updateDalton)
 
 module.exports = daltonRouter;

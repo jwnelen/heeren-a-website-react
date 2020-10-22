@@ -12,7 +12,8 @@ export const Modal = ({
   buttonRef,
   closeModal,
   onSubmit,
-	players
+	players,
+	currentDalton
 }) => {
   return ReactDOM.createPortal(
     <FocusTrap>
@@ -24,6 +25,7 @@ export const Modal = ({
         className="modal-cover"
         onClick={onClickOutside}
         onKeyDown={onKeyDown}
+				currentDalton={currentDalton}
       >
         <div className="modal-area" ref={modalRef}>
           <button

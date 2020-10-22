@@ -54,6 +54,7 @@ export class Container extends Component {
             onKeyDown={this.onKeyDown}
             onClickOutside={this.onClickOutside}
 						players={this.props.players}
+						currentDalton={this.props.currentDalton}
           />
         ) : null}
       </React.Fragment>
