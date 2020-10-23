@@ -103,6 +103,17 @@ const getPosts = (req, res) => {
 	}).catch(err => {console.log(err); throw err})
 }
 
+const getDaltonsTookByPlayerId = (req, res) => {
+	const id = parseInt(req.params.id)
+	
+	knex('daltons').count('person_took_id').where({person_took_id: id})
+		.then((result) => {
+		if(result.length === 0) {throw new Error}
+		console.log(result[0])
+		res.status(200).json(result[0])
+	}).catch(err => {console.log(err); throw err})
+}
+
 module.exports = {
 	getPlayer,
 	getPlayerById,
@@ -112,5 +123,6 @@ module.exports = {
 	getDaltonById,
 	deleteDalton,
 	getPosts,
-	updateDalton
+	updateDalton,
+	getDaltonsTookByPlayerId
 };
