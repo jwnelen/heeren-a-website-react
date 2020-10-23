@@ -11,8 +11,8 @@ class PlayerProfile extends Component {
     super(props);
  
     this.state = {
-      playerData: [],
-			amountDaltonsEarned: 0,
+      player: [],
+			posts: [],
       isLoading: true,
       error: null,
     };
@@ -21,48 +21,66 @@ class PlayerProfile extends Component {
 	componentDidMount() {
 		const { id } = this.props.match.params
 		
-		api.getPlayerById(id).then(data => {
-			console.log('data in component: ' + JSON.stringify(data));
-			this.setState({ 
-								playerData: data[0]
-					});
+		api.getPlayerById(id).then(pl => {
+			api.getPosts()
+				.then(postsData => 
+						this.setState({ 
+							posts: postsData,
+							player: pl[0],
+							isLoading: false,
+					})
+						 )
 		})
 		
-//		api.getAmountDaltonsPlayer(id).then(data => {
-//			console.log(data);
-//			let l = data[0] ? data[0].daltons_earned : 0
-//			this.setState({ 
-//				amountDaltonsEarned: l,
-//				isLoading: false 
-//
-//			})
-//		})
+		
 	}
 	
 	render(props) {
-		const player = this.state.playerData;
+		const {player, isLoading, posts} = this.state;
 		
+		let array = [];
+		let renderQuotes;
+		if(!isLoading ) {
+			posts.forEach(post => {
+				post.body.split(/[.\n]/).forEach(res => {
+					if(res.includes(player.nickname) || res.includes(player.name.split(' ')[0] )){
+						array.push([res.trim(), post.title])
+					}
+				})
+			})
+			renderQuotes = array.map( ([sentence, title], index) => <li className="list-group-item font-italic" key={index} >"{sentence}. - <b>{title}</b>"</li>)
+		}
+		
+		if(isLoading) return <p>Loading...</p>
+		else {
 			return(
-				<div className="card container">
-					<div className="card-body player">
-						<img className="card-img-top" src={link_fed} alt="player"></img>
-								<h3 className="card-title">{player.nickname || "Nickname"}</h3> 						
-								<p className="card-text text-secondary mb-1 font-italic font-light" >{player.name || "Name"}</p>
+				<div>
+					<div className="card container">
+						<div className="card-body player">
+							<img className="card-img-top" src={link_fed} alt="player"></img>
+									<h3 className="card-title">{player.nickname || "Nickname"}</h3> 						
+									<p className="card-text text-secondary mb-1 font-italic font-light" >{player.name || "Name"}</p>
+						</div>
+						<ul className="list-group list-group-flush">
+							<li className="list-group-item">
+								<RatingDisplay
+									ratingSingles={player.singles_rating}
+									ratingDoubles={player.doubles_rating}
+									ratingSinglesEndingYear={player.singles_rating_ending_year}
+									ratingDoublesEndingYear={player.doubles_rating_ending_year}/>
+							</li>
+							<li className="list-group-item">id: {player.player_id} </li>
+						</ul>
 					</div>
-					<ul className="list-group list-group-flush">
-						<li className="list-group-item">
-							<RatingDisplay
-								ratingSingles={player.singles_rating}
-								ratingDoubles={player.doubles_rating}
-								ratingSinglesEndingYear={player.singles_rating_ending_year}
-								ratingDoublesEndingYear={player.doubles_rating_ending_year}/>
-						</li>
-						<li className="list-group-item">Daltons verdient: {this.state.amountDaltonsEarned || 0}</li>
-						<li className="list-group-item">Daltons uitgedeeld: {this.state.playerData.amountDaltonsEarned || 0} </li>
-						<li className="list-group-item">id: {this.state.playerData.player_id} </li>
-				</ul>
+					<div className='container mt-5'>
+						<h3>Quotes</h3>
+						<ul className='list-group list-group-flush '>
+						{renderQuotes}
+						</ul>
+					</div>
 				</div>
 			);
+		}
 	}
 }
 
