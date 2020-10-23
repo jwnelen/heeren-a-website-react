@@ -13,4 +13,7 @@ daltonRouter
 	.put('/:id', queries.updateDalton)
 	.delete('/:id', queries.deleteDalton)
 
+daltonRouter
+	.get('/daltonsTook/:id', queries.getDaltonsTookByPlayerId)
+
 module.exports = daltonRouter;

@@ -11,7 +11,7 @@ class PlayerProfile extends Component {
     super(props);
  
     this.state = {
-      player: [],
+      player: {},
 			posts: [],
       isLoading: true,
       error: null,
@@ -23,16 +23,20 @@ class PlayerProfile extends Component {
 		
 		api.getPlayerById(id).then(pl => {
 			api.getPosts()
-				.then(postsData => 
-						this.setState({ 
-							posts: postsData,
-							player: pl[0],
-							isLoading: false,
-					})
-						 )
+				.then(postsData =>
+						api.getDaltonsTookByPlayerId(id)
+							.then(daltookpl => {
+						
+								pl[0].amountDaltonsTook = parseInt(daltookpl.count);
+				
+								this.setState({ 
+									posts: postsData,
+									player: pl[0],
+									isLoading: false,
+							})
+						}
+				))
 		})
-		
-		
 	}
 	
 	render(props) {
@@ -70,6 +74,7 @@ class PlayerProfile extends Component {
 									ratingDoublesEndingYear={player.doubles_rating_ending_year}/>
 							</li>
 							<li className="list-group-item">id: {player.player_id} </li>
+							<li className="list-group-item">Aantal daltons genomen: {player.amountDaltonsTook} </li>
 						</ul>
 					</div>
 					<div className='container mt-5'>
