@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './navbar.css'
-
 import AuthService from "../../services/auth.service";
 
 class NavBar extends Component {		

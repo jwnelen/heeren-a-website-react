@@ -2,8 +2,18 @@ import React, {Component} from 'react';
 import DaltonsListRow from '../daltonsListRow/daltonsListRow';
 import './daltonsList.css'
 import Table from 'react-bootstrap/Table'
-		
+import AuthService from "../../services/auth.service";
+
+
 class daltonsList extends Component {
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			currentUser: AuthService.getCurrentUser()
+		}
+	}
+
 	renderRows() {
 		const {daltons, players} = this.props;
 		
@@ -14,6 +24,7 @@ class daltonsList extends Component {
 								 players={players} 
 								 key={index} 
 								 index={index} 
+								 loggedIn={this.state.currentUser ? true : false}
 								 dalton={dalton}> </DaltonsListRow>)
 		});
 			
@@ -32,7 +43,7 @@ class daltonsList extends Component {
 							<th>Genomen door</th>
 							<th>Datum verdient</th>
 							<th>Datum genomen</th>
-							<th>Edit</th>
+							{this.state.currentUser && <th>Edit</th>}
 						</tr>
 					</thead>
 					<tbody>

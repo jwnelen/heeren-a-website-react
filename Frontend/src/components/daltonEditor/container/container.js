@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { Modal } from '../modal/modal';
 import TriggerButton from '../triggerButton/triggerButton';
+import AuthService from "../../../services/auth.service";
 
 export class Container extends Component {
-  state = { isShown: false };
-
+  constructor(props) {
+		super(props);
+		
+		this.state = { 
+			isShown: false, 
+			currentUser: AuthService.getCurrentUser()
+		};
+	}
+	
   showModal = () => {
     this.setState({ isShown: true }, () => {
       this.closeButton.focus();
@@ -32,7 +40,7 @@ export class Container extends Component {
   };
 
 	componentDidMount() {
-    this.props.onRefParent(this)
+    this.props.onRefParent(this);
   }
 
 	componentWillUnmount() {
@@ -40,11 +48,14 @@ export class Container extends Component {
   }
 
   render() {
+		let isLoggedIn = this.state.currentUser ? true : false
+		
     return (
       <React.Fragment>
         <TriggerButton
           showModal={this.showModal}
           buttonRef={(n) => (this.TriggerButton = n)}
+					enabled={isLoggedIn}
         />
         {this.state.isShown ? (
           <Modal
