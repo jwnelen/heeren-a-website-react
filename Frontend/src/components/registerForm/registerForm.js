@@ -122,15 +122,14 @@ export default class RegisterForm extends Component {
 
   render() {
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
-
+			<div className="container"> 
+				<div className="row justify-content-center">
+      		<div className="col-lg-6 form">
+						<div className="card">
+					<div className="card-body">
+					<div className="card-title"><h4>Register</h4></div>
           <Form
+						className="justify-content-center"
             onSubmit={this.handleRegister}
             ref={c => {
               this.form = c;
@@ -201,8 +200,11 @@ export default class RegisterForm extends Component {
               }}
             />
           </Form>
-        </div>
+						</div>
+							</div>
+				</div>
       </div>
+				</div>
     );
   }
 }

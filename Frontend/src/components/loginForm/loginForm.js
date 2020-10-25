@@ -81,14 +81,12 @@ export default class LoginForm extends Component {
 
   render() {
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
-
+      <div className="container"> 
+				<div className="row justify-content-center">
+      		<div className="col-lg-6 form">
+						<div className="card">
+					<div className="card-body">
+          <div className="card-title"><h4>Login here</h4></div>
           <Form
             onSubmit={this.handleLogin}
             ref={c => {
@@ -146,6 +144,9 @@ export default class LoginForm extends Component {
             />
           </Form>
         </div>
+						</div>
+					</div>
+				</div>
       </div>
     );
   }
