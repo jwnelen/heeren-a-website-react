@@ -1,3 +1,5 @@
+//https://bezkoder.com/react-jwt-auth/
+
 import React from 'react';
 import './App.css';
 import {
@@ -38,14 +40,17 @@ class App extends React.Component {
   }
 
   logOut() {
+		console.log('logout')
     AuthService.logout();
+		this.props.history.push("/");
+//    window.location.reload();
   }
 	
 	render() {
 		return (
 			<Router>
 				<div className="App">
-					<NavBar></NavBar>
+					<NavBar logOut={this.logOut}></NavBar>
 					<Route exact path="/"
 						component={Home}>
 					</Route>
