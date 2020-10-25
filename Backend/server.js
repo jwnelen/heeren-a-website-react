@@ -6,10 +6,23 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const db = require('./src/queries')
+const db = require('./middleware/queries')
 const path = require('path');
 const app = express()
 const cors = require('cors')
+
+const db_Seq = require('./models/index.js')
+
+const connectSeq = async function() {
+	try {
+		await db_Seq.sequelize.authenticate();
+		console.log('Connection has been established successfully.');
+	} catch (error) {
+		console.error('Unable to connect to the database:', error);
+	}
+}
+
+connectSeq();
 
 app.use(cors())
 
@@ -29,10 +42,17 @@ app.use(
 app.use(express.static(path.join(__dirname, "..", "build")));
 app.use(express.static("build"));
 
-// adding controllers
-app.use('/api/players', require('./router-controllers/player-controller'))
-app.use('/api/daltons', require('./router-controllers/dalton-controller'))
-app.use('/api/posts', require('./router-controllers/posts-controller'))
+// Authentication routes
+require('./routes/auth.routes')(app);
+require('./routes/user.routes')(app);
+
+// adding routes
+app.use('/api/players', require('./routes/player.routes'))
+app.use('/api/daltons', require('./routes/dalton.routes'))
+app.use('/api/posts', require('./routes/posts.routes'))
+
+
+db_Seq.sequelize.sync();
 
 app.get('/*', (request, response) => {
   response.sendFile(path.join(__dirname, "build", "index.html"));

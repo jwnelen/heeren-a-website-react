@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './playerProfile.css'
 import api from '../../data/api.js'
 import RatingDisplay from '../rating-display/rating-display.js'
+import AuthService from "../../services/auth.service";
 
 let link_fed = "https://images2.persgroep.net/rcs/SkRGKcrJ4sDaW0oWOoBQKgW9lYA/diocontent/169326362/_fitwidth/694/?appId=21791a8992982cd8da851550a453bd7f&quality=0.8"
 
@@ -15,6 +16,7 @@ class PlayerProfile extends Component {
 			posts: [],
       isLoading: true,
       error: null,
+			currentUser: AuthService.getCurrentUser()
     };
   }					
 	
@@ -40,7 +42,7 @@ class PlayerProfile extends Component {
 	}
 	
 	render(props) {
-		const {player, isLoading, posts} = this.state;
+		const {player, isLoading, posts, currentUser} = this.state;
 		
 		let array = [];
 		let renderQuotes;
@@ -59,6 +61,11 @@ class PlayerProfile extends Component {
 		else {
 			return(
 				<div>
+				<p>
+          <strong>Token:</strong>{" "}
+          {currentUser.accessToken.substring(0, 20)} ...{" "}
+          {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
+        </p>
 					<div className="card container">
 						<div className="card-body player">
 							<img className="card-img-top" src={link_fed} alt="player"></img>

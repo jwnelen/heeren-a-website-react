@@ -1,5 +1,5 @@
-//const apiUrl = 'http://127.0.0.1:8000/api';
-const apiUrl = '/api';
+const apiUrl = 'http://127.0.0.1:8000/api';
+//const apiUrl = '/api';
 
 async function getPlayers() {
 	return fetch(apiUrl + '/players')
