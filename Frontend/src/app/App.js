@@ -10,28 +10,64 @@ import Daltons from '../contents/daltons.js'
 import Team from '../contents/team.js'
 import NavBar from '../components/NavigationBar/navbar'
 import PlayerProfile from '../components/playerProfile/playerProfile'
+import RegisterForm from '../components/registerForm/registerForm'
+import LoginForm from '../components/loginForm/loginForm'
 
-function App() {
+import AuthService from "../services/auth.service";
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+
+    this.state = {
+      showModeratorBoard: false,
+      showAdminBoard: false,
+      currentUser: undefined,
+    };
+  }
 	
-	return (
-    <Router>
-    	<div className="App">
-				<NavBar></NavBar>
-				<Route exact path="/"
-					component={Home}>
-				</Route>
-				<Route path="/team"
-					component={Team}>
-    		</Route>
-				<Route exact path="/daltons"
-					component={Daltons}>
-				</Route>
-				<Route 
-					path="/players/:id"
-					component={PlayerProfile}/>
-    	</div>
-    </Router>
-    );
+	componentDidMount() {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      this.setState({
+        currentUser: user,
+      });
+    }
+  }
+
+  logOut() {
+    AuthService.logout();
+  }
+	
+	render() {
+		return (
+			<Router>
+				<div className="App">
+					<NavBar></NavBar>
+					<Route exact path="/"
+						component={Home}>
+					</Route>
+					<Route path="/team"
+						component={Team}>
+					</Route>
+					<Route path="/register"
+						component={RegisterForm}>
+					</Route>
+					<Route path="/login"
+						component={LoginForm}>
+					</Route>
+					<Route exact path="/daltons"
+						component={Daltons}>
+					</Route>
+					<Route 
+						path="/players/:id"
+						component={PlayerProfile}/>
+				</div>
+			</Router>
+			);
+		}
 }
 
 export default App;

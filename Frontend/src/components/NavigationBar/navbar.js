@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './navbar.css'
 
-class NavBar extends Component {
+class NavBar extends Component {	
     render() {
         return(
            	<ul className="nav justify-content-center">
@@ -11,8 +11,14 @@ class NavBar extends Component {
 							<li className="nav-item">
 								<a className="nav-link" href="/team">Team</a>
 							</li>
-						<li className="nav-item">
+							<li className="nav-item">
 								<a className="nav-link" href="/daltons">Daltons</a>
+							</li>
+							<li className="nav-item">
+								<a className="nav-link" href="/register">Register</a>
+							</li>
+							<li className="nav-item">
+								<a className="nav-link" href="/login">Login</a>
 							</li>
 						</ul>
         );
