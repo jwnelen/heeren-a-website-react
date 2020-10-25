@@ -1,7 +1,8 @@
 const {Client} = require('pg')
-require('dotenv').config();
+require('dotenv').config({path: './config/.env'});
 
 let options = null;
+
 
 if(process.env.NODE_ENV === 'development') {
 	options = {

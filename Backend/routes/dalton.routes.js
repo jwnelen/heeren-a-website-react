@@ -2,7 +2,7 @@ var express = require('express');
 
 var daltonRouter = express.Router();
 
-const queries = require('../src/queries')
+const queries = require('../middleware/queries')
 
 daltonRouter
 	.get('/', queries.getDaltons)

@@ -2,7 +2,7 @@ var express = require('express');
 
 var playerRouter = express.Router();
 
-const queries = require('../src/queries')
+const queries = require('../middleware/queries')
 
 playerRouter.get('/', queries.getPlayer)
 playerRouter.get('/compressed', queries.getPlayersIdandName)
