@@ -61,11 +61,6 @@ class PlayerProfile extends Component {
 		else {
 			return(
 				<div>
-				<p>
-          <strong>Token:</strong>{" "}
-          {currentUser.accessToken.substring(0, 20)} ...{" "}
-          {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
-        </p>
 					<div className="card container">
 						<div className="card-body player">
 							<img className="card-img-top" src={link_fed} alt="player"></img>

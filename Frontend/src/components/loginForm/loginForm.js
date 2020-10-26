@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
+import './loginForm.css'
 import AuthService from "../../services/auth.service";
 
 const required = value => {
@@ -77,75 +77,70 @@ export default class LoginForm extends Component {
         loading: false
       });
     }
-  }
-
+  }	
+	
   render() {
     return (
-      <div className="container"> 
-				<div className="row justify-content-center">
-      		<div className="col-lg-6 form">
-						<div className="card">
-					<div className="card-body">
-          <div className="card-title"><h4>Login here</h4></div>
-          <Form
-            onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <Input
-                type="text"
-                className="form-control"
-                name="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}
-              />
-            </div>
+				<div className="wrapper">
+      		<div id="formContent">
+					<div className="card card-block">
+						<div className="card-body form-login form">
+							<div className="card-title mb-3"><h4>Login</h4>
+							</div>
+								<Form
+									onSubmit={this.handleLogin}
+									ref={c => { this.form = c;}}
+								>
+									<div className="form-group">
+										<Input
+											type="text"
+											className="form-control"
+											name="username"
+											placeholder="Username"
+											value={this.state.username}
+											onChange={this.onChangeUsername}
+											validations={[required]}/>
+									</div>
+									<div className="form-group">
+										<Input
+											type="password"
+											className="form-control"
+											placeholder="Password"
+											name="password"
+											value={this.state.password}
+											onChange={this.onChangePassword}
+											validations={[required]}
+										/>
+									</div>
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Input
-                type="password"
-                className="form-control"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
+									<div className="form-group">
+										<button
+											className="btn btn-info btn-block"
+											disabled={this.state.loading}
+										>
+											{this.state.loading && (
+												<span className="spinner-border spinner-border-sm"></span>
+											)}
+											<span>Login</span>
+										</button>
+									</div>
 
-            <div className="form-group">
-              <button
-                className="btn btn-primary btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
-            </div>
-
-            {this.state.message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {this.state.message}
-                </div>
-              </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
-        </div>
+									{this.state.message && (
+										<div className="form-group">
+											<div className="alert alert-danger" role="alert">
+												{this.state.message}
+											</div>
+										</div>
+									)}
+									<CheckButton
+										style={{ display: "none" }}
+										ref={c => {
+											this.checkBtn = c;
+										}}
+									/>
+								</Form>
+								</div>
 						</div>
-					</div>
 				</div>
       </div>
     );

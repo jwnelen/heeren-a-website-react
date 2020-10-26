@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  height: 90%;
+  padding: 20px;
+}
+
+
+#formContent {
+  width: 50%;
+  max-width: 350px;
+	min-width: 250px;
+  padding: 0px;
+	z-index: 1;
+}
+
+.card-body {
+	padding: 2rem !important
+}
+
+.card {
+	border: 0px !important
+}
+
+.form-login {
+    background-color: #EDEDED;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+}
