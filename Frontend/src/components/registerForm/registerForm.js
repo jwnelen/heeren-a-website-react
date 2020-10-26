@@ -175,7 +175,7 @@ export default class RegisterForm extends Component {
                 </div>
 
                 <div className="form-group">
-                  <button className="btn btn-info btn-block">Sign Up</button>
+                  <button className="btn btn-info btn-block">Register</button>
                 </div>
               </div>
             )}
