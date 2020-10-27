@@ -45,14 +45,16 @@ app.use(express.static("build"));
 // Authentication routes
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
+require('./routes/player.routes')(app);
 
 // adding routes
-app.use('/api/players', require('./routes/player.routes'))
+//app.use('/api/players', require('./routes/player.routes'))
 app.use('/api/daltons', require('./routes/dalton.routes'))
 app.use('/api/posts', require('./routes/posts.routes'))
 
-
-db_Seq.sequelize.sync();
+db_Seq.sequelize.sync({force:false}).then(() => {
+    console.log("sync is completed")
+	})
 
 app.get('/*', (request, response) => {
   response.sendFile(path.join(__dirname, "build", "index.html"));

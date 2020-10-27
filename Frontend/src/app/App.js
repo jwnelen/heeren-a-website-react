@@ -10,6 +10,8 @@ import {
 import Home from '../contents/home.js'
 import Daltons from '../contents/daltons.js'
 import Team from '../contents/team.js'
+import UserProfile from '../contents/userProfile'
+
 import NavBar from '../components/NavigationBar/navbar'
 import PlayerProfile from '../components/playerProfile/playerProfile'
 import RegisterForm from '../components/registerForm/registerForm'
@@ -68,7 +70,12 @@ class App extends React.Component {
 					</Route>
 					<Route 
 						path="/players/:id"
-						component={PlayerProfile}/>
+						component={PlayerProfile}>
+					</Route>
+					<Route 
+							path="/userProfile"
+							component={UserProfile}>
+					</Route>
 				</div>
 			</Router>
 			);

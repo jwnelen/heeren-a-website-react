@@ -48,8 +48,8 @@ class NavBar extends Component {
 						</ul>
 						{logginIn && (
 							<ul className='navbar-nav ml-auto'>
-							<span className="navbar-text">
-      					{currentUser.username}
+							<span className="navbar-item">
+      					<a className="nav-link" href="/userProfile">{currentUser.username}</a>
     					</span>
 							<li className="nav-item">
 								<a className="nav-link" href="/" onClick={this.props.logOut}>logout</a>
