@@ -24,5 +24,14 @@ exports.getPlayersIdandName = (req, res) => {
 		attributes: ['player_id', 'nickname']
 		})
 		.then(players => res.status(200).json(players))
-		.catch(err => console.log('ERROR ---- : ' + err))
+		.catch(next)
+}
+
+exports.updatePlayer = (req, res, next) => {
+	const pl = req.body
+	const id = req.params.id
+	
+	Player.update(pl, {where: {player_id: id}})
+		.then(rows => res.json(rows))
+		.catch(next)
 }
