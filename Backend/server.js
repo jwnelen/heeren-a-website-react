@@ -3,6 +3,7 @@
 // https://www.red-gate.com/simple-talk/blogs/setting-up-a-simple-rest-interface-with-sql-serve
 
 // git subtree push heroku --prefix=Backend main
+// PGUSER=postgres PGPASSWORD=<> heroku pg:push heeren-a-api DATABASE_URL 
 
 const express = require('express')
 const bodyParser = require('body-parser')
