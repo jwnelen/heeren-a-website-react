@@ -83,8 +83,8 @@ export default class LoginForm extends Component {
     return (
 				<div className="wrapper">
       		<div id="formContent">
-					<div className="card card-block">
-						<div className="card-body form-login form">
+					<div className="card card-login-form card-block">
+						<div className="card-body card-body-form form-login form">
 							<div className="card-title mb-3"><h4>Login</h4>
 							</div>
 								<Form

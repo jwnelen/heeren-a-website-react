@@ -15,17 +15,19 @@ class Home extends Component {
 	componentDidMount() {
 		api.getPosts()
 			.then(posts => {
-								this.setState({ 
-									posts: posts,
-									isLoading: false 
-							});
+								if(posts) {
+									this.setState({ 
+											posts: posts,
+											isLoading: false
+									})
+								};
 		})
 	}
 	
 	render() {
 		const {isLoading, posts} = this.state;
 		
-		const postList = posts.map((post, index) => {
+		const postList = !posts ? null : posts.map((post, index) => {
 						return (
 							<div key={index}>
 								<BlogPost post={post} index={index}></BlogPost>
@@ -34,10 +36,7 @@ class Home extends Component {
 							)})
 		
 		if(isLoading) {
-			return (
-					<div className="typewriter">
-				<h1 className="App-header">Welcome</h1>
-			</div>)
+			return <h3 className='mt-4'>loading...</h3>
 		} else 
 			return (
 				<div>

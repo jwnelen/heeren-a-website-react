@@ -3,7 +3,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import './registerForm.css'
+import '../loginForm/loginForm.css'
 
 import AuthService from "../../services/auth.service";
 
@@ -125,8 +125,8 @@ export default class RegisterForm extends Component {
     return (
 			<div className="wrapper">
       		<div id="formContent">
-					<div className="card card-block">
-						<div className="card-body form-login form">
+					<div className="card card-login-form card-block">
+						<div className="card-body card-body-form form-login form">
 							<div className="card-title mb-3"><h4>Register</h4>
 							</div>
           <Form
