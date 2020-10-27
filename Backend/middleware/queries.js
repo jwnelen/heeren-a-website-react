@@ -3,7 +3,6 @@ require('dotenv').config({path: './config/.env'});
 
 let options = null;
 
-
 if(process.env.NODE_ENV === 'development') {
 	options = {
 		client: 'pg',
@@ -26,32 +25,6 @@ const knex = require('knex')(options);
 knex.raw("SELECT VERSION()").then(
     (version) => console.log('connected with knex')
 		).catch((err) => { console.log( err); throw err })
-
-const getPlayer = (req, res) => {
-	knex.select('*').from('players')
-		.then((result) => {
-		res.status(200).json(result)
-	}).catch(err => {console.log(err); throw err})
-	
-};
-
-const getPlayerById = (req, res) => {
-	const id = parseInt(req.params.id)
-
-	knex.select('*').from('players').where('player_id', id)
-		.then((result) => {
-		if(result.length === 0) {throw new Error}
-		res.status(200).json(result)
-	}).catch(err => {console.log(err); throw err})
-}
-
-const getPlayersIdandName = (req, res) => {
-	knex.select('player_id', 'nickname').from('players')
-		.then((result) => {
-		res.status(200).json(result)
-	}).catch(err => {console.log(err); throw err})
-}
-
 
 const getDaltons = (req, res) => {
 	knex.select('*').from('daltons')
@@ -106,7 +79,7 @@ const getPosts = (req, res) => {
 
 const getDaltonsTookByPlayerId = (req, res) => {
 	const id = parseInt(req.params.id)
-	
+	console.log('is called');
 	knex('daltons').count('person_took_id').where({person_took_id: id})
 		.then((result) => {
 		if(result.length === 0) {throw new Error}
@@ -116,9 +89,6 @@ const getDaltonsTookByPlayerId = (req, res) => {
 }
 
 module.exports = {
-	getPlayer,
-	getPlayerById,
-	getPlayersIdandName,
 	getDaltons,
 	addDalton,
 	getDaltonById,

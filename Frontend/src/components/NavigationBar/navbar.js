@@ -26,7 +26,7 @@ class NavBar extends Component {
 		
 			return(
 				<nav className="navbar navbar-expand-md navbar-light bg-light">
-						<span className="navbar-brand mb-0 h1">Heeren A Tenniphil</span>
+						<a className="navbar-brand mb-0 h1" href="/">Heeren A Tenniphil</a>
 							<button className="custom-toggler navbar-toggler" 
 								type="button" 
 								data-toggle="collapse" 
@@ -48,8 +48,8 @@ class NavBar extends Component {
 						</ul>
 						{logginIn && (
 							<ul className='navbar-nav ml-auto'>
-							<span className="navbar-text">
-      					{currentUser.username}
+							<span className="navbar-item">
+      					<a className="nav-link" href="/userProfile">{currentUser.username}</a>
     					</span>
 							<li className="nav-item">
 								<a className="nav-link" href="/" onClick={this.props.logOut}>logout</a>
@@ -59,9 +59,12 @@ class NavBar extends Component {
 								
 						{!logginIn && (
 							<ul className='navbar-nav ml-auto'>
-							<li className="nav-item">
-								<a className="nav-link" href="/login">Login</a>
-							</li>
+								<li className="nav-item">
+									<a className="nav-link" href="/login">Login</a>
+								</li>
+								<li className="nav-item">
+									<a className="nav-link" href="/register">Register</a>
+								</li>
 						</ul>
 								)}
 						 
