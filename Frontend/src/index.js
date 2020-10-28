@@ -5,7 +5,8 @@ import App from './app/App.js';
 import * as serviceWorker from './serviceWorker';
 
 // Importing the Bootstrap CSS
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
