@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import api from '../data/api.js'
-import AuthService from "../services/auth.service";
+import AuthService from "../services/auth.service"
 import EditPlayerProfile from "../components/editPlayerProfile/editPlayerProfile"
+import EditUserProfile from "../components/editUserProfile/editUserProfile"
+
 class UserProfile extends Component {
 	
 	constructor(props) {
@@ -29,6 +31,8 @@ class UserProfile extends Component {
 							isLoading: false
 							})
 				})
+		} else {
+			this.setState({isLoading: false})
 		}
 	}
 	
@@ -44,12 +48,14 @@ class UserProfile extends Component {
 		} else 
 			return (
 					<div className='container'>
-							<h2>User Profile </h2>
-							<p>{currentUser.username}</p>
-							<p>{currentUser.email}</p>
-							<p>{currentUser.user_player_id}</p>
-							<h2>Player Profile</h2>
-							<EditPlayerProfile player={player} saveProfile={this.handleSaveButton}/>
+							<h2 className="mb-3">User Profile </h2>
+							<EditUserProfile user={currentUser} saveProfile={this.handleSaveButton}/>
+							
+							<h2 className="mb-3">Player Profile</h2>
+							{player.player_id && 
+								(<EditPlayerProfile player={player} saveProfile={this.handleSaveButton}/>)}
+							{!player.player_id && 
+								(<p>This user is not connected to a player. Please request access to edit your player.</p>)}
 					</div>
 				)
 			}

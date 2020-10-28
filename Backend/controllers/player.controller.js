@@ -18,7 +18,7 @@ exports.getPlayerById = (req, res) => {
 		.catch(err => console.log('ERROR ---- : ' + err))
 }
 
-exports.getPlayersIdandName = (req, res) => {
+exports.getPlayersIdandName = (req, res, next) => {
 	console.log('getPlayers compressed!!');
 	Player.findAll({
 		attributes: ['player_id', 'nickname']
