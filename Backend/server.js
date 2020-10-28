@@ -54,7 +54,9 @@ app.use('/api/daltons', require('./routes/dalton.routes'))
 app.use('/api/posts', require('./routes/posts.routes'))
 
 db_Seq.sequelize.sync({force:false}).then(() => {
-    console.log("sync is completed")
+    db_Seq.user.findAll({where: {user_player_id: 1}})
+		.then(player => console.log(JSON.stringify(player)))
+		.catch(err => console.log("error! - " + err ))
 	})
 
 app.get('/*', (request, response) => {

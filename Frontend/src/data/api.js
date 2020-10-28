@@ -1,3 +1,5 @@
+
+import axios from "axios";
 //const apiUrl = 'http://127.0.0.1:8000/api';
 const apiUrl = '/api';
 
@@ -27,6 +29,13 @@ async function getPlayersIdAndName() {
 		.catch((error) => console.log('error in api', error))		
 					
 };
+
+async function updatePlayer(id, data) {
+	delete data['player_id']
+	
+	return axios.put(apiUrl + "/players/" + id, data)
+		.then(response => console.log(response))
+}
 
 async function getDaltons() {	
 	return fetch(apiUrl + '/daltons')
@@ -143,6 +152,7 @@ export default {
 	getDaltons, 
 	getPlayersIdAndName, 
 	getDaltonsTookByPlayerId,
+	updatePlayer,
 	addDalton,
 	deleteDalton,
 	updateDalton,

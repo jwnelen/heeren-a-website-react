@@ -53,7 +53,8 @@ exports.signin = (req, res) => {
 				id: user.id,
 				username: user.username,
 				email: user.email,
-				accessToken: token
+				accessToken: token,
+				user_player_id: user.user_player_id
         });
     })
     .catch(err => {
