@@ -37,7 +37,8 @@ class UserProfile extends Component {
 	}
 	
 	handleSaveButton(data) {
-		api.updatePlayer(this.state.currentUser.user_player_id, data)
+		return api.updatePlayer(this.state.currentUser.user_player_id, data)
+			.then(response => response);
 	}
 	
 	render() {

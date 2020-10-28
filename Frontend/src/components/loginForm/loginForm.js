@@ -19,8 +19,7 @@ export default class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       username: "",
@@ -30,18 +29,15 @@ export default class LoginForm extends Component {
     };
   }
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
-  }
+  handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
 
-  onChangePassword(e) {
     this.setState({
-      password: e.target.value
-    });
+      [name]: value
+    })
   }
-
+	
   handleLogin(e) {
     e.preventDefault();
 
@@ -98,7 +94,7 @@ export default class LoginForm extends Component {
 											name="username"
 											placeholder="Username"
 											value={this.state.username}
-											onChange={this.onChangeUsername}
+											onChange={this.handleChange}
 											validations={[required]}/>
 									</div>
 									<div className="form-group">
@@ -108,7 +104,7 @@ export default class LoginForm extends Component {
 											placeholder="Password"
 											name="password"
 											value={this.state.password}
-											onChange={this.onChangePassword}
+											onChange={this.handleChange}
 											validations={[required]}
 										/>
 									</div>

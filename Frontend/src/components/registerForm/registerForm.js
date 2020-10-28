@@ -50,10 +50,8 @@ const vpassword = value => {
 export default class RegisterForm extends Component {
   constructor(props) {
     super(props);
-    this.handleRegister = this.handleRegister.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+		this.handleRegister = this.handleRegister.bind(this);
 
     this.state = {
       username: "",
@@ -64,22 +62,14 @@ export default class RegisterForm extends Component {
     };
   }
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
-  }
+	
+	handleChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
 
-  onChangeEmail(e) {
     this.setState({
-      email: e.target.value
-    });
-  }
-
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
+      [name]: value
+    })
   }
 
   handleRegister(e) {
@@ -145,7 +135,7 @@ export default class RegisterForm extends Component {
                     name="username"
 										placeholder="Username"
                     value={this.state.username}
-                    onChange={this.onChangeUsername}
+                    onChange={this.handleChange}
                     validations={[required, vusername]}
                   />
                 </div>
@@ -157,7 +147,7 @@ export default class RegisterForm extends Component {
                     name="email"
 										placeholder="Email"
                     value={this.state.email}
-                    onChange={this.onChangeEmail}
+                    onChange={this.handleChange}
                     validations={[required, email]}
                   />
                 </div>
@@ -169,7 +159,7 @@ export default class RegisterForm extends Component {
                     name="password"
 										placeholder="Password"
                     value={this.state.password}
-                    onChange={this.onChangePassword}
+                    onChange={this.handleChange}
                     validations={[required, vpassword]}
                   />
                 </div>
