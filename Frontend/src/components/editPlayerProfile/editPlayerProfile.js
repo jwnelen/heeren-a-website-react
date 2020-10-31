@@ -158,7 +158,7 @@ class EditPlayerProfile extends Component {
 							name="doubles_rating"
 							value={player.doubles_rating}
 							onChange={this.handleChange}
-							validations={[required, vrating]}/>
+							validations={[required, vrating	]}/>
 						<label className="text-left col-sm-2 col-form-label" htmlFor="doubles_rating_ending_year">Rating Doubles Final</label>
 						<Input 
 							readOnly={readOnly}
