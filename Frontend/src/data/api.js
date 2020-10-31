@@ -33,8 +33,13 @@ async function getPlayersIdAndName() {
 async function updatePlayer(id, data) {
 	delete data['player_id']
 	
-	return axios.put(apiUrl + "/players/" + id, data)
-		.then(response => console.log(response))
+	return axios
+		.put(apiUrl + "/players/" + id, data)
+		.then(response => {
+				console.log(response) 
+				return response
+	})
+		.catch(err => err);
 }
 
 async function getDaltons() {	

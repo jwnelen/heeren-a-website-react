@@ -33,5 +33,5 @@ exports.updatePlayer = (req, res, next) => {
 	
 	Player.update(pl, {where: {player_id: id}})
 		.then(rows => res.json(rows))
-		.catch(next)
+		.catch(Error("Some field are wrong"))
 }

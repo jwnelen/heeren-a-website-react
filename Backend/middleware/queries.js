@@ -71,7 +71,7 @@ const updateDalton = (req, res) => {
 }
 
 const getPosts = (req, res) => {
-	knex.select('*').from('posts')
+	knex.select('*').from('posts').orderBy('date', 'desc')
 		.then((result) => {
 		res.status(200).json(result)
 	}).catch(err => {console.log(err); throw err})
