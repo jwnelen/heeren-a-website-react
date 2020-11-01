@@ -6,11 +6,9 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const db = require('./middleware/queries')
 const path = require('path');
 const app = express()
 const cors = require('cors')
-
 const db_Seq = require('./models/index.js')
 
 const connectSeq = async function() {

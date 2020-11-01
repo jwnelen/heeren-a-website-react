@@ -32,8 +32,9 @@ exports.deleteDalton = (req, res) => {
 		where: {
 			dalton_id: id
 		}
-	}).then(res.send({message: 'deleted dalton: ' + id}))
-	.catch(err => {console.log('err:: ' + err); throw err})
+	})
+		.then(res.send({message: 'deleted dalton: ' + id}))
+		.catch(err => {console.log('err:: ' + err); throw err})
 
 }
 
