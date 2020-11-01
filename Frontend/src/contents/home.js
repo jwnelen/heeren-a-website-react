@@ -31,6 +31,7 @@ class Home extends Component {
 			return <h3 className='mt-4'>loading...</h3>
 		} else 
 			return (
+				<div>
 				<div className="container">
 					<div className='row'>
 						<div className='front-image-container col-12'>
@@ -60,7 +61,7 @@ class Home extends Component {
 							</p>
 						</div>
 					</div>
-					
+					</div>
 				</div>
 				)
 			}

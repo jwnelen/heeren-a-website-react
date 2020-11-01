@@ -6,7 +6,13 @@ import * as serviceWorker from './serviceWorker';
 
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/dist/js/popper.min.js';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+
+//import './theme.min.css'
+import './theme.scss'
+import './theme.css'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

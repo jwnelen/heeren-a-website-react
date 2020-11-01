@@ -25,7 +25,7 @@ class NavBar extends Component {
 		let logginIn = currentUser && currentUser.username;
 		
 			return(
-				<nav className="navbar navbar-expand-md navbar-light bg-light">
+				<nav className="navbar navbar-expand-md navbar-dark bg-primary">
 						<a className="navbar-brand mb-0 h1" href="/">Heeren A Tenniphil</a>
 							<button className="custom-toggler navbar-toggler" 
 								type="button" 
