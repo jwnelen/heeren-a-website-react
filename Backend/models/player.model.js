@@ -2,7 +2,7 @@ module.exports = (sequelize, Sequelize) => {
   const Player = sequelize.define("players", {
     player_id : {
 			type: Sequelize.INTEGER,
-			 primaryKey: true
+			primaryKey: true
 		},
 		name: {
       type: Sequelize.STRING
