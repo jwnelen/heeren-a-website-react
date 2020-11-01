@@ -1,6 +1,6 @@
 const db = require("../models");
 const config = require("../config/auth.config");
-const Player = db.players;
+const Player = db.player;
 
 const Op = db.Sequelize.Op;
 
@@ -19,7 +19,7 @@ exports.getPlayerById = (req, res) => {
 }
 
 exports.getPlayersIdandName = (req, res, next) => {
-	console.log('getPlayers compressed!!');
+//	console.log('getPlayers compressed!!');
 	Player.findAll({
 		attributes: ['player_id', 'nickname']
 		})

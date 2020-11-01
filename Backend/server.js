@@ -46,11 +46,12 @@ app.use(express.static("build"));
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
 require('./routes/player.routes')(app);
+require('./routes/post.routes')(app);
 
 // adding routes
 //app.use('/api/players', require('./routes/player.routes'))
 app.use('/api/daltons', require('./routes/dalton.routes'))
-app.use('/api/posts', require('./routes/posts.routes'))
+//app.use('/api/posts', require('./routes/posts.routes'))
 
 db_Seq.sequelize.sync({force:false}).then(() => {
     db_Seq.user.findAll({where: {user_player_id: 1}})
