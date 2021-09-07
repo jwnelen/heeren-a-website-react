@@ -2,7 +2,7 @@
 // https://itnext.io/building-restful-api-with-node-js-express-js-and-postgresql-the-right-way-b2e718ad1c66
 // https://www.red-gate.com/simple-talk/blogs/setting-up-a-simple-rest-interface-with-sql-serve
 
-// git subtree push heroku --prefix=client main
+// git subtree push heroku --prefix=server main
 // PGUSER=postgres PGPASSWORD=<> heroku pg:push heeren-a-api DATABASE_URL 
 
 const express = require('express')
@@ -59,16 +59,16 @@ db_Seq.sequelize.sync({force:false}).then(() => {
 		.catch(err => console.log("error! - " + err ))
 	})
 
-app.use(express.static(path.resolve(__dirname, "../client/build")));
+app.use(express.static(path.resolve(__dirname, "../server/build")));
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static("server/build"));
 }
 
 // in production environment devdependecies (the ones in the package.json) are not installed
 
 app.get("*", function (request, response) {
-	response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+	response.sendFile(path.resolve(__dirname, "../server/build", "index.html"));
 });
 
 app.listen(port, () => {

@@ -1,4 +1,4 @@
-require('dotenv').config({path: './client/config/.env'});
+require('dotenv').config({path: './server/config/.env'});
 
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
