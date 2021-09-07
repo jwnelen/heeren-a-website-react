@@ -1,7 +1,12 @@
 
 import axios from "axios";
 //const apiUrl = 'http://127.0.0.1:8000/api';
-const apiUrl = '/api';
+
+const baseUrl = process.env.REACT_APP_API_URL || "";
+const apiUrl = `${baseUrl}/api`;
+
+const API_URL = `${baseUrl}/api/auth`;
+
 
 async function getPlayers() {
 	return fetch(apiUrl + '/players')

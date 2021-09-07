@@ -1,9 +1,12 @@
-require('dotenv').config({path: './config/.env'});
+require('dotenv').config({path: './client/config/.env'});
 
-const Sequelize = require('sequelize');
+const { Sequelize, Model, DataTypes } = require('sequelize');
 
 let sequelize;
+console.log("process", process.env.NODE_ENV)
+
 if(process.env.NODE_ENV === 'development') {
+	console.log("process env is development")
 	sequelize = new Sequelize(
 		process.env.DATABASE_URL,
 		process.env.USER,
@@ -12,6 +15,7 @@ if(process.env.NODE_ENV === 'development') {
 			dialect: 'postgres',
 		})
 } else {
+	console.log("process env is production")
 	sequelize = new Sequelize(process.env.DATABASE_URL)
 }
 
