@@ -59,9 +59,18 @@ db_Seq.sequelize.sync({force:false}).then(() => {
 		.catch(err => console.log("error! - " + err ))
 	})
 
-app.get('/*', (request, response) => {
-  response.sendFile(path.join(__dirname, "build", "index.html"));
-})
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+// in production environment devdependecies (the ones in the package.json) are not installed
+
+app.get("*", function (request, response) {
+	response.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
+
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })
