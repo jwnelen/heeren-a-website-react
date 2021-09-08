@@ -2,6 +2,7 @@
   "name": "heeren-a",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://heeren-a.herokuapp.com/",
   "main": "server.js",
   "proxy": "http://localhost:3000",
   "scripts": {

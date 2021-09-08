@@ -2,6 +2,7 @@
   "name": "heeren-a-web",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://heeren-a.herokuapp.com/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
