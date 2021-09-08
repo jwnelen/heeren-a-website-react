@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd web && npm run build",
     "install-client": "cd web && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build && copyfiles -V -u 1 web/build/** server",
     "server": "nodemon server/server.js",
     "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix web\"",
     "start": "node server/server.js"
@@ -41,6 +41,7 @@
     "npm": "6.14.4"
   },
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "eslint": "^7.14.0"
   }
 }

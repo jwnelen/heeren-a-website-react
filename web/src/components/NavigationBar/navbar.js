@@ -26,7 +26,7 @@ class NavBar extends Component {
 		
 			return(
 				<nav className="navbar navbar-expand-md navbar-light bg-light">
-						<a className="navbar-brand mb-0 h1" href="/">Heeren A Tenniphil</a>
+						<a className="navbar-brand mb-0 h1" href="/">Heeren A Tenniphil - new</a>
 							<button className="custom-toggler navbar-toggler" 
 								type="button" 
 								data-toggle="collapse" 
