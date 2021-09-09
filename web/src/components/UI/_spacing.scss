@@ -1,0 +1,114 @@
+@import "./constants";
+
+$box-properties: (
+  "p": "padding",
+  "m": "margin",
+);
+
+$space-properties: (
+  "space-x": "margin-left",
+  "space-r": "margin-right",
+  "space-y": "margin-top",
+);
+
+@include responsive {
+  @each $alignment in $flex-alignments {
+    .#{$bp}items-#{$alignment} {
+      align-items: #{$alignment};
+    }
+    .#{$bp}self-#{$alignment} {
+      align-self: #{$alignment};
+    }
+    .#{$bp}content-#{$alignment} {
+      align-content: #{$alignment};
+    }
+    .#{$bp}justify-#{$alignment} {
+      justify-content: #{$alignment};
+    }
+  }
+
+  @each $prefix, $prop in $box-properties {
+    @each $label, $value in $fixed-sizes {
+      .#{$bp}#{$prefix}-#{$label} {
+        #{$prop}: #{$value};
+      }
+      .#{$bp}#{$prefix}y-#{$label} {
+        #{$prop}-top: #{$value};
+        #{$prop}-bottom: #{$value};
+      }
+      .#{$bp}#{$prefix}x-#{$label} {
+        #{$prop}-left: #{$value};
+        #{$prop}-right: #{$value};
+      }
+      .#{$bp}#{$prefix}t-#{$label} {
+        #{$prop}-top: #{$value};
+      }
+      .#{$bp}#{$prefix}l-#{$label} {
+        #{$prop}-left: #{$value};
+      }
+      .#{$bp}#{$prefix}b-#{$label} {
+        #{$prop}-bottom: #{$value};
+      }
+      .#{$bp}#{$prefix}r-#{$label} {
+        #{$prop}-right: #{$value};
+      }
+    }
+  }
+
+  @each $label, $value in $fixed-sizes {
+    .#{$bp}m--#{$label} {
+      margin: -#{$value};
+    }
+    .#{$bp}my--#{$label} {
+      margin-top: -#{$value};
+      margin-bottom: -#{$value};
+    }
+    .#{$bp}mx--#{$label} {
+      margin-left: -#{$value};
+      margin-right: -#{$value};
+    }
+    .#{$bp}mt--#{$label} {
+      margin-top: -#{$value};
+    }
+    .#{$bp}ml--#{$label} {
+      margin-left: -#{$value};
+    }
+    .#{$bp}mb--#{$label} {
+      margin-bottom: -#{$value};
+    }
+    .#{$bp}mr--#{$label} {
+      margin-right: -#{$value};
+    }
+  }
+
+  @each $prefix, $prop in $space-properties {
+    @each $label, $value in $numerical-sizes {
+      .#{$bp}#{$prefix}-#{$label} > * + * {
+        #{$prop}: #{$value};
+      }
+      .#{$bp}#{$prefix}--#{$label} > * + * {
+        #{$prop}: -#{$value};
+      }
+    }
+  }
+
+  @each $label, $value in $numerical-sizes {
+    .#{$bp}flex-gap-#{$label} > * {
+      margin: #{$value};
+    }
+
+    .#{$bp}flex-gap--#{$label} > * {
+      margin: -#{$value};
+    }
+
+    .#{$bp}flex-gap-x-#{$label} > * {
+      margin-left: #{$value};
+      margin-right: #{$value};
+    }
+
+    .#{$bp}flex-gap-y-#{$label} > * {
+      margin-top: #{$value};
+      margin-bottom: #{$value};
+    }
+  }
+}

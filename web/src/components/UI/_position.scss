@@ -1,0 +1,109 @@
+.static {
+  position: static;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.sticky {
+  position: sticky;
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.inset-auto {
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+}
+.inset-safe {
+  top: env(safe-area-inset-top);
+  right: env(safe-area-inset-right);
+  bottom: env(safe-area-inset-bottom);
+  left: env(safe-area-inset-left);
+}
+
+.inset-y-0 {
+  top: 0;
+  bottom: 0;
+}
+.inset-x-0 {
+  right: 0;
+  left: 0;
+}
+.inset-y-auto {
+  top: auto;
+  bottom: auto;
+}
+.inset-x-auto {
+  right: auto;
+  left: auto;
+}
+.inset-y-safe {
+  top: env(safe-area-inset-top);
+  bottom: env(safe-area-inset-bottom);
+}
+.inset-x-safe {
+  right: env(safe-area-inset-right);
+  left: env(safe-area-inset-left);
+}
+
+.top-0 {
+  top: 0;
+}
+.right-0 {
+  right: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.left-0 {
+  left: 0;
+}
+.top-auto {
+  top: auto;
+}
+.right-auto {
+  right: auto;
+}
+.bottom-auto {
+  bottom: auto;
+}
+.left-auto {
+  left: auto;
+}
+.top-100 {
+  top: 100%;
+}
+.right-100 {
+  right: 100%;
+}
+.bottom-100 {
+  bottom: 100%;
+}
+.left-100 {
+  left: 100%;
+}
+
+.top-safe {
+  top: env(safe-area-inset-top);
+}
+.right-safe {
+  right: env(safe-area-inset-right);
+}
+.bottom-safe {
+  bottom: env(safe-area-inset-bottom);
+}
+.left-safe {
+  left: env(safe-area-inset-left);
+}

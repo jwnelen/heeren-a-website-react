@@ -19,7 +19,7 @@ class PlayerGrid extends Component {
 			<div>
 				<div className="container">
 					<div className="row justify-content-center">
-						<PlayerList players={players}></PlayerList>
+						<PlayerList players={players}/>
 					</div>
 				</div>
 			</div>

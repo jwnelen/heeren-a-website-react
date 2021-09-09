@@ -1,0 +1,54 @@
+// Appearance
+.appearance-none {
+  appearance: none;
+}
+
+// Cursor
+$cursors: "auto", "default", "pointer", "wait", "text", "move", "not-allowed";
+
+@each $cursor in $cursors {
+  .cursor-#{$cursor} {
+    cursor: #{$cursor};
+  }
+}
+
+// Outline
+.outline-none {
+  outline: 0;
+}
+
+// Pointer events
+.pointer-events-none {
+  pointer-events: none;
+}
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
+// Resize
+.resize-none {
+  resize: none;
+}
+.resize {
+  resize: both;
+}
+.resize-y {
+  resize: vertical;
+}
+.resize-x {
+  resize: horizontal;
+}
+
+// User Select
+.select-none {
+  user-select: none;
+}
+.select-text {
+  user-select: text;
+}
+.select-all {
+  user-select: all;
+}
+.select-auto {
+  user-select: auto;
+}

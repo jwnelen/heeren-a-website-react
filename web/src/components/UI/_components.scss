@@ -1,0 +1,39 @@
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  width: 2em;
+  height: 2em;
+  margin: auto;
+  border: 0.25rem solid var(--caption);
+  border-right-color: transparent !important;
+  border-radius: 100%;
+
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes backgroundShimmer {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 1000px 0;
+  }
+}
+
+.placeholder-shimmer {
+  animation: backgroundShimmer 2s linear forwards infinite;
+  background-color: var(--light);
+  background: linear-gradient(105deg, #eeeeee 45%, #dddddd 50%, #eeeeee 55%);
+  background-size: 1000px 1000px;
+}
+
+
+
+.navlink[data-partially-current] {
+  @extend .underline-black;
+  font-weight: bold;
+}
