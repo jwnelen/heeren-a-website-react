@@ -12,7 +12,7 @@ const Dalton = db.sequelize.model("Dalton");
 const getDaltons = (req, res) => {
   console.log("getting all daltons")
   Dalton.findAll()
-      .then( (result) => res.status(200).json(result))
+      .then( (result) => res.send(result))
       .catch( (err) => console.log(err))
 }
 
