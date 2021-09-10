@@ -56,7 +56,7 @@ async function getDaltonById(id) {
     }
     return (error);
   }
-};
+}
 
 // TODO
 async function addDalton(dalton) {

@@ -4,6 +4,8 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import './loginForm.css'
 import AuthService from "../../services/auth.service";
+import { Link, navigate } from "@reach/router";
+
 
 const required = value => {
   if (!value) {
@@ -53,10 +55,10 @@ export default class LoginForm extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
+      AuthService.login(this.state.username, this.state.password)
+          .then(
         () => {
-          this.props.history.push("/");
-          window.location.reload();
+          navigate("/").then(() => window.location.reload());
         },
         error => {
           const resMessage =
@@ -119,7 +121,7 @@ export default class LoginForm extends Component {
 											disabled={this.state.loading}
 										>
 											{this.state.loading && (
-												<span className="spinner-border spinner-border-sm"></span>
+												<span className="spinner-border spinner-border-sm"/>
 											)}
 											<span>Login</span>
 										</button>

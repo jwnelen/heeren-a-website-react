@@ -34,17 +34,16 @@ const getDaltons = (req, res) => {
 // }
 
 //
-// const addDalton = (req, res) => {
-//   const dalton = req.body;
-//
-//   // TODO: check correct values!
-//   knex.insert(dalton, 'dalton_id').into('daltons')
-//       .then(id => res.status(200).json(id))
-//       .catch(err => {
-//         console.log(err);
-//         throw err
-//       })
-// }
+const addDalton = (req, res) => {
+  const dalton = req.body;
+  console.log(dalton)
+
+  Dalton.create({
+    reason: dalton.reason
+  })
+      .then((id) => res.status(200).json(id))
+      .catch((err) => console.log('could not add dalton', err))
+}
 //
 // const deleteDalton = (req, res) => {
 //   const id = parseInt(req.params.id)
@@ -68,6 +67,7 @@ const getDaltons = (req, res) => {
 //         console.log(err);
 //         throw err
 //       })
+
 // }
 //
 // const getPosts = (req, res) => {
@@ -98,7 +98,7 @@ const getDaltons = (req, res) => {
 
 module.exports = {
   getDaltons,
-  // addDalton,
+  addDalton,
   // getDaltonById,
   // deleteDalton,
   // getPosts,

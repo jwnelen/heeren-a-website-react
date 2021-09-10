@@ -6,8 +6,8 @@ const queries = require('../middleware/queries')
 
 daltonRouter
 	.get('/', queries.getDaltons)
-	// .post('/', queries.addDalton)
-//
+	.post('/', queries.addDalton)
+
 // daltonRouter
 // 	.get('/:id', queries.getDaltonById)
 // 	.put('/:id', queries.updateDalton)
