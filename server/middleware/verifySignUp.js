@@ -1,5 +1,5 @@
-const db = require("../models");
-const User = db.user;
+const db = require("../models/index");
+const User = db.sequelize.model("User");
 
 checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Username
@@ -34,7 +34,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
 };
 
 const verifySignUp = {
-	checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail,
+  checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail,
 };
 
 module.exports = verifySignUp;
