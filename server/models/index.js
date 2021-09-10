@@ -10,11 +10,9 @@ const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 let sequelize;
-console.log('use database', config.database)
-
+console.log('use env', config.use_env_variable)
 if (config.use_env_variable) {
-  console.log("here")
-  sequelize = new Sequelize(process.env.DATABASE_URL);
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   console.log("there")
 
