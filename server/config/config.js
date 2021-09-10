@@ -14,10 +14,6 @@ module.exports = {
     },
   },
   production: {
-    username: "root",
-    password: null,
-    database: "heeren_a_production",
-    host: "127.0.0.1",
-    dialect: "postgres"
+    use_env_variable: process.env.DATABASE_URL
   }
 }
