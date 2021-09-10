@@ -43,7 +43,7 @@ export default () => {
               <a className="nav-link" href={"/daltons"}>Daltons</a>
             </li>
           </ul>
-          {isAuthorized && (
+          {isAuthorized ? (
               <ul className='navbar-nav ml-auto'>
 							<span className="navbar-item">
       					<a className="nav-link" href={"/userProfile"}>Profile</a>
@@ -52,9 +52,7 @@ export default () => {
                   <a className="nav-link" href="/" onClick={logOut}>logout</a>
                 </li>
               </ul>
-          )}
-
-          {!isAuthorized && (
+          ) : (
               <ul className='navbar-nav ml-auto'>
                 <li className="nav-item">
                   <a className="nav-link" href={"/login"}>Login</a>
@@ -64,7 +62,6 @@ export default () => {
                 </li>
               </ul>
           )}
-
         </div>
       </nav>
   );
