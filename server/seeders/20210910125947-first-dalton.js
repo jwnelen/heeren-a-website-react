@@ -16,7 +16,9 @@ module.exports = {
       p_earned_id: 2,
       p_took_id: 1,
       date_earned: new Date(),
-      date_took: new Date()
+      date_took: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date()
     }])
   },
 
