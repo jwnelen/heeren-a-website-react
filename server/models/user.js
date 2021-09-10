@@ -12,12 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-  };
+  }
   User.init({
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    user_player_id: DataTypes.STRING
+    user_player_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'User',
