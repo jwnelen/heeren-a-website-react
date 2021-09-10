@@ -8,7 +8,7 @@ import './modal.css'
 export const Modal = ({
   onClickOutside,
   onKeyDown,
-  modalRef,
+  ref,
   buttonRef,
   closeModal,
   onSubmit,
@@ -26,7 +26,7 @@ export const Modal = ({
         onClick={onClickOutside}
         onKeyDown={onKeyDown}
       >
-        <div className="modal-area" ref={modalRef}>
+        <div className="modal-area" ref={ref}>
           <button
             ref={buttonRef}
             aria-label="Close Modal"
