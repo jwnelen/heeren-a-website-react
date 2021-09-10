@@ -12,8 +12,6 @@ const app = express()
 const cors = require('cors')
 app.use(cors())
 
-const db_Seq = require('./models/index.js')
-
 let port = process.env.PORT;
 if (port == null || port === "") {
   port = 8000;
@@ -37,7 +35,7 @@ require('./routes/auth.routes')(app);
 //
 // // adding routes
 // app.use('/api/players', require('./routes/player.routes'))
-// app.use('/api/daltons', require('./routes/dalton.routes'))
+app.use('/api/daltons', require('./routes/dalton.routes'))
 // app.use('/api/posts', require('./routes/posts.routes'))
 
 app.use(express.static(path.resolve(__dirname, "../server/build")));
