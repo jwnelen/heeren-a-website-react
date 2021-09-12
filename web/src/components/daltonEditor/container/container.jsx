@@ -1,12 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Modal} from '../modal/modal';
 import TriggerButton from '../triggerButton/triggerButton';
 import AuthService from "../../../services/auth.service";
 
-const Container = ({currentDalton, onClearDalton, onRefParent, onSubmit}) => {
+const Container = ({currentDalton, onClearDalton, onSubmit}) => {
   const [isVisible, setIsVisible] = useState(false)
   const [isLoggedIn, setLoggedIn] = useState(false)
-  const modalRef = useRef(null)
 
   const toggleScrollLock = () => {
     document.querySelector('html').classList.toggle('scroll-lock');
@@ -22,28 +21,28 @@ const Container = ({currentDalton, onClearDalton, onRefParent, onSubmit}) => {
     onClearDalton()
   }
 
+  const onKeyDown = () => {
+    closeModal()
+  }
+
+
   useEffect(() => {
     setLoggedIn(AuthService.getCurrentUser()?.username)
-    // onRefParent(this)
-    // return (onRefParent(undefined))
   }, [])
 
   return (
       <React.Fragment>
         <TriggerButton
             showModal={showModal}
-            // buttonRef={(n) => (this.TriggerButton = n)}
             enabled={isLoggedIn}
         />
         {isVisible ? (
             <Modal
-                ref={modalRef}
                 onSubmit={onSubmit}
-                buttonRef={(n) => (this.closeButton = n)}
                 closeModal={closeModal}
-                // onKeyDown={this.onKeyDown}
-                // onClickOutside={this.onClickOutside}
-                // players={this.props.players}
+                onKeyDown={onKeyDown}
+                onClickOutside={closeModal}
+                players={[]}
                 currentDalton={currentDalton}
             />
         ) : null}

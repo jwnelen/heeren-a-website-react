@@ -16,7 +16,6 @@ export default () => {
   useEffect(() => {
     api.getDaltons().then(d => {
       setDaltons(d)
-      console.log(d)
       setIsLoading(false)
     })
 

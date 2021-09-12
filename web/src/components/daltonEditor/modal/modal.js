@@ -4,16 +4,11 @@ import Form from '../form/form';
 import FocusTrap from 'focus-trap-react';
 import './modal.css'
 
+import ModalContainer from "containers/Modal";
 
 export const Modal = ({
-  onClickOutside,
-  onKeyDown,
-  ref,
-  buttonRef,
-  closeModal,
-  onSubmit,
-	players,
-	currentDalton
+  isOpen,
+
 }) => {
   return ReactDOM.createPortal(
     <FocusTrap>
@@ -26,13 +21,12 @@ export const Modal = ({
         onClick={onClickOutside}
         onKeyDown={onKeyDown}
       >
-        <div className="modal-area" ref={ref}>
+        <div className="modal-area">
           <button
-            ref={buttonRef}
             aria-label="Close Modal"
             aria-labelledby="close-modal"
             className="_modal-close"
-            onClick={closeModal}
+            onClick={onCloseModal}
           >
             <span id="close-modal" className="_hide-visual">
               Close
