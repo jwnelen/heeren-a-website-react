@@ -1,79 +1,49 @@
-import React, {useEffect, useState} from 'react';
-import {Modal} from '../modal/modal';
-import TriggerButton from '../triggerButton/triggerButton';
-import AuthService from "../../../services/auth.service";
+import {useLayoutEffect, useMemo, useRef} from "react";
+import {createPortal} from "react-dom";
 
-const Container = ({currentDalton, onClearDalton, onSubmit}) => {
-  const [isVisible, setIsVisible] = useState(false)
-  const [isLoggedIn, setLoggedIn] = useState(false)
+export default function Modal({
+                                children,
+                                isOpen,
+                                onClose,
+                                appear,
+                                interactive = true,
+                              }) {
+  const container = useMemo(() => {
+    const container = document.createElement("div");
+    container.className = "modal inset-0 z-50 overflow-x-hidden overflow-y-auto"
+    return container;
+  }, [interactive]);
+  const hasAppearedRef = useRef(!appear);
 
-  const toggleScrollLock = () => {
-    document.querySelector('html').classList.toggle('scroll-lock');
-  };
+  useLayoutEffect(() => {
+    const tryClose = (event) => {
+      if (event.target === event.currentTarget) {
+        onClose(event);
+      }
+    };
+    container.addEventListener("click", tryClose);
+    return () => {
+      container.removeEventListener("click", tryClose);
+    };
+  }, [container, onClose]);
 
-  const showModal = () => {
-    setIsVisible(true)
-    toggleScrollLock();
-  }
-  const closeModal = () => {
-    setIsVisible(false)
-    toggleScrollLock()
-    onClearDalton()
-  }
+  useLayoutEffect(() => {
+    if (isOpen) {
+      hasAppearedRef.current = true;
+      document.body.appendChild(container);
+    }
+    container.classList.toggle("isOpen", isOpen);
+  }, [container, isOpen]);
 
-  const onKeyDown = () => {
-    closeModal()
-  }
+  useLayoutEffect(() => {
+    return () => {
+      if (document.body.contains(container)) {
+        document.body.removeChild(container);
+      }
+    };
+  }, [container]);
 
-
-  useEffect(() => {
-    setLoggedIn(AuthService.getCurrentUser()?.username)
-  }, [])
-
-  return (
-      <React.Fragment>
-        <TriggerButton
-            showModal={showModal}
-            enabled={isLoggedIn}
-        />
-        {isVisible ? (
-            <Modal
-                onSubmit={onSubmit}
-                closeModal={closeModal}
-                onKeyDown={onKeyDown}
-                onClickOutside={closeModal}
-                players={[]}
-                currentDalton={currentDalton}
-            />
-        ) : null}
-      </React.Fragment>
-  );
+  return isOpen || hasAppearedRef.current
+      ? createPortal(children, container)
+      : null;
 }
-
-export default Container
-
-
-// showModal = () => {
-//   this.setState({ isShown: true }, () => {
-//     this.closeButton.focus();
-//   });
-//   this.toggleScrollLock();
-// };
-// closeModal = () => {
-//   this.setState({ isShown: false });
-//   this.TriggerButton.focus();
-//   this.toggleScrollLock();
-// 	this.props.onClearDalton();
-// };
-// onKeyDown = (event) => {
-//   if (event.keyCode === 27) {
-//     this.closeModal();
-//   }
-// };
-// onClickOutside = (event) => {
-//   if (this.modal && this.modal.contains(event.target)) return;
-//   this.closeModal();
-// };
-
-
-

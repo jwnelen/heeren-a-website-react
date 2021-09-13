@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
+import Modal from "components/daltonEditor/modal/modal";
 
-const Form = ({currentDalton, onSubmit}) => {
+const daltonModal = ({currentDalton, isOpen, onClose, onSubmit}) => {
+
   const [daltonId, setDaltonId] = useState(currentDalton?.dalton_id || -1)
   const [reason, setReason] = useState(currentDalton?.reason || "")
   const [personTookId, setPersonTookId] = useState()
 
   const handleDeleteDalton = (e) => {
-    event.preventDefault();
+    e.preventDefault();
     onSubmit({daltonId, reason, personTookId})
   }
+
   const options = [1, 2, 3].map((i) => (
       <option value={i} key={i}>{i}</option>
   ))
@@ -39,31 +42,39 @@ const Form = ({currentDalton, onSubmit}) => {
       </div>
 
   return (
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="reason">Reden</label>
-          <input
-              className="form-control"
-              id="reason"
-              name="reason"
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}/>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <div>
+          <p>Welkom</p>
         </div>
-        <div className="form-group">
-          <label htmlFor="playerTook">Genomen door</label>
-          <select
-              className="form-control"
-              id="playerTook"
-              name="person_took_id"
-              value={personTookId}
-              onChange={(e) => setPersonTookId(e.target.value)}>
-            <option value={0}>Choose...</option>
-            {options}
-          </select>
-        </div>
-        {confirmButtons}
-      </form>
+      </Modal>
   )
 }
 
-export default Form
+export default daltonModal
+      // <form onSubmit={onSubmit}>
+      //   <div className="form-group">
+      //     <label htmlFor="reason">Reden</label>
+      //     <input
+      //         className="form-control"
+      //         id="reason"
+      //         name="reason"
+      //         value={reason}
+      //         onChange={(e) => setReason(e.target.value)}/>
+      //   </div>
+      //   <div className="form-group">
+      //     <label htmlFor="playerTook">Genomen door</label>
+      //     <select
+      //         className="form-control"
+      //         id="playerTook"
+      //         name="person_took_id"
+      //         value={personTookId}
+      //         onChange={(e) => setPersonTookId(e.target.value)}>
+      //       <option value={0}>Choose...</option>
+      //       {options}
+      //     </select>
+      //   </div>
+      //   {confirmButtons}
+      // </form>
+  // )
+// }
+

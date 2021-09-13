@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import DaltonsList from 'components/daltonsList/daltonsList'
-import Container from 'components/daltonEditor/container/container'
 
 import api from '../data/api.js'
 
@@ -10,8 +9,7 @@ export default () => {
   const [players, setPlayers] = useState()
   const [currentDalton, setCurrentDalton] = useState()
   const [isLoading, setIsLoading] = useState(true)
-
-  // const modal = useRef();
+  const [modalIsOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     api.getDaltons().then(d => {
@@ -31,7 +29,7 @@ export default () => {
   }
 
   const onSubmit = () => {
-		console.log("on submit")
+    console.log("on submit")
   }
 
   if (isLoading) {
@@ -41,10 +39,6 @@ export default () => {
   return (
       <div>
         <h1>Daltons</h1>
-        <Container
-						currentDalton={currentDalton}
-            onSubmit={onSubmit}
-            onClearDalton={clearDalton}/>
         <DaltonsList daltons={daltons} players={players} onSelectDalton={handleDaltonChange}/>
 
       </div>
