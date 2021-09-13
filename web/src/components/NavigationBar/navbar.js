@@ -11,7 +11,7 @@ export default () => {
 
   useEffect(() => {
     setUser(AuthService.getCurrentUser())
-  })
+  }, [])
 
   const logOut = () => {
     AuthService.logout();

@@ -18,7 +18,7 @@ export default () => {
     })
 
     // this.getPlayersData();
-  })
+  }, [])
 
   const handleDaltonChange = (dalton) => {
     setCurrentDalton(dalton)
