@@ -9,7 +9,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd web && npm run build",
     "install-client": "cd web && npm install",
-    "migrate": "heroku pg:migrate",
     "heroku-postbuild": "npm run install-client && npm run build && copyfiles -V -u 1 \"web/build/**/*\" server",
     "server": "nodemon server/server.js",
     "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix web\"",
