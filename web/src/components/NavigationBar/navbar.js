@@ -36,9 +36,9 @@ export default () => {
 
         <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarsExample09">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href={"/team"}>Team</a>
-            </li>
+            {/*<li className="nav-item">*/}
+            {/*  <a className="nav-link" href={"/team"}>Team</a>*/}
+            {/*</li>*/}
             <li className="nav-item">
               <a className="nav-link" href={"/daltons"}>Daltons</a>
             </li>

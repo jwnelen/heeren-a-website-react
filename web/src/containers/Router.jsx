@@ -27,7 +27,7 @@ export default () => {
   return (
       <Router>
         <Home exact path="/"/>
-        <Team path="/team"/>
+        {/*<Team path="/team"/>*/}
         <RegisterForm path="/register"/>
         <LoginForm path="/login"/>
         <Daltons path="/daltons"/>

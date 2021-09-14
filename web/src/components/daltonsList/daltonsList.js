@@ -1,59 +1,31 @@
-import React, {Component} from 'react';
-import DaltonsListRow from '../daltonsListRow/daltonsListRow';
+import React, {useEffect} from 'react';
 import './daltonsList.css'
-import Table from 'react-bootstrap/Table'
 import AuthService from "../../services/auth.service";
+import "../daltonsListRow/daltonItem"
+import DaltonItem from "../daltonsListRow/daltonItem";
+const daltonList = ({daltons, players}) => {
+  let user;
 
+  const editDalton = (index) => {
+    console.log("index", index)
+  }
 
-class daltonsList extends Component {
-	constructor(props) {
-		super(props);
-		
-		this.state = {
-			currentUser: AuthService.getCurrentUser()
-		}
-	}
+  const renderRows = (
+      daltons.map((d, i) =>
+          <DaltonItem dalton={d} onEditDalton={() => editDalton(i)}/>
+    )
+  )
 
-	renderRows() {
-		const {daltons, players} = this.props;
-		
-		let items = [];
-		daltons.forEach( (dalton, index) => {
-			items.push(<DaltonsListRow 
-								 onSelectCurrentDalton={this.props.onSelectDalton} 
-								 players={players} 
-								 key={index} 
-								 index={index} 
-								 loggedIn={this.state.currentUser ? true : false}
-								 dalton={dalton}> </DaltonsListRow>)
-		});
-			
-		return items
-	}
+  useEffect(() => {
+    user = AuthService.getCurrentUser()
+  }, [])
 
-	render(props) {
-		return(
-			<div className="container">
-				<Table responsive striped bordered hover size="sm">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Verdiend</th>
-							<th>Reden</th>
-							<th>Genomen door</th>
-							<th>Datum verdient</th>
-							<th>Datum genomen</th>
-							{this.state.currentUser && <th>Edit</th>}
-						</tr>
-					</thead>
-					<tbody>
-						{ this.renderRows() }
-					</tbody>
-				</Table>
-			</div>
-		);
-	}
+  return (
+      <div className="container">
+        {renderRows}
+      </div>
+  )
 }
 
-export default daltonsList
+export default daltonList
 
