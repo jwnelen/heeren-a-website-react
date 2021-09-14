@@ -1,15 +1,25 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Modal from "components/daltonEditor/modal/modal";
+import {useFormState} from "react-use-form-state";
+import AuthService from "../../../services/auth.service";
 
-const daltonModal = ({currentDalton, isOpen, onClose, onSubmit}) => {
-
+const DaltonForm = ({currentDalton, onSubmit, ...props}) => {
   const [daltonId, setDaltonId] = useState(currentDalton?.dalton_id || -1)
-  const [reason, setReason] = useState(currentDalton?.reason || "")
-  const [personTookId, setPersonTookId] = useState()
+  // const [reason, setReason] = useState(currentDalton?.reason || "")
+  // const [personTookId, setPersonTookId] = useState()
 
-  const handleDeleteDalton = (e) => {
+  const [formState, {text}] = useFormState();
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    setUser(AuthService.getCurrentUser());
+  }, [])
+
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({daltonId, reason, personTookId})
+    const dalton = formState.values
+    onSubmit({dalton})
   }
 
   const options = [1, 2, 3].map((i) => (
@@ -42,15 +52,44 @@ const daltonModal = ({currentDalton, isOpen, onClose, onSubmit}) => {
       </div>
 
   return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <div>
-          <p>Welkom</p>
+      <form onSubmit={(e) => user === null ? handleSubmit(e) : null}>
+        <div className="form-group">
+          <label htmlFor="reason">Reden</label>
+          <input
+              className="form-control"
+              id="reason"
+              name="reason"
+              {...text("reason")}/>
         </div>
-      </Modal>
+        <div className="form-group">
+          <label htmlFor="playerEarned">Gewonnen door</label>
+          <select
+              className="form-control"
+              id="playerEarned"
+              {...text("person_earned_id")}
+          >
+            <option value={0}>Choose...</option>
+            {options}
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="playerTook">Genomen door</label>
+          <select
+              className="form-control"
+              id="playerTook"
+              {...text("person_took_id")}
+          >
+            <option value={0}>Choose...</option>
+            {options}
+          </select>
+        </div>
+        {props}
+      </form>
   )
 }
 
-export default daltonModal
+export default DaltonForm
+
       // <form onSubmit={onSubmit}>
       //   <div className="form-group">
       //     <label htmlFor="reason">Reden</label>

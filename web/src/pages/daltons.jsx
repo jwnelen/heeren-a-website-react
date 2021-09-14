@@ -20,9 +20,10 @@ export default () => {
     // this.getPlayersData();
   }, [])
 
-  const handleDaltonChange = (dalton) => {
-    setCurrentDalton(dalton)
+  const handleDaltonChange = (currentDaltonIndex) => {
+    // setCurrentDalton(dalton)
     // modal.current =;
+    console.log("curren", currentDaltonIndex)
   }
   const clearDalton = () => {
     setCurrentDalton({});
@@ -39,8 +40,7 @@ export default () => {
   return (
       <div>
         <h1>Daltons</h1>
-        <DaltonsList daltons={daltons} players={players} onSelectDalton={handleDaltonChange}/>
-
+        <DaltonsList daltons={daltons} players={players} onDaltonChange={handleDaltonChange}/>
       </div>
   )
 }

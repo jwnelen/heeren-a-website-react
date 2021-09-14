@@ -2,6 +2,7 @@ import React from 'react';
 import './daltonsListRow.css'
 import Button from 'react-bootstrap/Button'
 import 'moment/locale/nl'
+import moment from "moment";
 
 const DaltonItem = ({dalton, onEditDalton}) => {
   // let {index, players, loggedIn} = this.props;
@@ -13,7 +14,10 @@ const DaltonItem = ({dalton, onEditDalton}) => {
             {dalton.reason}
           </div>
           <div>
-            {dalton.date_earned}
+            {dalton.date_earned ? moment(dalton.date_earned).format('dddd DD MMMM YYYY') : ''}
+          </div>
+          <div>
+            {dalton.date_took ? moment(dalton.date_took).format('dddd DD MMMM YYYY') : ''}
           </div>
           <div>
             <Button variant="transparent" className='p-0' id={dalton.id} onClick={onEditDalton}>
