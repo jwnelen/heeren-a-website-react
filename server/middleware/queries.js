@@ -12,8 +12,8 @@ const Dalton = db.sequelize.model("Dalton");
 const getDaltons = (req, res) => {
   console.log("getting all daltons")
   Dalton.findAll()
-      .then( (result) => res.send(result))
-      .catch( (err) => console.log(err))
+      .then((result) => res.send(result))
+      .catch((err) => console.log(err))
 }
 
 
@@ -44,24 +44,34 @@ const addDalton = (req, res) => {
       .then((id) => res.status(200).json(id))
       .catch((err) => console.log('could not add dalton', err))
 }
+
+const updateDalton = (req, res) => {
+  const _id = parseInt(req.params.id)
+  const dalton = req.body
+
+  Dalton.update(dalton,
+      {
+        where: {
+          id: _id
+        }
+      }).then((id) => res.status(200).json(id))
+      .catch((err) => console.log("could not update dalton", err))
+}
+// knex('daltons')
+//     .where({dalton_id: id})
+//     .update(dalton, ['dalton_id'])
+//     .then(rows => res.status(200).json(rows))
+//     .catch(err => {
+//       console.log(err);
+//       throw err
+//     })
+
+// }
+
 //
 // const deleteDalton = (req, res) => {
 //   const id = parseInt(req.params.id)
 //   knex('daltons').where('dalton_id', id).del()
-//       .then(rows => res.status(200).json(rows))
-//       .catch(err => {
-//         console.log(err);
-//         throw err
-//       })
-// }
-//
-// const updateDalton = (req, res) => {
-//   const id = parseInt(req.params.id)
-//   const dalton = req.body
-//
-//   knex('daltons')
-//       .where({dalton_id: id})
-//       .update(dalton, ['dalton_id'])
 //       .then(rows => res.status(200).json(rows))
 //       .catch(err => {
 //         console.log(err);
@@ -102,6 +112,6 @@ module.exports = {
   // getDaltonById,
   // deleteDalton,
   // getPosts,
-  // updateDalton,
+  updateDalton,
   // getDaltonsTookByPlayerId
 };

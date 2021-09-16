@@ -5,36 +5,20 @@ import api from '../data/api.js'
 
 export default () => {
 
-  const [daltons, setDaltons] = useState()
+  const [daltons, setDaltons] = useState([])
   const [players, setPlayers] = useState()
   const [currentDalton, setCurrentDalton] = useState()
-  const [isLoading, setIsLoading] = useState(true)
-  const [modalIsOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     api.getDaltons().then(d => {
       setDaltons(d)
-      setIsLoading(false)
     })
 
     // this.getPlayersData();
   }, [])
 
-  const handleDaltonChange = (currentDaltonIndex) => {
-    // setCurrentDalton(dalton)
-    // modal.current =;
-    console.log("curren", currentDaltonIndex)
-  }
-  const clearDalton = () => {
-    setCurrentDalton({});
-  }
-
-  const onSubmit = () => {
-    console.log("on submit")
-  }
-
-  if (isLoading) {
-    return <h3 className='mt-4'>loading...</h3>
+  const handleDaltonChange = () => {
+    window.location.reload()
   }
 
   return (

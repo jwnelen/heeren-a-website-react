@@ -108,9 +108,7 @@ async function deleteDalton(dalton) {
 }
 
 async function updateDalton(dalton) {
-  console.log('dalton in api function: ' + JSON.stringify(dalton));
-  let id = dalton.dalton_id;
-  delete dalton['dalton_id']
+  const id = dalton.id;
   console.log('id in api: ' + id);
 
   let response = await fetch(apiUrl + '/daltons/' + id, {

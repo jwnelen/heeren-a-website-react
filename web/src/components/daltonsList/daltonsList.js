@@ -3,11 +3,16 @@ import './daltonsList.css'
 import AuthService from "../../services/auth.service";
 import "../daltonsListRow/daltonItem"
 import DaltonItem from "../daltonsListRow/daltonItem";
+import DaltonForm from "../daltonEditor/form/daltonForm";
 
 const daltonList = ({daltons, players, onDaltonChange}) => {
   let user;
   const [isEditing, setIsEditing] = useState(false)
   const [currentDalton, setCurrentDalton] = useState(null)
+
+  useEffect(() => {
+    user = AuthService.getCurrentUser()
+  }, [])
 
   const editDalton = (index) => {
     let isE = isEditing
@@ -15,16 +20,17 @@ const daltonList = ({daltons, players, onDaltonChange}) => {
     setCurrentDalton(isE ? null : index)
   }
 
+  const onSubmit = () => {
+    onDaltonChange();
+  }
+
+
   const editDaltonForm = () => {
+    const d = daltons[currentDalton]
 
     return (
         <>
-          <p>Editing dalton</p>
-
-          <button
-              className="btn btn-info btn-block"
-              onClick={() => onDaltonChange(currentDalton)}
-          >Opslaan</button>
+          <DaltonForm currentDalton={d} onSubmit={onSubmit} buttons={["save"]}/>
         </>
     )
   }
@@ -38,10 +44,6 @@ const daltonList = ({daltons, players, onDaltonChange}) => {
           </>
       )
   )
-
-  useEffect(() => {
-    user = AuthService.getCurrentUser()
-  }, [])
 
   return (
       <div className="container">

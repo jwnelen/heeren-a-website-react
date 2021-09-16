@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import Modal from "components/daltonEditor/modal/modal";
 import {useFormState} from "react-use-form-state";
-import AuthService from "../../../services/auth.service";
+import AuthService from "services/auth.service";
+import api from "data/api";
 
-const DaltonForm = ({currentDalton, onSubmit, ...props}) => {
+const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
   const [daltonId, setDaltonId] = useState(currentDalton?.dalton_id || -1)
   // const [reason, setReason] = useState(currentDalton?.reason || "")
   // const [personTookId, setPersonTookId] = useState()
 
-  const [formState, {text}] = useFormState();
+  const [formState, {text}] = useFormState(currentDalton);
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -16,10 +16,36 @@ const DaltonForm = ({currentDalton, onSubmit, ...props}) => {
   }, [])
 
 
-  const handleSubmit = (e) => {
+  const addDalton = (e) => {
     e.preventDefault();
     const dalton = formState.values
-    onSubmit({dalton})
+    api.addDalton(dalton)
+        .then( res => {
+          if (res.status === 200) {
+            // self.getDaltonsData()
+            window.alert("Dalton is added!");
+          } else {
+            window.alert("Could not add dalton");
+          }
+        }
+    )
+  }
+
+  const saveDalton = (e) => {
+    e.preventDefault();
+    const dalton = formState.values
+    console.log(dalton)
+
+    api.updateDalton(dalton)
+        .then( res => {
+              if (res.status === 200) {
+                onSubmit()
+                window.alert("Dalton is Edited");
+              } else {
+                window.alert("Could not save dalton");
+              }
+            }
+        )
   }
 
   const options = [1, 2, 3].map((i) => (
@@ -30,29 +56,8 @@ const DaltonForm = ({currentDalton, onSubmit, ...props}) => {
   // 	return <option key={key} value={key}>{players[key]}</option>
   // });
 
-  const confirmButtons =
-      <div className="form-group">
-        {daltonId === -1 ?
-            <button className="form-control btn btn-primary" type="submit">
-              Add Dalton!
-            </button> :
-            <div className="row justify-content-around">
-              <div className='col-6'>
-                <button className="form-control btn btn-primary" type="submit">
-                  Confirm
-                </button>
-              </div>
-              <div className='col-6'>
-                <button className="form-control btn btn-danger" type="button" onClick={(e) => handleDeleteDalton}>
-                  Delete Dalton
-                </button>
-              </div>
-            </div>
-        }
-      </div>
-
   return (
-      <form onSubmit={(e) => user === null ? handleSubmit(e) : null}>
+      <form>
         <div className="form-group">
           <label htmlFor="reason">Reden</label>
           <input
@@ -83,37 +88,21 @@ const DaltonForm = ({currentDalton, onSubmit, ...props}) => {
             {options}
           </select>
         </div>
-        {props}
+        <div>
+          {buttons.includes("add") && <button
+              className="form-control btn btn-primary"
+              onClick={addDalton}>
+            Add Dalton!
+          </button>}
+          {buttons.includes("save") && <button
+              className="form-control btn btn-primary"
+              onClick={saveDalton}>
+            Save
+          </button>}
+        </div>
       </form>
   )
 }
 
 export default DaltonForm
-
-      // <form onSubmit={onSubmit}>
-      //   <div className="form-group">
-      //     <label htmlFor="reason">Reden</label>
-      //     <input
-      //         className="form-control"
-      //         id="reason"
-      //         name="reason"
-      //         value={reason}
-      //         onChange={(e) => setReason(e.target.value)}/>
-      //   </div>
-      //   <div className="form-group">
-      //     <label htmlFor="playerTook">Genomen door</label>
-      //     <select
-      //         className="form-control"
-      //         id="playerTook"
-      //         name="person_took_id"
-      //         value={personTookId}
-      //         onChange={(e) => setPersonTookId(e.target.value)}>
-      //       <option value={0}>Choose...</option>
-      //       {options}
-      //     </select>
-      //   </div>
-      //   {confirmButtons}
-      // </form>
-  // )
-// }
 
