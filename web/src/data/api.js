@@ -85,9 +85,9 @@ async function addDalton(dalton) {
 };
 
 async function deleteDalton(dalton) {
-  console.log('dalton deletion of ' + JSON.stringify(dalton));
+  console.log(dalton)
 
-  let response = await fetch(apiUrl + '/daltons/' + dalton.dalton_id, {
+  let response = await fetch(apiUrl + '/daltons/' + dalton.id, {
     method: 'DELETE',
     headers: {
       'Content-type': 'application/json; charset=UTF-8' // Indicates the content

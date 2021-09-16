@@ -57,29 +57,20 @@ const updateDalton = (req, res) => {
       }).then((id) => res.status(200).json(id))
       .catch((err) => console.log("could not update dalton", err))
 }
-// knex('daltons')
-//     .where({dalton_id: id})
-//     .update(dalton, ['dalton_id'])
-//     .then(rows => res.status(200).json(rows))
-//     .catch(err => {
-//       console.log(err);
-//       throw err
-//     })
 
-// }
 
-//
-// const deleteDalton = (req, res) => {
-//   const id = parseInt(req.params.id)
-//   knex('daltons').where('dalton_id', id).del()
-//       .then(rows => res.status(200).json(rows))
-//       .catch(err => {
-//         console.log(err);
-//         throw err
-//       })
+const deleteDalton = (req, res) => {
+  const _id = parseInt(req.params.id)
+  console.log(_id, req.params)
 
-// }
-//
+  Dalton.destroy({
+    where: {
+      id: _id
+    }
+  }).then((id) => res.status(200).json(id))
+      .catch((err) => console.log('could not delete dalton', err))
+}
+
 // const getPosts = (req, res) => {
 //   knex.select('*').from('posts')
 //       .then((result) => {
@@ -110,7 +101,7 @@ module.exports = {
   getDaltons,
   addDalton,
   // getDaltonById,
-  // deleteDalton,
+  deleteDalton,
   // getPosts,
   updateDalton,
   // getDaltonsTookByPlayerId

@@ -30,7 +30,7 @@ const daltonList = ({daltons, players, onDaltonChange}) => {
 
     return (
         <>
-          <DaltonForm currentDalton={d} onSubmit={onSubmit} buttons={["save"]}/>
+          <DaltonForm currentDalton={d} onSubmit={onSubmit} buttons={["save", "delete"]}/>
         </>
     )
   }

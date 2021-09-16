@@ -22,7 +22,6 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
     api.addDalton(dalton)
         .then( res => {
           if (res.status === 200) {
-            // self.getDaltonsData()
             window.alert("Dalton is added!");
           } else {
             window.alert("Could not add dalton");
@@ -34,7 +33,6 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
   const saveDalton = (e) => {
     e.preventDefault();
     const dalton = formState.values
-    console.log(dalton)
 
     api.updateDalton(dalton)
         .then( res => {
@@ -47,6 +45,22 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
             }
         )
   }
+
+  const deleteDalton = (e) => {
+    e.preventDefault();
+    const dalton = formState.values
+    api.deleteDalton(dalton)
+        .then( res => {
+              if (res.status === 200) {
+                onSubmit()
+                window.alert("Dalton is Deleted");
+              } else {
+                window.alert("Could not delete dalton");
+              }
+            }
+        )
+  }
+
 
   const options = [1, 2, 3].map((i) => (
       <option value={i} key={i}>{i}</option>
@@ -98,6 +112,11 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
               className="form-control btn btn-primary"
               onClick={saveDalton}>
             Save
+          </button>}
+          {buttons.includes("delete") && <button
+            className="form-control btn btn-warning"
+            onClick={deleteDalton}>
+           Delete
           </button>}
         </div>
       </form>
