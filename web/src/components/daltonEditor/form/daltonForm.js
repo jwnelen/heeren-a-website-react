@@ -4,11 +4,17 @@ import AuthService from "services/auth.service";
 import api from "data/api";
 import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@material-ui/core";
 import Wrapper from "../../UI/Wrapper";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
   const [daltonId, setDaltonId] = useState(currentDalton?.dalton_id || -1)
+  // console.log("current", currentDalton)
 
-  const [formState, {text}] = useFormState(currentDalton);
+  const [formState, {text, raw}] = useFormState(currentDalton);
+  formState.date_earned = new Date(currentDalton?.date_earned || null)
+
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -19,6 +25,7 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
   const addDalton = (e) => {
     e.preventDefault();
     const dalton = formState.values
+    console.log("daton in add", dalton)
     api.addDalton(dalton)
         .then(res => {
               if (res.status === 200) {
@@ -78,7 +85,7 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
             label="reden"
             {...text("reason")}/>
         <div>
-          <FormControl sx={{ m: 1, minWidth: 2000 }}>
+          <FormControl sx={{m: 1, minWidth: 2000}}>
             <InputLabel id={"person_earned_id"}>Gewonnen door</InputLabel>
             <Select
                 autoWidth
@@ -100,6 +107,15 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
               {options}
             </Select>
           </FormControl>
+        </div>
+        <div>
+          <DatePicker
+              {...raw({
+                name: "date_earned",
+                onChange: date => date.toString()
+              })}
+              value={new Date(formState.date_earned)}
+          />
         </div>
         <div>
           {buttons.includes("add") && <Button
