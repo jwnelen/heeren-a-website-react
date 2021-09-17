@@ -1,12 +1,12 @@
-const db = require("../models-pg");
-const config = require("../config/auth.config");
-const Player = db.players;
-
-const Op = db.Sequelize.Op;
+const db = require("../models/index");
+// const config = require("../config/auth.config");
+const Player = db.sequelize.model("Player");
 
 exports.getPlayers = (req, res) => {
+  console.log("got here")
+
   Player.findAll()
-      .then(players => res.status(200).json(players))
+      .then(players => res.send(players))
       .catch(err => console.log('ERROR ---- : ' + err))
 }
 

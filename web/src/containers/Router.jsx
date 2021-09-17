@@ -4,7 +4,7 @@ import {Router} from "@reach/router";
 
 // pages
 import Home from "pages/home.jsx";
-import Team from "pages/team";
+import Players from "pages/players";
 import Daltons from "pages/daltons";
 import UserProfile from "pages/userProfile";
 import NotFound from "pages/404";
@@ -27,7 +27,7 @@ export default () => {
   return (
       <Router>
         <Home exact path="/"/>
-        {/*<Team path="/team"/>*/}
+        <Players path="/players"/>
         <RegisterForm path="/register"/>
         <LoginForm path="/login"/>
         <Daltons path="/daltons"/>

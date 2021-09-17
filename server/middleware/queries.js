@@ -1,7 +1,6 @@
 const db = require("../models/index");
 const Dalton = db.sequelize.model("Dalton");
 
-
 // knex.raw("SELECT VERSION()").then(
 //     (version) => console.log('connected with knex')
 // ).catch((err) => {
@@ -10,7 +9,6 @@ const Dalton = db.sequelize.model("Dalton");
 // })
 
 const getDaltons = (req, res) => {
-  console.log("getting all daltons")
   Dalton.findAll()
       .then((result) => res.send(result))
       .catch((err) => console.log(err))

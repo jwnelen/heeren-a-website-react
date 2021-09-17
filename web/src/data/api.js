@@ -3,10 +3,12 @@ import axios from "axios";
 const baseUrl = process.env.REACT_APP_API_URL || "";
 const apiUrl = `${baseUrl}/api`;
 
+
 async function getPlayers() {
-	// return fetch(apiUrl + '/players')
-  //     .then(response => response.json())
-  //     .catch((error) => console.log('error in api', error))
+  console.log("getting players")
+	return fetch(apiUrl + '/players')
+      .then(response => response.json())
+      .catch((error) => console.log('error in api', error))
 }
 
 async function getPlayerById(id) {
@@ -41,7 +43,7 @@ async function getDaltons() {
   return fetch(apiUrl + '/daltons')
       .then(response => response.json())
       .catch((error) => console.log('error in api', error))
-};
+}
 
 async function getDaltonById(id) {
   if (id) {
@@ -82,7 +84,7 @@ async function addDalton(dalton) {
     }
     return (error);
   }
-};
+}
 
 async function deleteDalton(dalton) {
   console.log(dalton)
@@ -136,13 +138,13 @@ async function getDaltonsTookByPlayerId(id) {
   return fetch(apiUrl + '/daltons/daltonsTook/' + id)
       .then(response => response.json())
       .catch((error) => console.log('error in api', error))
-};
+}
 
 async function getPosts() {
   return fetch(apiUrl + '/posts')
       .then(response => response.json())
       .catch((error) => console.log('error in api', error))
-};
+}
 
 export default {
   getPlayers,

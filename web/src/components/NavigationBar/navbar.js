@@ -26,9 +26,9 @@ export default () => {
               <a href={"/daltons"} className="h4">
                 Daltons
               </a>
-              {/*<a href={"/team"} className="h4">*/}
-              {/*  Team*/}
-              {/*</a>*/}
+              <a href={"/players"} className="h4">
+                Players
+              </a>
             </div>
             {isAuthorized ?
                 <div>
