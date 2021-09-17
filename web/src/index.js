@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+// import 'components/UI/index.scss'
+// @import 'components/UI/index.scss';
+
 import App from "./containers/App";
 import * as serviceWorker from './serviceWorker';
 
 // Importing the Bootstrap CSS
-// import "node_modules/bootstrap/dist/css/bootstrap.css"
-import "bootstrap/dist/css/bootstrap-grid.css"
-import 'bootstrap/dist/css/bootstrap.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 const root = document.getElementById("root");

@@ -32,7 +32,7 @@ export default () => {
         <LoginForm path="/login"/>
         <Daltons path="/daltons"/>
         <PlayerProfile path="/players/:id"/>
-        <UserProfile path="/userProfile"/>
+        <UserProfile path="/profile"/>
         <NotFound default/>
       </Router>
   )

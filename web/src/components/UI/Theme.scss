@@ -1,0 +1,55 @@
+@import "./constants";
+
+:root {
+  --box-shadow-xs: 0 0.125rem 0.365rem -0.125rem #0002;
+  --box-shadow-sm: 0 0.25rem 0.75rem -0.25rem #0004;
+  --box-shadow-md: 0 0.5rem 1.5rem -0.5rem #0006;
+  --box-shadow-lg: 0 1rem 3rem -1rem #0008;
+  --box-shadow-xl: 0 2rem 6rem -2rem #000a;
+
+  --border-radius: 1rem;
+  --font-copy: Roboto, Calibri, Candara, Arial, sans-serif;
+  --font-heading: quatro, Calibri, Candara, Arial, sans-serif;
+}
+
+@function luminance($color) {
+  $red: nth($linear-channel-values, red($color) + 1);
+  $green: nth($linear-channel-values, green($color) + 1);
+  $blue: nth($linear-channel-values, blue($color) + 1);
+
+  @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
+}
+
+//@function contrast($back, $front) {
+//  $back-lum: luminance($back) + 0.05;
+//  $fore-lum: luminance($front) + 0.05;
+//
+//  @return max($back-lum, $fore-lum) / min($back-lum, $fore-lum);
+//}
+
+//@function readable-color($color, $light-color, $dark-color) {
+//  $light-contrast: contrast($color, $light-color);
+//  $dark-contrast: contrast($color, $dark-color);
+//
+//  @if ($light-contrast > $dark-contrast) {
+//    @return $light-color;
+//  } @else {
+//    @return $dark-color;
+//  }
+//}
+
+@each $color-mode, $colors in $color-modes {
+  .#{$color-mode} {
+    @each $color-name, $color in $colors {
+      --#{$color-name}: #{$color};
+      --#{$color-name}_rgb: #{red($color)}, #{green($color)}, #{blue($color)};
+      --#{$color-name}_shade: #{adjust-color($color, $lightness: -10%)};
+      --#{$color-name}_tint: #{adjust-color($color, $lightness: 10%)};
+      //--#{$color-name}_contrast: #{readable-color(
+      //    adjust-color($color, $lightness: -20%),
+      //    map-get($colors, "background"),
+      //    map-get($colors, "text")
+      //  )};
+    }
+  }
+}

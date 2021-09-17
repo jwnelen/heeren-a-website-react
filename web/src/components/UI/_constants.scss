@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $variable-sizes: "xs", "sm", "md", "lg", "xl";
 $numerical-size-labels: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 20, 24, 32, 40, 48,
   56, 64, 80;
@@ -5,7 +7,7 @@ $numerical-sizes: ();
 @each $label in $numerical-size-labels {
   $numerical-sizes: map-merge(
     $numerical-sizes,
-    (#{$label}: "#{$label / 4}rem")
+    (#{$label}: "#{ math.div($label, 4)}rem")
   );
 }
 $misc-sizes: (

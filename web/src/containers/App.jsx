@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react';
-import './App.css';
+import './App.scss';
 
 import Router from "./Router";
 import NavBar from "../components/NavigationBar/navbar";

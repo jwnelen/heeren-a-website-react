@@ -1,14 +1,14 @@
 import React from 'react';
-import './daltonsListRow.css'
-import Button from 'react-bootstrap/Button'
+import './DaltonItem.scss'
 import 'moment/locale/nl'
 import moment from "moment";
+import {Card} from "./index";
 
 const DaltonItem = ({dalton, onEditDalton}) => {
   // let {index, players, loggedIn} = this.props;
 
   return (
-      <div className="card">
+      <Card>
         <div className="flex">
           <div>
             {dalton.reason}
@@ -20,7 +20,7 @@ const DaltonItem = ({dalton, onEditDalton}) => {
             {dalton.date_took ? moment(dalton.date_took).format('dddd DD MMMM YYYY') : ''}
           </div>
           <div>
-            <Button variant="transparent" className='p-0' id={dalton.id} onClick={onEditDalton}>
+            <button variant="transparent" className='p-0' id={dalton.id} onClick={onEditDalton}>
               <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" className="bi bi-pencil-square" fill="currentColor"
                    xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -28,10 +28,10 @@ const DaltonItem = ({dalton, onEditDalton}) => {
                 <path fillRule="evenodd"
                       d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
               </svg>
-            </Button>
+            </button>
           </div>
         </div>
-      </div>
+      </Card>
   )
 }
 

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './daltonsList.css'
 import AuthService from "../../services/auth.service";
-import "../daltonsListRow/daltonItem"
-import DaltonItem from "../daltonsListRow/daltonItem";
+import "../UI/DaltonItem"
+import DaltonItem from "../UI/DaltonItem";
 import DaltonForm from "../daltonEditor/form/daltonForm";
 
 const daltonList = ({daltons, players, onDaltonChange}) => {
