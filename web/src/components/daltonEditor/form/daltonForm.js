@@ -13,7 +13,8 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
   // console.log("current", currentDalton)
 
   const [formState, {text, raw}] = useFormState(currentDalton);
-  formState.date_earned = new Date(currentDalton?.date_earned || null)
+  formState.date_earned = currentDalton ? new Date(currentDalton.date_earned) : new Date()
+  console.log('date earned is ', formState.date_earned)
 
   const [user, setUser] = useState(null)
 
@@ -114,7 +115,7 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
                 name: "date_earned",
                 onChange: date => date.toString()
               })}
-              value={new Date(formState.date_earned)}
+              selected={formState.date_earned}
           />
         </div>
         <div>

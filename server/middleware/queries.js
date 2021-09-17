@@ -38,9 +38,7 @@ const addDalton = (req, res) => {
   const dalton = req.body;
   console.log(dalton)
 
-  Dalton.create({
-    reason: dalton.reason
-  })
+  Dalton.create(dalton)
       .then((id) => res.status(200).json(id))
       .catch((err) => console.log('could not add dalton', err))
 }
