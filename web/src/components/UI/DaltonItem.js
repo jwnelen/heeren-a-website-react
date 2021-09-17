@@ -7,27 +7,29 @@ import {Button} from "@material-ui/core";
 
 const DaltonItem = ({dalton, onEditDalton}) => {
   // let {index, players, loggedIn} = this.props;
-  console.log("daltin", dalton)
+  console.log("dalton", dalton)
   return (
       <Card >
         <div className="flex-column">
-          <div className="flex space-x-10">
-            <div>
+          <div className="flex justify-center">
+            <div className="font-weight-bold  mb-1">
               {dalton.reason}
             </div>
+          </div>
+          <div className="flex justify-space-around">
             <div>
-              {dalton.p_took_id || ""}
+              genomen door {dalton.p_took_id || ""}
             </div>
             <div>
-              {dalton.p_earned_id || ""}
+              gewonnen door {dalton.p_earned_id || ""}
             </div>
           </div>
-          <div className="flex space-x-10">
+          <div className="flex justify-space-around ">
             <div>
-              {dalton.date_earned ? moment(dalton.date_earned).format('dddd DD MMMM YYYY') : ''}
+              gewonnen op {dalton.date_earned ? moment(dalton.date_earned).format('dddd DD MMMM YYYY') : ''}
             </div>
             <div>
-              {dalton.date_took ? moment(dalton.date_took).format('dddd DD MMMM YYYY') : ''}
+              genomen op {dalton.date_took ? moment(dalton.date_took).format('dddd DD MMMM YYYY') : ''}
             </div>
             <div>
               <Button variant="transparent" className='p-0' id={dalton.id} onClick={onEditDalton}>

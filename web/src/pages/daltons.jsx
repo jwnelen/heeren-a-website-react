@@ -9,6 +9,8 @@ export default () => {
   // const [players, setPlayers] = useState()
   // const [currentDalton, setCurrentDalton] = useState()
 
+  const players = []
+
   useEffect(() => {
     api.getDaltons().then(d => {
       setDaltons(d)
