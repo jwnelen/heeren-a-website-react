@@ -5,7 +5,7 @@ export const Home = () => {
 
   return (
       <div>
-        <div className='container'>
+        <div className=''>
           <h2>Welkom op de Heeren A Dalton turver</h2>
           <DaltonForm buttons={["add"]}/>
         </div>

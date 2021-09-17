@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import {useFormState} from "react-use-form-state";
 import AuthService from "services/auth.service";
 import api from "data/api";
+import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@material-ui/core";
+import Wrapper from "../../UI/Wrapper";
 
 const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
   const [daltonId, setDaltonId] = useState(currentDalton?.dalton_id || -1)
-  // const [reason, setReason] = useState(currentDalton?.reason || "")
-  // const [personTookId, setPersonTookId] = useState()
 
   const [formState, {text}] = useFormState(currentDalton);
   const [user, setUser] = useState(null)
@@ -20,14 +20,14 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
     e.preventDefault();
     const dalton = formState.values
     api.addDalton(dalton)
-        .then( res => {
-          if (res.status === 200) {
-            window.alert("Dalton is added!");
-          } else {
-            window.alert("Could not add dalton");
-          }
-        }
-    )
+        .then(res => {
+              if (res.status === 200) {
+                window.alert("Dalton is added!");
+              } else {
+                window.alert("Could not add dalton");
+              }
+            }
+        )
   }
 
   const saveDalton = (e) => {
@@ -35,7 +35,7 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
     const dalton = formState.values
 
     api.updateDalton(dalton)
-        .then( res => {
+        .then(res => {
               if (res.status === 200) {
                 onSubmit()
                 window.alert("Dalton is Edited");
@@ -50,7 +50,7 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
     e.preventDefault();
     const dalton = formState.values
     api.deleteDalton(dalton)
-        .then( res => {
+        .then(res => {
               if (res.status === 200) {
                 onSubmit()
                 window.alert("Dalton is Deleted");
@@ -63,7 +63,7 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
 
 
   const options = [1, 2, 3].map((i) => (
-      <option value={i} key={i}>{i}</option>
+      <MenuItem value={i} key={i}>{i}</MenuItem>
   ))
 
   // let options = Object.keys(players).map( function(key) {
@@ -71,55 +71,56 @@ const DaltonForm = ({currentDalton, onSubmit, buttons}) => {
   // });
 
   return (
-      <form>
-        <div className="form-group">
-          <label htmlFor="reason">Reden</label>
-          <input
-              className="form-control"
-              id="reason"
-              name="reason"
-              {...text("reason")}/>
+      <Wrapper>
+        <TextField
+            fullwidth
+            variant="outlined"
+            label="reden"
+            {...text("reason")}/>
+        <div>
+          <FormControl sx={{ m: 1, minWidth: 2000 }}>
+            <InputLabel id={"person_earned_id"}>Gewonnen door</InputLabel>
+            <Select
+                autoWidth
+                labelId={"person_earned_id"}
+                {...text("person_earned_id")}
+            >
+              {options}
+            </Select>
+          </FormControl>
         </div>
-        <div className="form-group">
-          <label htmlFor="playerEarned">Gewonnen door</label>
-          <select
-              className="form-control"
-              id="playerEarned"
-              {...text("person_earned_id")}
-          >
-            <option value={0}>Choose...</option>
-            {options}
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="playerTook">Genomen door</label>
-          <select
-              className="form-control"
-              id="playerTook"
-              {...text("person_took_id")}
-          >
-            <option value={0}>Choose...</option>
-            {options}
-          </select>
+
+        <div>
+          <FormControl fullwidth>
+            <InputLabel id={"person_took_id"}>Genomen door</InputLabel>
+            <Select
+                labelId={"person_took_id"}
+                {...text("person_took_id")}
+            >
+              {options}
+            </Select>
+          </FormControl>
         </div>
         <div>
-          {buttons.includes("add") && <button
-              className="form-control btn btn-primary"
+          {buttons.includes("add") && <Button
+              variant="contained"
               onClick={addDalton}>
             Add Dalton!
-          </button>}
-          {buttons.includes("save") && <button
-              className="form-control btn btn-primary"
+          </Button>}
+          {buttons.includes("save") && <Button
+              variant="contained"
               onClick={saveDalton}>
             Save
-          </button>}
-          {buttons.includes("delete") && <button
-            className="form-control btn btn-warning"
-            onClick={deleteDalton}>
-           Delete
-          </button>}
+          </Button>}
+          {buttons.includes("delete") && <Button
+              variant="contained"
+              color="error"
+              className={"btn btn-warning"}
+              onClick={deleteDalton}>
+            Delete
+          </Button>}
         </div>
-      </form>
+      </Wrapper>
   )
 }
 

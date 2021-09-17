@@ -8,8 +8,6 @@ export default () => {
   const [user, setUser] = useState()
   const isAuthorized = user?.username;
 
-  const [isNavCollapsed, setNavCollapsed] = useState(true);
-
   useEffect(() => {
     setUser(AuthService.getCurrentUser())
   }, [])
@@ -19,10 +17,8 @@ export default () => {
     navigate("/").then(() => window.location.reload());
   }
 
-  const handleNavCollapse = () => setNavCollapsed(!isNavCollapsed)
-
   return (
-      <Box sx={{flexGrow: 1}}>
+      <Box className="flex-grow">
         <AppBar position="static">
           <Toolbar className="flex justify-space-between">
             <div className="flex md:flex-gap-3 sm:flex-gap-1 items-center">
@@ -30,9 +26,9 @@ export default () => {
               <a href={"/daltons"} className="h4">
                 Daltons
               </a>
-              <a href={"/team"} className="h4">
-                Team
-              </a>
+              {/*<a href={"/team"} className="h4">*/}
+              {/*  Team*/}
+              {/*</a>*/}
             </div>
             {isAuthorized ?
                 <div>
