@@ -4,12 +4,13 @@ import AuthService from "../../services/auth.service";
 import "../UI/DaltonItem"
 import DaltonItem from "../UI/DaltonItem";
 import DaltonForm from "../daltonEditor/form/daltonForm";
+import {Wrapper} from "../UI";
 
 const daltonList = ({daltons, players, onDaltonChange}) => {
   let user;
   const [isEditing, setIsEditing] = useState(false)
   const [currentDalton, setCurrentDalton] = useState(null)
-
+  console.log(players)
   useEffect(() => {
     user = AuthService.getCurrentUser()
   }, [])
@@ -29,9 +30,7 @@ const daltonList = ({daltons, players, onDaltonChange}) => {
     const d = daltons[currentDalton]
 
     return (
-        <>
-          <DaltonForm currentDalton={d} onSubmit={onSubmit} buttons={["save", "delete"]}/>
-        </>
+        <DaltonForm currentDalton={d} onSubmit={onSubmit} buttons={["save", "delete"]}/>
     )
   }
 
@@ -46,9 +45,9 @@ const daltonList = ({daltons, players, onDaltonChange}) => {
   )
 
   return (
-      <div className="container">
+      <Wrapper className="space-y-4">
         {renderRows}
-      </div>
+      </Wrapper>
   )
 }
 
