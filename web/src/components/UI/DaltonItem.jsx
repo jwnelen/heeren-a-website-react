@@ -8,7 +8,6 @@ import {Button} from "@material-ui/core";
 const DaltonItem = ({dalton, players, onEditDalton}) => {
   // let {index, players, loggedIn} = this.props;
 
-  console.log('players,', players)
   const getPlayersName = (id) => {
     return `${players.filter((pl) => pl.id === id)[0]?.nickname || ""}`;
   }
@@ -23,18 +22,18 @@ const DaltonItem = ({dalton, players, onEditDalton}) => {
           </div>
           <div className="flex justify-space-around">
             <div>
-              genomen door {getPlayersName(dalton.p_took_id) || ""}
+              gewonnen door {getPlayersName(dalton.p_earned_id) || ""}
             </div>
             <div>
-              gewonnen op {dalton.date_earned ? moment(dalton.date_earned).format('dddd DD MMMM YYYY') : ''}
+              gewonnen op {dalton.date_earned ? moment(dalton.date_earned).format('dd DD MMMM YYYY') : ''}
             </div>
           </div>
           <div className="flex justify-space-around ">
             <div>
-              gewonnen door {getPlayersName(dalton.p_earned_id) || ""}
+              genomen door {getPlayersName(dalton.p_took_id) || ""}
             </div>
             <div>
-              genomen op {dalton.date_took ? moment(dalton.date_took).format('dddd DD MMMM YYYY') : 'Nog niet genomen!'}
+              {dalton.date_took ? `genomen op ${ moment(dalton.date_took).format('dd DD MMMM YYYY')}` : 'Nog niet genomen!'}
             </div>
           </div>
           <div>
@@ -55,4 +54,4 @@ const DaltonItem = ({dalton, players, onEditDalton}) => {
 }
 
 export default DaltonItem
-			
+

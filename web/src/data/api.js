@@ -86,8 +86,6 @@ async function addDalton(dalton) {
 }
 
 async function deleteDalton(dalton) {
-  console.log(dalton)
-
   let response = await fetch(apiUrl + '/daltons/' + dalton.id, {
     method: 'DELETE',
     headers: {
@@ -110,7 +108,12 @@ async function deleteDalton(dalton) {
 
 async function updateDalton(dalton) {
   const id = dalton.id;
-  console.log('id in api: ' + id);
+  if(!dalton.p_took_id > 0) {
+    dalton.p_took_id = null;
+  }
+  if(!dalton.p_earned_id > 0) {
+    dalton.p_earned_id = null;
+  }
 
   let response = await fetch(apiUrl + '/daltons/' + id, {
     method: 'PUT',
