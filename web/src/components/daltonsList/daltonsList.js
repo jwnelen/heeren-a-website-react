@@ -10,7 +10,7 @@ const daltonList = ({daltons, players, onDaltonChange}) => {
   let user;
   const [isEditing, setIsEditing] = useState(false)
   const [currentDalton, setCurrentDalton] = useState(null)
-  console.log(players)
+
   useEffect(() => {
     user = AuthService.getCurrentUser()
   }, [])
@@ -30,14 +30,14 @@ const daltonList = ({daltons, players, onDaltonChange}) => {
     const d = daltons[currentDalton]
 
     return (
-        <DaltonForm currentDalton={d} onSubmit={onSubmit} buttons={["save", "delete"]}/>
+        <DaltonForm currentDalton={d} players={players} onSubmit={onSubmit} buttons={["save", "delete"]}/>
     )
   }
 
   const renderRows = (
       daltons.map((d, i) =>
           <>
-            <DaltonItem dalton={d} onEditDalton={() => editDalton(i)}/>
+            <DaltonItem dalton={d} players={players} onEditDalton={() => editDalton(i)}/>
             {(isEditing && currentDalton === i) ?
                 editDaltonForm() : <></>}
           </>

@@ -7,7 +7,7 @@ import api from '../data/api.js'
 export default () => {
 
   const [daltons, setDaltons] = useState([])
-  const [players, setPlayers] = useState()
+  const [players, setPlayers] = useState([])
   // const [currentDalton, setCurrentDalton] = useState()
 
   useEffect(() => {

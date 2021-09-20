@@ -9,7 +9,6 @@ const Players = () => {
 
   useEffect(() => {
     api.getPlayers().then(p => {
-      console.log('after call', p)
       setPlayers(p)
     })
   }, [])
