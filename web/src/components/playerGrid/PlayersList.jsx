@@ -1,5 +1,5 @@
 import React from 'react';
-import Player from '../player/player'
+import Player from '../UI/Player'
 import './playerGrid.css'
 
 const PlayersList = ({players}) => {

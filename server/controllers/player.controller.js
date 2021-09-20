@@ -13,8 +13,8 @@ exports.getPlayers = (req, res) => {
 exports.getPlayerById = (req, res) => {
   const id = parseInt(req.params.id)
 
-  Player.findAll({where: {player_id: id}})
-      .then(player => res.status(200).json(player))
+  Player.findOne({where: {id: id}})
+      .then(player => res.send(player))
       .catch(err => console.log('ERROR ---- : ' + err))
 }
 

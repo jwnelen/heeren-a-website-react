@@ -1,7 +1,5 @@
 import React, {useEffect} from "react";
 
-import {Router} from "@reach/router";
-
 // pages
 import Home from "pages/home.jsx";
 import Players from "pages/players";
@@ -16,6 +14,7 @@ import LoginForm from "components/loginForm/loginForm";
 import PlayerProfile from "components/playerProfile/playerProfile";
 
 import AuthService from "services/auth.service";
+import {BrowserRouter as Router, Route, Switch, useParams} from "react-router-dom";
 
 export default () => {
   let user = null;
@@ -24,16 +23,25 @@ export default () => {
     user = AuthService.getCurrentUser();
   }, [])
 
+  const PlayerComponent = () => {
+    let {id} = useParams();
+    return (<PlayerProfile playerid={id}/>)
+  }
+
   return (
       <Router>
-        <Home exact path="/"/>
-        <Players path="/players"/>
-        <RegisterForm path="/register"/>
-        <LoginForm path="/login"/>
-        <Daltons path="/daltons"/>
-        <PlayerProfile path="/players/:id"/>
-        <UserProfile path="/profile"/>
-        <NotFound default/>
+        <Switch>
+          <Home exact path="/"/>
+          <RegisterForm path="/register"/>
+          <LoginForm path="/login"/>
+          <Route path="/players/:id">
+            <PlayerComponent />
+          </Route>
+          <Players path="/players"/>
+          <Daltons path="/daltons"/>
+          <UserProfile path="/profile"/>
+          <NotFound default/>
+        </Switch>
       </Router>
   )
 }
