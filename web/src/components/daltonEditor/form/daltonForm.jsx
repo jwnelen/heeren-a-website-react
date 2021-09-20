@@ -15,7 +15,7 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
     p_took_id: currentDalton?.p_took_id || "",
     date_earned: currentDalton ? new Date(currentDalton.date_earned) : new Date(),
     date_took: currentDalton ? new Date(currentDalton.date_took) : new Date(),
-    id: currentDalton?.id || -1
+    id: currentDalton?.id || null
   });
 
   const [user, setUser] = useState(null)
