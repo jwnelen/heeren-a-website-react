@@ -15,7 +15,6 @@ export default () => {
   const logOut = () => {
     AuthService.logout();
     history.push("/")
-    // navigate("/").then(() => window.location.reload());
   }
 
   return (
@@ -24,21 +23,21 @@ export default () => {
           <Toolbar className="flex justify-space-between">
             <div className="flex md:flex-gap-3 sm:flex-gap-1 items-center">
               <h2 className={"cursor-pointer"} onClick={() => history.push("/")}>Heeren A Tenniphil</h2>
-              <a href={"/daltons"} className="h4">
+              <Link to={"/daltons"} className="h4 text-white">
                 Daltons
-              </a>
-              <Link to={"/players"} className="h4">
+              </Link>
+              <Link to={"/players"} className="h4 text-white">
                 Players
               </Link>
             </div>
             {isAuthorized ?
                 <div>
-                  <a className="px-4" href={"/profile"} color="inherit">Profiel</a>
-                  <a className="px-4" href={""} onClick={logOut} color="inherit">Uitloggen</a>
+                  <Link className="px-4 text-white" to={"/profile"}>Profiel</Link>
+                  <Link className="px-4 text-white" to={"/"} onClick={logOut}>Uitloggen</Link>
                 </div>
                 : <div>
-                  <a className="px-4" href={"/login"} color="inherit">Login</a>
-                  <a className="px-4" href={"/register"} color="inherit">Registreer</a>
+                  <Link className="px-4 text-white" to={"/login"} >Login</Link>
+                  <Link className="px-4 text-white" to={"/register"}>Registreer</Link>
                 </div>}
           </Toolbar>
         </AppBar>

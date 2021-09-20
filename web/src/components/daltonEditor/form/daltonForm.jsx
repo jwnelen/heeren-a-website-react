@@ -9,7 +9,7 @@ import DatePicker from "react-datepicker";
 
 const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
 
-  const [formState, {text, raw}] = useFormState({
+  const [formState, {text}] = useFormState({
     reason: currentDalton?.reason || "",
     p_earned_id: currentDalton?.p_earned_id || "",
     p_took_id: currentDalton?.p_took_id || "",
@@ -135,18 +135,20 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
         <div>
           {buttons.includes("add") && <Button
               variant="contained"
+              disabled={!user}
               onClick={addDalton}>
             Add Dalton!
           </Button>}
           {buttons.includes("save") && <Button
               variant="contained"
+              disabled={!user}
               onClick={saveDalton}>
             Save
           </Button>}
           {buttons.includes("delete") && <Button
               variant="contained"
-              color="error"
               className={"btn btn-warning"}
+              disabled={!user}
               onClick={deleteDalton}>
             Delete
           </Button>}

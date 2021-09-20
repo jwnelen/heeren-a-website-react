@@ -1,18 +1,19 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
+import {isEmail} from "validator";
 import '../loginForm/loginForm.css'
+import PageLayout from "layouts/page"
 
 import AuthService from "../../services/auth.service";
 
 const required = value => {
   if (!value) {
     return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
+        <div className="alert alert-danger" role="alert">
+          This field is required!
+        </div>
     );
   }
 };
@@ -20,9 +21,9 @@ const required = value => {
 const email = value => {
   if (!isEmail(value)) {
     return (
-      <div className="alert alert-danger" role="alert">
-        This is not a valid email.
-      </div>
+        <div className="alert alert-danger" role="alert">
+          This is not a valid email.
+        </div>
     );
   }
 };
@@ -30,9 +31,9 @@ const email = value => {
 const vusername = value => {
   if (value.length < 3 || value.length > 20) {
     return (
-      <div className="alert alert-danger" role="alert">
-        The username must be between 3 and 20 characters.
-      </div>
+        <div className="alert alert-danger" role="alert">
+          The username must be between 3 and 20 characters.
+        </div>
     );
   }
 };
@@ -40,9 +41,9 @@ const vusername = value => {
 const vpassword = value => {
   if (value.length < 6 || value.length > 40) {
     return (
-      <div className="alert alert-danger" role="alert">
-        The password must be between 6 and 40 characters.
-      </div>
+        <div className="alert alert-danger" role="alert">
+          The password must be between 6 and 40 characters.
+        </div>
     );
   }
 };
@@ -94,117 +95,119 @@ export default class RegisterForm extends Component {
 
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.register(
-        this.state.username,
-        this.state.email,
-        this.state.password
+          this.state.username,
+          this.state.email,
+          this.state.password
       ).then(
-        response => {
-          this.setState({
-            message: response.data.message,
-            successful: true
-          });
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+          response => {
+            this.setState({
+              message: response.data.message,
+              successful: true
+            });
+          },
+          error => {
+            const resMessage =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
 
-          this.setState({
-            successful: false,
-            message: resMessage
-          });
-        }
+            this.setState({
+              successful: false,
+              message: resMessage
+            });
+          }
       );
     }
   }
 
   render() {
     return (
-			<div className="wrapper">
-      		<div id="formContent">
-					<div className="card card-login-form card-block">
-						<div className="card-body card-body-form form-login form">
-							<div className="card-title mb-3"><h4>Register</h4>
-							</div>
-          <Form
-						className="justify-content-center"
-            onSubmit={this.handleRegister}
-            ref={c => {
-              this.form = c;
-            }}
-          >
-            {!this.state.successful && (
-              <div>
-                <div className="form-group">
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="username"
-										placeholder="Username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    validations={[required, vusername]}
-                  />
-                </div>
+        <PageLayout>
+          <div className="wrapper">
+            <div id="formContent">
+              <div className="card card-login-form card-block">
+                <div className="card-body card-body-form form-login form">
+                  <div className="card-title mb-3"><h4>Register</h4>
+                  </div>
+                  <Form
+                      className="justify-content-center"
+                      onSubmit={this.handleRegister}
+                      ref={c => {
+                        this.form = c;
+                      }}
+                  >
+                    {!this.state.successful && (
+                        <div>
+                          <div className="form-group">
+                            <Input
+                                type="text"
+                                className="form-control"
+                                name="username"
+                                placeholder="Username"
+                                value={this.state.username}
+                                onChange={this.onChangeUsername}
+                                validations={[required, vusername]}
+                            />
+                          </div>
 
-                <div className="form-group">
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="email"
-										placeholder="Email"
-                    value={this.state.email}
-                    onChange={this.onChangeEmail}
-                    validations={[required, email]}
-                  />
-                </div>
+                          <div className="form-group">
+                            <Input
+                                type="text"
+                                className="form-control"
+                                name="email"
+                                placeholder="Email"
+                                value={this.state.email}
+                                onChange={this.onChangeEmail}
+                                validations={[required, email]}
+                            />
+                          </div>
 
-                <div className="form-group">
-                  <Input
-                    type="password"
-                    className="form-control"
-                    name="password"
-										placeholder="Password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required, vpassword]}
-                  />
-                </div>
+                          <div className="form-group">
+                            <Input
+                                type="password"
+                                className="form-control"
+                                name="password"
+                                placeholder="Password"
+                                value={this.state.password}
+                                onChange={this.onChangePassword}
+                                validations={[required, vpassword]}
+                            />
+                          </div>
 
-                <div className="form-group">
-                  <button className="btn btn-info btn-block">Register</button>
+                          <div className="form-group">
+                            <button className="btn btn-info btn-block">Register</button>
+                          </div>
+                        </div>
+                    )}
+
+                    {this.state.message && (
+                        <div className="form-group">
+                          <div
+                              className={
+                                this.state.successful
+                                    ? "alert alert-success"
+                                    : "alert alert-danger"
+                              }
+                              role="alert"
+                          >
+                            {this.state.message}
+                          </div>
+                        </div>
+                    )}
+                    <CheckButton
+                        style={{display: "none"}}
+                        ref={c => {
+                          this.checkBtn = c;
+                        }}
+                    />
+                  </Form>
                 </div>
               </div>
-            )}
-
-            {this.state.message && (
-              <div className="form-group">
-                <div
-                  className={
-                    this.state.successful
-                      ? "alert alert-success"
-                      : "alert alert-danger"
-                  }
-                  role="alert"
-                >
-                  {this.state.message}
-                </div>
-              </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
-						</div>
-				</div>
-      </div>
-				</div>
+            </div>
+          </div>
+        </PageLayout>
     );
   }
 }
