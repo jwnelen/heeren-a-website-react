@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import api from '../data/api.js'
 import {Wrapper} from "../components/UI";
 import PlayersList from "../components/playerGrid/PlayersList";
+import PageLayout from "layouts/page"
 
 const Players = () => {
   const [players, setPlayers] = useState([])
@@ -13,12 +14,14 @@ const Players = () => {
     })
   }, [])
 
-return (
-    <Wrapper>
-      <h1>Team Heeren-A</h1>
-      <PlayersList players={players}/>
-    </Wrapper>
-)
+  return (
+      <PageLayout>
+        <Wrapper>
+          <h1>Team Heeren-A</h1>
+          <PlayersList players={players}/>
+        </Wrapper>
+      </PageLayout>
+  )
 }
 export default Players
 // class Team extends Component {

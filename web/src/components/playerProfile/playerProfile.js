@@ -4,6 +4,7 @@ import api from '../../data/api.js'
 import RatingDisplay from '../rating-display/rating-display.js'
 import AuthService from "../../services/auth.service";
 import {useParams} from 'react-router-dom'
+import PageLayout from "layouts/page"
 
 // let link_fed = "https://images2.persgroep.net/rcs/SkRGKcrJ4sDaW0oWOoBQKgW9lYA/diocontent/169326362/_fitwidth/694/?appId=21791a8992982cd8da851550a453bd7f&quality=0.8"
 
@@ -25,7 +26,7 @@ const PlayerProfile = ({playerid}) => {
   }, [])
 
   return (
-      <div>
+      <PageLayout>
         <div className="card container">
           <div className="card-body player">
             <h3 className="card-title">{player.nickname || "-"}</h3>
@@ -43,7 +44,7 @@ const PlayerProfile = ({playerid}) => {
           </ul>
         </div>
 
-      </div>
+      </PageLayout>
   )
 
 }

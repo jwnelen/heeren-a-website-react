@@ -2,14 +2,15 @@ import React, {Suspense} from 'react';
 import './App.scss';
 
 import Router from "./Router";
-import NavBar from "../components/NavigationBar/navbar";
+import {LocationProvider} from "@reach/router";
 
 export default () => {
   return (
       <Suspense fallback={<div className="loader absolute inset-0"/>}>
         <div className="App">
-          <NavBar/>
-          <Router />
+          <LocationProvider>
+            <Router/>
+          </LocationProvider>
         </div>
       </Suspense>
   );

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import './navbar.css'
 import AuthService from "../../services/auth.service";
-import {navigate} from "@reach/router";
 import {AppBar, Box, Toolbar} from "@material-ui/core";
+import {useHistory, Link,} from "react-router-dom";
 
 export default () => {
   const [user, setUser] = useState()
   const isAuthorized = user?.username;
+  let history = useHistory();
 
   useEffect(() => {
     setUser(AuthService.getCurrentUser())
@@ -14,7 +14,8 @@ export default () => {
 
   const logOut = () => {
     AuthService.logout();
-    navigate("/").then(() => window.location.reload());
+    history.push("/")
+    // navigate("/").then(() => window.location.reload());
   }
 
   return (
@@ -22,13 +23,13 @@ export default () => {
         <AppBar position="static">
           <Toolbar className="flex justify-space-between">
             <div className="flex md:flex-gap-3 sm:flex-gap-1 items-center">
-              <h2 className={"cursor-pointer"} onClick={() => navigate("/")}>Heeren A Tenniphil</h2>
+              <h2 className={"cursor-pointer"} onClick={() => history.push("/")}>Heeren A Tenniphil</h2>
               <a href={"/daltons"} className="h4">
                 Daltons
               </a>
-              <a href={"/players"} className="h4">
+              <Link to={"/players"} className="h4">
                 Players
-              </a>
+              </Link>
             </div>
             {isAuthorized ?
                 <div>

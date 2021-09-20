@@ -31,16 +31,14 @@ export default () => {
   return (
       <Router>
         <Switch>
-          <Home exact path="/"/>
-          <RegisterForm path="/register"/>
-          <LoginForm path="/login"/>
-          <Route path="/players/:id">
-            <PlayerComponent />
-          </Route>
-          <Players path="/players"/>
-          <Daltons path="/daltons"/>
-          <UserProfile path="/profile"/>
-          <NotFound default/>
+          <Route exact path="/"><Home/> </Route>
+          <Route path="/register"><RegisterForm/> </Route>
+          <Route path="/login"><LoginForm/> </Route>
+          <Route path="/players/:id"> <PlayerComponent/> </Route>
+          <Route path="/players"><Players/> </Route>
+          <Route path="/daltons"><Daltons/> </Route>
+          <Route path="/profile"><UserProfile/> </Route>
+          <Route default> <NotFound/> </Route>
         </Switch>
       </Router>
   )

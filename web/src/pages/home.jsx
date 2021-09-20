@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import DaltonForm from "components/daltonEditor/form/daltonForm"
 import api from "../data/api";
+import PageLayout from "layouts/page"
 
 export const Home = () => {
 
@@ -12,12 +13,12 @@ export const Home = () => {
   }, [])
 
   return (
-      <div>
+      <PageLayout>
         <div className=''>
           <h2>Welkom op de Heeren A Dalton turver</h2>
           <DaltonForm players={players} buttons={["add"]}/>
         </div>
-      </div>
+      </PageLayout>
   )
 }
 

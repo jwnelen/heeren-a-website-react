@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import DaltonsList from 'components/daltonsList/daltonsList'
+import PageLayout from "layouts/page"
 
 import api from '../data/api.js'
 
@@ -22,9 +23,9 @@ export default () => {
   }
 
   return (
-      <div>
+      <PageLayout>
         <h1>Daltons</h1>
         <DaltonsList daltons={daltons} players={players} onDaltonChange={handleDaltonChange}/>
-      </div>
+      </PageLayout>
   )
 }
