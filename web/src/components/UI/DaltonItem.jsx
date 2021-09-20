@@ -29,7 +29,7 @@ const DaltonItem = ({dalton, onEditDalton}) => {
               gewonnen door {dalton.p_earned_id || ""}
             </div>
             <div>
-              genomen op {dalton.date_took ? moment(dalton.date_took).format('dddd DD MMMM YYYY') : ''}
+              genomen op {dalton.date_took ? moment(dalton.date_took).format('dddd DD MMMM YYYY') : 'Nog niet genomen!'}
             </div>
           </div>
           <div>
