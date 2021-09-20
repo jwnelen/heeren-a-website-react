@@ -5,9 +5,14 @@ import moment from "moment";
 import {Card} from "./index";
 import {Button} from "@material-ui/core";
 
-const DaltonItem = ({dalton, onEditDalton}) => {
+const DaltonItem = ({dalton, players, onEditDalton}) => {
   // let {index, players, loggedIn} = this.props;
-  console.log("dalton", dalton)
+
+  console.log('players,', players)
+  const getPlayersName = (id) => {
+    return `${players.filter((pl) => pl.id === id)[0]?.nickname || ""}`;
+  }
+
   return (
       <Card>
         <div className="flex-column">
@@ -18,7 +23,7 @@ const DaltonItem = ({dalton, onEditDalton}) => {
           </div>
           <div className="flex justify-space-around">
             <div>
-              genomen door {dalton.p_took_id || ""}
+              genomen door {getPlayersName(dalton.p_took_id) || ""}
             </div>
             <div>
               gewonnen op {dalton.date_earned ? moment(dalton.date_earned).format('dddd DD MMMM YYYY') : ''}
@@ -26,7 +31,7 @@ const DaltonItem = ({dalton, onEditDalton}) => {
           </div>
           <div className="flex justify-space-around ">
             <div>
-              gewonnen door {dalton.p_earned_id || ""}
+              gewonnen door {getPlayersName(dalton.p_earned_id) || ""}
             </div>
             <div>
               genomen op {dalton.date_took ? moment(dalton.date_took).format('dddd DD MMMM YYYY') : 'Nog niet genomen!'}

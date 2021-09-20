@@ -5,7 +5,6 @@ const apiUrl = `${baseUrl}/api`;
 
 
 async function getPlayers() {
-  console.log("getting players")
 	return fetch(apiUrl + '/players')
       .then(response => response.json())
       .catch((error) => console.log('error in api', error))

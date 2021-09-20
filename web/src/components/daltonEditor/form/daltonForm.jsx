@@ -137,20 +137,20 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
               variant="contained"
               disabled={!user}
               onClick={addDalton}>
-            Add Dalton!
+            Dalton toevoegen
           </Button>}
           {buttons.includes("save") && <Button
               variant="contained"
               disabled={!user}
               onClick={saveDalton}>
-            Save
+            Opslaan
           </Button>}
           {buttons.includes("delete") && <Button
               variant="contained"
               className={"btn btn-warning"}
               disabled={!user}
               onClick={deleteDalton}>
-            Delete
+            Verwijder
           </Button>}
         </div>
       </Wrapper>
