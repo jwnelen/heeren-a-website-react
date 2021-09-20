@@ -9,7 +9,7 @@ const Dalton = db.sequelize.model("Dalton");
 // })
 
 const getDaltons = (req, res) => {
-  Dalton.findAll()
+  Dalton.findAll({order: [['createdAt', 'ASC']]})
       .then((result) => res.send(result))
       .catch((err) => console.log(err))
 }
