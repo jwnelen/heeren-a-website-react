@@ -12,14 +12,27 @@ registerLocale('nl', nl)
 
 const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
 
-  const [formState, {text}] = useFormState({
+  console.log(currentDalton)
+
+  const [formState, ] = useFormState({
     reason: currentDalton?.reason || "",
-    p_earned_id: currentDalton?.p_earned_id || "",
-    p_took_id: currentDalton?.p_took_id || "",
-    date_earned: currentDalton ? new Date(currentDalton.date_earned) : new Date(),
-    date_took: currentDalton ? new Date(currentDalton.date_took) : new Date(),
+    p_earned_id: currentDalton?.p_earned_id || null,
+    p_took_id: currentDalton?.p_took_id || null,
+    date_earned: currentDalton?.date_earned ? new Date(currentDalton.date_earned) : null,
+    date_took: currentDalton?.date_took ? new Date(currentDalton.date_took) : null,
     id: currentDalton?.id || null
   });
+
+  const getPlayersName = (id) => {
+    return `${players.filter((pl) => pl.id === id)[0]?.nickname || ''}`;
+  }
+
+  // const daltonExplanation =
+  //     `Deze dalton
+  //     ${formState.values.date_earned ? 'is gewonnen door ' + getPlayersName(formState.values.p_earned_id)
+  //         + ' en ' : ""}
+  //     ${formState.values.date_took ? ' is genomen door ' : ' moet genomen worden door '}${getPlayersName(formState.values.p_took_id)}
+  //     vanwege ${formState.values.reason}`
 
   const [user, setUser] = useState(null)
 
@@ -89,18 +102,20 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
           <TextField
               variant="outlined"
               label="reden"
-              {...text("reason")}/>
+              value={formState.values.reason}
+              onChange={(e) => formState.setField('reason', e.target.value)}>
+          </TextField>
         </FormControl>
         <FormControl fullWidth>
-          <InputLabel id={"p_earned_id"}>Gewonnen door</InputLabel>
+          <InputLabel id={"p_earned_id"}>Verdient door</InputLabel>
           <Select
               value={formState.values.p_earned_id || ""}
-              label={"Gewonnen door"}
+              label={"Verdient door"}
               labelId={"p_earned_id"}
               onChange={(e) => formState.setField('p_earned_id', e.target.value)}
           >
-            <MenuItem value="">
-              <em>Niemand</em>
+            <MenuItem value={null}>
+              -
             </MenuItem>
             {options}
           </Select>
@@ -113,9 +128,7 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
               labelId={"p_took_id"}
               onChange={(e) => formState.setField('p_took_id', e.target.value)}
           >
-            <MenuItem value="">
-              <em>Niemand</em>
-            </MenuItem>
+            <MenuItem value={null}>-</MenuItem>
             {options}
           </Select>
         </FormControl>
@@ -166,6 +179,9 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
             Verwijder
           </Button>}
         </div>
+        {/*<p className="italic">*/}
+        {/*  samenvatting: {daltonExplanation}*/}
+        {/*</p>*/}
       </Wrapper>
   )
 }
