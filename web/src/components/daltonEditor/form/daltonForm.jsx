@@ -5,7 +5,10 @@ import api from "data/api";
 import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@material-ui/core";
 import Wrapper from "../../UI/Wrapper";
 import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
+import DatePicker, {registerLocale} from "react-datepicker";
+import nl from 'date-fns/locale/nl';
+
+registerLocale('nl', nl)
 
 const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
 
@@ -74,6 +77,12 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
       <MenuItem key={`${p.id}-${p.nickname}`} value={p.id}>{p.nickname}</MenuItem>
   ))
 
+  // const CustomDatePicker = forwardRef(({ value, onClick }, ref) => (
+  //     <TextField className="px-5" onClick={onClick} ref={ref}>
+  //       {value}
+  //     </TextField>
+  // ));
+
   return (
       <Wrapper className="space-y-10">
         <FormControl fullWidth>
@@ -111,25 +120,29 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
           </Select>
         </FormControl>
         <div className="mx-1 my-2 full-w">
-          <FormControl>
+          <FormControl className="">
             <InputLabel id={"date_earned"}>Datum gewonnen</InputLabel>
             <DatePicker
                 labelId={"date_earned"}
                 selected={formState.values.date_earned}
                 isClearable
+                dateFormat="dd/MM/yyyy"
+                locale="nl"
                 onChange={(e) => formState.setField("date_earned", e)}
             />
           </FormControl>
         </div>
-        <div className="mx-1 my-2 full-w">
+        <div className="mx-1 my-5 full-w">
           <FormControl>
-          <InputLabel id={"date_took"}>Datum genomen</InputLabel>
-          <DatePicker
-              labelId={"date_took"}
-              selected={formState.values.date_took}
-              isClearable
-              onChange={(e) => formState.setField("date_took", e)}
-          />
+            <InputLabel id={"date_took"}>Datum genomen</InputLabel>
+            <DatePicker
+                labelId={"date_took"}
+                selected={formState.values.date_took}
+                isClearable
+                dateFormat="dd/MM/yyyy"
+                locale="nl"
+                onChange={(e) => formState.setField("date_took", e)}
+            />
           </FormControl>
         </div>
         <div>
