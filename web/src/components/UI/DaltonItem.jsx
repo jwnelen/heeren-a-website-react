@@ -4,6 +4,7 @@ import 'moment/locale/nl'
 import moment from "moment";
 import {Card} from "./index";
 import {Button} from "@material-ui/core";
+import AuthService from "../../services/auth.service";
 
 const DaltonItem = ({dalton, players, onEditDalton}) => {
   // let {index, players, loggedIn} = this.props;
@@ -12,17 +13,19 @@ const DaltonItem = ({dalton, players, onEditDalton}) => {
     return `${players.filter((pl) => pl.id === id)[0]?.nickname || ""}`;
   }
 
+  const user = AuthService.getCurrentUser() || null;
+
   return (
       <Card>
         <div className="flex-column">
           <div className="flex justify-center">
-            <h4 className="font-weight-bold  mb-1">
+            <h4 className="font-weight-bold mb-1">
               {dalton.reason}
             </h4>
           </div>
           <div className="flex justify-space-around">
             <div>
-              gewonnen door {getPlayersName(dalton.p_earned_id) || ""}
+              gewonnen door <span className={dalton.p_earned_id === user?.user_player_id ? "highlight" : ""}>{getPlayersName(dalton.p_earned_id) || ""}</span>
             </div>
             <div>
               gewonnen op {dalton.date_earned ? moment(dalton.date_earned).format('dd DD MMMM YYYY') : ''}
@@ -30,7 +33,7 @@ const DaltonItem = ({dalton, players, onEditDalton}) => {
           </div>
           <div className="flex justify-space-around ">
             <div>
-              genomen door {getPlayersName(dalton.p_took_id) || ""}
+              genomen door <span className={dalton.p_took_id === user?.user_player_id ? "highlight" : ""}> {getPlayersName(dalton.p_took_id) || ""} </span>
             </div>
             <div>
               {dalton.date_took ? `genomen op ${ moment(dalton.date_took).format('dd DD MMMM YYYY')}` : 'Nog niet genomen!'}
