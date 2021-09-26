@@ -3,7 +3,7 @@ import React from "react";
 
 const Card = ({ color = "card", elevation, className, ...props }) => (
     <div
-        className={`card w-full w p-2 bg-${color}`}
+        className={`card w-full p-2 bg-${color} ${className}`}
         {...props}
     />
 );

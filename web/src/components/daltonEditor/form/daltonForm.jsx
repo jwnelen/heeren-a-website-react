@@ -47,9 +47,9 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
     api.addDalton(dalton)
         .then(res => {
               if (res.status === 200) {
-                window.alert("Dalton is added!");
+                window.alert("Dalton is toegevoegd!");
               } else {
-                window.alert("Could not add dalton");
+                window.alert("Kon dalton niet toevoegen");
               }
             }
         )
@@ -63,9 +63,9 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
         .then(res => {
               if (res.status === 200) {
                 onSubmit()
-                window.alert("Dalton is Edited");
+                window.alert("Dalton is aangepast");
               } else {
-                window.alert("Could not save dalton");
+                window.alert("Kon dalton niet aanpassen");
               }
             }
         )
@@ -78,9 +78,9 @@ const DaltonForm = ({currentDalton, players = [], onSubmit, buttons}) => {
         .then(res => {
               if (res.status === 200) {
                 onSubmit()
-                window.alert("Dalton is Deleted");
+                window.alert("Dalton is verwijderd");
               } else {
-                window.alert("Could not delete dalton");
+                window.alert("Kon dalton niet verwijderen");
               }
             }
         )

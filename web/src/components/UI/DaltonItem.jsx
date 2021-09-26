@@ -15,29 +15,35 @@ const DaltonItem = ({dalton, players, onEditDalton}) => {
 
   const user = AuthService.getCurrentUser() || null;
 
+  let dateDisplay = dalton.date_took ? dalton.date_took : dalton.date_earned;
+  dateDisplay = dateDisplay ? moment(dateDisplay).format('DD-MM-YYYY') : '-'
+
+  const tookBy2 = dalton.p_took_id ?
+      dalton.date_took ?
+          `Genomen door ${getPlayersName(dalton.p_took_id)}` :
+          `Nog niet genomen door ${getPlayersName(dalton.p_took_id)}`
+      : `Nog niet uitgedeeld`
+
+  const earnedBy = dalton.p_earned_id ?
+      `Gewonnen door ${getPlayersName(dalton.p_earned_id)}` :
+      null
+
   return (
-      <Card>
-        <div className="flex-column">
-          <div className="flex justify-center">
-            <h4 className="font-weight-bold mb-1">
+      <Card className="px-10 py-4">
+        <div className="flex flex-col">
+          <div className="flex justify-space-between items-center">
+            <h3 className="font-weight-bold">
               {dalton.reason}
+            </h3>
+            <h4 className="p-2">
+              {dateDisplay}
             </h4>
           </div>
-          <div className="flex justify-space-around">
+          <div className="flex flex-col items-flex-start">
             <div>
-              gewonnen door <span className={dalton.p_earned_id === user?.user_player_id ? "highlight" : ""}>{getPlayersName(dalton.p_earned_id) || ""}</span>
+              {tookBy2}
             </div>
-            <div>
-              gewonnen op {dalton.date_earned ? moment(dalton.date_earned).format('dd DD MMMM YYYY') : ''}
-            </div>
-          </div>
-          <div className="flex justify-space-around ">
-            <div>
-              genomen door <span className={dalton.p_took_id === user?.user_player_id ? "highlight" : ""}> {getPlayersName(dalton.p_took_id) || ""} </span>
-            </div>
-            <div>
-              {dalton.date_took ? `genomen op ${ moment(dalton.date_took).format('dd DD MMMM YYYY')}` : 'Nog niet genomen!'}
-            </div>
+            {earnedBy && earnedBy}
           </div>
           <div>
             <Button variant="transparent" className='p-0' id={dalton.id} onClick={onEditDalton}>
