@@ -27,7 +27,7 @@ export default () => {
                 Daltons
               </Link>
               <Link to={"/players"} className="h4 text-white">
-                Players
+                Spelers
               </Link>
             </div>
             {isAuthorized ?
