@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import AuthService from "../../services/auth.service";
 import {AppBar, Box, Toolbar} from "@material-ui/core";
 import {useHistory, Link,} from "react-router-dom";
+import {navigate} from "@reach/router";
 
 export default () => {
   const [user, setUser] = useState()
@@ -15,6 +16,7 @@ export default () => {
   const logOut = () => {
     AuthService.logout();
     history.push("/")
+    window.location.reload()
   }
 
   return (

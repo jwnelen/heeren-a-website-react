@@ -31,13 +31,13 @@ const DaltonItem = ({dalton, players, onEditDalton}) => {
   return (
       <Card className="px-10 py-4">
         <div className="flex flex-col">
-          <div className="flex justify-space-between items-center">
+          <div className="flex justify-space-between">
             <h3 className="font-weight-bold">
               {dalton.reason}
             </h3>
-            <h4 className="p-2">
+            <p className="p-1 min-w-32">
               {dateDisplay}
-            </h4>
+            </p>
           </div>
           <div className="flex flex-col items-flex-start">
             <div>
