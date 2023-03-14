@@ -9,7 +9,7 @@ import App from "./containers/App";
 import * as serviceWorker from './serviceWorker';
 
 // Importing the Bootstrap CSS
-import '../node_modules/font-awesome/css/font-awesome.min.css';
+// import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 const root = document.getElementById("root");
 const Root = <App />;

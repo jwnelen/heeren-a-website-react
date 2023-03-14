@@ -2,26 +2,11 @@ import React, {useEffect, useState} from 'react';
 import DaltonsList from 'components/daltonsList/daltonsList'
 import PageLayout from "layouts/page"
 
-import api from '../data/api.js'
 import DaltonOverview from "../components/DaltonOverview";
 
 export default () => {
-
   const [daltons, setDaltons] = useState([])
   const [players, setPlayers] = useState([])
-  // const [currentDalton, setCurrentDalton] = useState()
-
-  useEffect(() => {
-    api.getDaltons().then(d => {
-      setDaltons(d)
-    })
-
-    api.getPlayers().then(p => setPlayers(p))
-  }, [])
-
-  const handleDaltonChange = () => {
-    window.location.reload()
-  }
 
   return (
       <PageLayout>

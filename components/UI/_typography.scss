@@ -1,4 +1,4 @@
-@import "./constants";
+@import "constants";
 
 @each $alignment in $text-alignments {
   .text-#{$alignment} {

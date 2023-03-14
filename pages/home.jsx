@@ -4,13 +4,11 @@ import api from "../data/api";
 import PageLayout from "layouts/page"
 
 export const Home = () => {
+  const [players, setPlayers] = useState([])
 
-  const [players, setPlayers] = useState()
-
-  useEffect(() => {
-    api.getPlayers().then(p => setPlayers(p))
-
-  }, [])
+  // useEffect(() => {
+  //   api.getPlayers().then(p => setPlayers(p))
+  // }, [])
 
   return (
       <PageLayout>

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 
 // pages
 import Home from "pages/home.jsx";
@@ -13,16 +13,9 @@ import LoginForm from "components/loginForm/loginForm";
 
 import PlayerProfile from "components/playerProfile/playerProfile";
 
-import AuthService from "services/auth.service";
 import {BrowserRouter as Router, Route, Switch, useParams} from "react-router-dom";
 
 export default () => {
-  let user = null;
-
-  useEffect(() => {
-    user = AuthService.getCurrentUser();
-  }, [])
-
   const PlayerComponent = () => {
     let {id} = useParams();
     return (<PlayerProfile playerid={id}/>)

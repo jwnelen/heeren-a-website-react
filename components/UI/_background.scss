@@ -1,4 +1,4 @@
-@import "./constants";
+@import "constants";
 
 @each $color in $variable-colors {
   .bg-#{$color} {
